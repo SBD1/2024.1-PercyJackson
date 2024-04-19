@@ -4,7 +4,7 @@
 
 <p style="text-align:center; font-size:15px">AI-generated image</p>
 
-"Percy Jackson: Quest of Olympus" is a MUD game developed as final project for the DataBases Systems 1 course. Inspired by literary series
+"Percy Jackson: Quest of Olympus" is a MUD game developed as final project for the Database Systems 1 course. Inspired by literary series
 "Percy Jackson and the Olypians" by Rick Riordan, the game immerses the player in a world of Greek mythology, where he take on the role of a demigod in exciting and dangerous quests.
 
 
