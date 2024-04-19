@@ -18,12 +18,41 @@ import tensorflow as tf
 
 ## Project Members
 
-| Member         | GitHub                                                | 
-| -------------- | ----------------------------------------------------- |
-| Charles Serafim| [@charles-serafim](https://github.com/charles-serafim)|
-| Clara Ribeiro  | [@clara-ribeiro](https://github.com/clara-ribeiro)    |
-| Natan Tavares  | [@Neitan2001](https://github.com/Neitan2001)          |
-| Paulo Henrique | [@owhenrique](https://github.com/owhenrique)          |
+<div style="display: grid; align-items: center; gap: 25px;">
+    <div style="display: flex; align-items: end; justify-content: center; gap: 50px;">
+        <div style="text-align: center;">
+            Charles Serafim
+            <br/>
+            <img src="https://github.com/charles-serafim.png" alt="Foto Charles Serafim" width="130px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/charles-serafim" target="_blank">@charles-serafim</a>
+        </div>
+        <div style="text-align: center;">
+            Clara Ribeiro
+            <br/>
+            <img src="https://github.com/clara-ribeiro.png" alt="Foto Clara Ribeiro" width="130px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/clara-ribeiro" target="_blank">@clara-ribeiro</a>
+        </div>
+    </div>
+    <div style="display: flex; align-items: end; justify-content: center; gap: 50px;">
+        <div style="text-align: center;">
+            Natan Tavares
+            <br/>
+            <img src="https://github.com/Neitan2001.png" alt="Foto Natan Tavares" width="130px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/Neitan2001" target="_blank">@Neitan2001</a>
+        </div>
+        <div style="text-align: center;">
+            Paulo Henrique
+            <br/>
+            <img src="https://github.com/owhenrique.png" alt="Foto Paulo Henrique" width="130px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/owhenrique" target="_blank">@owhenrique</a>
+        </div>
+    </div>
+</div>
+
 
 ## Release History
 
