@@ -1,26 +1,20 @@
-# Percy Jackson Game
+# Home
 
-<!-- For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+<img style="max-width:75%; display:block; margin-right: auto; margin-left:auto" src="assets/game-cover/Default_a_percy_jackson_quest_of_olympus_game_cover_0.jpg"/>
 
-## Commands
+<p style="text-align:center; font-size:15px">AI-generated image</p>
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+"Percy Jackson: Quest of Olympus" is a MUD game developed as final project for the DataBases Systems 1 course. Inspired by literary series
+"Percy Jackson and the Olypians" by Rick Riordan, the game immerses the player in a world of Greek mythology, where he take on the role of a demigod in exciting and dangerous quests.
 
-## Code
-```
-    testing code font
-```
 
-## Project layout
+<!-- ## Code
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files. -->
+Adding a `code`annotate
 
+``` py title="tensorflow.py" linenums="1" hl_lines="1"
+import tensorflow as tf
+``` -->
 
 ## Project Members
 

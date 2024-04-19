@@ -1,25 +1,56 @@
-site_name: Percy Jackson
+site_name: "Percy Jackson: Quest of Olympus"
 theme:
   name: material
-  feature:
-    - navigation.path
-    - navigation.sections
+  features:
+    - navigation.section
     - navigation.expand
+    - navigation.path
+    - navigation.top
     - toc.follow
+    - content.code.copy
+    - content.code.annotate
   font: 
     text: montserrat
     code: JetBrains Mono
   language: en
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  icon:
+    repo: fontawesome/brands/github
   palette:
     - scheme: default
       toggle:
         icon: material/brightness-7 
         name: Switch to dark mode
-      primary: teal
-      accent: light blue
+      primary: cyan
+      accent: cyan
     - scheme: slate
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-      primary: teal
-      accent: light blue
+      primary: cyan
+      accent: cyan
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+repo_url: https://github.com/SBD1/2024.1-PercyJackson
+repo_name: SBD1/2024.1-PercyJackson
+
+# NavTabs
+nav:
+  - index.md
+  - Overview:
+    - overview/game-objectives.md
+    - overview/game-mechanics.md
+    - overview/technologies-used.md
+    - overview/database-system.md
+  - Diagram:
+    - diagram/entity-relationship-diagram.md
+

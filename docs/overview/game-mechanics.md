@@ -1,4 +1,4 @@
-# Entity Relation Diagram
+# Game Mechanics
 
 
 ## Release History
