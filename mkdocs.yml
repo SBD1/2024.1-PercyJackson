@@ -1,4 +1,4 @@
-site_name: "Percy Jackson: Quest of Olympus"
+site_name: "Percy Jackson: Captura a Bandeira"
 theme:
   name: material
   features:
@@ -46,11 +46,6 @@ repo_name: SBD1/2024.1-PercyJackson
 # NavTabs
 nav:
   - index.md
-  - Overview:
-    - overview/game-objectives.md
-    - overview/game-mechanics.md
-    - overview/technologies-used.md
-    - overview/database-system.md
-  - Diagram:
-    - diagram/entity-relationship-diagram.md
+  - Módulo 1:
+    - modulo1/der.md
 

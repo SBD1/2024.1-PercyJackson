@@ -2,21 +2,11 @@
 
 <img style="max-width:75%; display:block; margin-right: auto; margin-left:auto" src="assets/game-cover/Default_a_percy_jackson_quest_of_olympus_game_cover_0.jpg"/>
 
-<p style="text-align:center; font-size:15px">AI-generated image</p>
+<p style="text-align:center; font-size:15px">Imagem gerada por IA</p>
 
-"Percy Jackson: Quest of Olympus" is a MUD game developed as final project for the Database Systems 1 course. Inspired by literary series
-"Percy Jackson and the Olypians" by Rick Riordan, the game immerses the player in a world of Greek mythology, where he take on the role of a demigod in exciting and dangerous quests.
+"Percy Jackson: Captura a Bandeira" é um jogo MUD desenvolvido como trabalho final da Matéria "Banco de Dados 1". Inspirado pela série de livros "Percy Jackson e os Olimpianos", escrito por Rick Riordan, o jogo mergulha o jogador em um mundo da Mitologia Grega em que ele assume o papel de um SemiDeus em uma aventura perigosa e interessante.
 
-
-<!-- ## Code
-
-Adding a `code`annotate
-
-``` py title="tensorflow.py" linenums="1" hl_lines="1"
-import tensorflow as tf
-``` -->
-
-## Project Members
+## Membros do Projeto
 
 <div style="display: grid; align-items: center; gap: 25px;">
     <div style="display: flex; align-items: end; justify-content: center; gap: 50px;">
@@ -54,8 +44,9 @@ import tensorflow as tf
 </div>
 
 
-## Release History
+## Histórico de Versões
 
-|  Version  | Release date | Release | Responsible | Reviewer | Review Date |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| 1.0 | 18/04 | Creating document | [@owhenrique](https://github.com/owhenrique) |  |  |
+|  Versão  | Data | Descrição | Responsável |
+| :---: | :---: | :---: | :---: | 
+| 1.0 | 18/04 | Criação do Documento | [@owhenrique](https://github.com/owhenrique) |
+| 2.0 | 12/07 | Tradução do documento | [@Neitan2001](https://github.com/Neitan2001) |
