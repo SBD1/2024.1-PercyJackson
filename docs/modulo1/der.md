@@ -18,7 +18,7 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 
 <img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der2.jpg"/>
 
-<p style="text-align:center; font-size:15px">Versão 2 do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
+<p style="text-align:center; font-size:15px">Versão 2 do Diagrama Entidade Relacionamento. Autor: Natan. Ferramenta: Miro</p>
 
 </details>
 
