@@ -4,20 +4,117 @@
 
 ## Tabelas
 
-### Tabela Fulano
+### Tabela Jogador
 
-| Tabela      | Veiculo                                                  |
-| ----------- | -------------------------------------------------------- |
-| Descrição   | Armazenará as informações dos veículos                   |
-| Observações | Essa tabela possui uma chave estrangeira da tabela Marca |
+| Tabela      | jogador                                                                                                                                     |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará as informações referente ao personagem jogável do usuário                                                                        |
+| Observações | Essa tabela é uma especificação de Personagem, a tabela tipoPersonagem será a responsável por armazenar as chaves e o tipo da especificação |
 
-| Nome       | Descrição                                                | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
-| ---------- | -------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| Codigo     | Código de identificação da tabela                        | Int          |         | PK / Identity                                                      |
-| Placa      | Placa do ônibus                                          | Varchar      | 20      | Unique / Not Null                                                  |
-| Anoveiculo | Ano de fabricação do ônibus                              | Int          |         | Not Null                                                           |
-| Anocompra  | Ano de compra do veículo                                 | Int          |         | Not Null                                                           |
-| Codmarca   | Chave estrangeira referenciando o código da tabela Marca | Int          |         | FK                                                                 |
+| Nome             | Descrição                                                                                                                                                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
+| nome             | Nome que irá identificar unicamente o personagem do jogador                                                                                                                                                        | Varchar      | 15      | PK/ FK/ Not Null                                                   |
+| defesa           | O número de defesa define a dificuldade para um atacante acertar um ataque. Esse valor é calculado com base no valor de agilidade                                                                                  | Int          |         | Not Null/Default = 10                                              |
+| vidaMax          | O limite de vida do personagem. É separado da vida atual do personagem pois ele pode encontrar itens que recuperam a saúde, mas não deve passar desse limite                                                       | Int          |         | Not Null                                                           |
+| forca            | O número de força define o quão forte o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir quebrar/levantar coisas. A força também define quantos itens o personagem pode carregar | Int          |         | Not Null                                                           |
+| intelecto        | O número de intelecto define o quão inteligente o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir desvendar enigmas, confundir/convencer inimigos                               | Int          |         | Not Null                                                           |
+| agilidade        | O número de agilidade define o quão rápido o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir fugir de armadilhas, escapar de inimigos                                           | Int          |         | Not Null                                                           |
+| combate          | O número de intelecto define o quão bom em combate o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir acertar ataques                                                            | Int          |         | Not Null                                                           |
+| carga            | O número de carga define o multiplicador para definir quantos itens o personagem pode carregar. A quantidade de peso que o personagem consegue carregar é definido da seguinte forma: carga x forca                | Int          |         | Not Null/ Default = 2                                              |
+| vidaAtual        | A vida atual do personagem, ao chegar a 0 o personagem morre e o jogo deve começar do zero                                                                                                                         | Int          |         | Not Null/ Default = 0                                              |
+| experienciaAtual | Número de pontos que determina o nível do personagem                                                                                                                                                               | Int          |         | Not Null/ Default = 0                                              |
+| armadura         | Referência ao item de defesa que o personagem possui equipado. Oferece bônus no atributo de defesa. Quando o valor for "null", então o personagem não possui nenhum Item de defesa equipado                        | Int          |         | FK                                                                 |
+| arma             | Referência ao item de ataque que o personagem possui equipado. Oferece bônus no atributo de força e combate. Quando o valor for "null", então o personagem não possui nenhum Item de ataque equipado               | Int          |         | FK                                                                 |
+| itemMagico       | Referência ao item mágico que o personagem possui equipado. Oferece bônus em vários atributos dependendo do item. Quando o valor for "null", então o personagem não possui nenhum Item mágico equipado             | Int          |         | FK                                                                 |
+| deus             | Referência ao deus que define os atributos inicias do personagem                                                                                                                                                   | Int          |         | FK/ Not Null                                                       |
+| areaAtual        | Referência à área que o personagem se encontra dentro do mapa do jogo                                                                                                                                              | Varchar      | 25      | FK/ Not Null                                                       |
+| nivel            | Referência ao nível atual do personagem. Ao atingir os pontos base do próximo nível, o personagem muda para o nível acima do atual                                                                                 | Int          |         | FK/ Not Null/ Default = 1                                          |
+
+### Tabela Inimigo
+
+| Tabela      | inimigo                                                                                                                                                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará as informações referente a um inimigo do jogo. Um inimigo é uma criatura com o objetivo de matar o personagem do jogador                                                                                       |
+| Observações | Essa tabela é uma especificação de Personagem, a tabela tipoPersonagem será a responsável por armazenar as chaves e o tipo da especificação. Esta tabela defini uma "ficha" de inimigo que irá gerar "Inimigos Concretos" |
+
+| Nome              | Descrição                                                                                                                                                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
+| nome              | Nome que irá identificar unicamente o personagem do inimigo                                                                                                                                                        | Varchar      | 15      | PK/ FK/ Not Null                                                   |
+| defesa            | O número de defesa define a dificuldade para um atacante acertar um ataque. Esse valor é calculado com base no valor de agilidade                                                                                  | Int          |         | Not Null/ Default = 10                                             |
+| vidaMax           | O limite de vida do personagem. É separado da vida atual do personagem pois ele pode encontrar itens que recuperam a saúde, mas não deve passar desse limite                                                       | Int          |         | Not Null                                                           |
+| forca             | O número de força define o quão forte o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir quebrar/levantar coisas. A força também define quantos itens o personagem pode carregar | Int          |         | Not Null                                                           |
+| intelecto         | O número de intelecto define o quão inteligente o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir desvendar enigmas, confundir/convencer inimigos                               | Int          |         | Not Null                                                           |
+| agilidade         | O número de agilidade define o quão rápido o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir fugir de armadilhas, escapar de inimigos                                           | Int          |         | Not Null                                                           |
+| combate           | O número de intelecto define o quão bom em combate o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir acertar ataques                                                            | Int          |         | Not Null                                                           |
+| pontosExperiencia | O número de pontos de experiência que um jogador ganha ao derrotar uma instância deste inimigo                                                                                                                     | Int          |         | Not Null                                                           |
+| nivel             | Referência ao nível atual do personagem. Diferente do jogador, o nível do inimigo não muda. Ele é usado como referência a fim de balancear os combates                                                             | Int          |         | FK/ Not Null                                                       |
+
+### Tabela TipoPersonagem
+
+| Tabela      | tipoPersonagem                                                                                      |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará a relação de nome do Personagem com o tipo dele, Jogador ou Inimigo                      |
+| Observações | Esta tabela possui a finalidade de diferenciar quais personagens são Jogadores e Quais são Inimigos |
+
+| Nome | Descrição                                                                                                                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nome | Nome que irá identificar unicamente um personagem                                                                                                                     | Varchar      | 15      | PK/ Not Null                                                       |
+| tipo | Este atributo especifica se o Personagem é um Jogador ou um Inimigo. Os valores permitidos para este atributo será o caracter 'J', para Jogador, ou 'I', para Inimigo | Char         | 1       | Not Null                                                           |
+
+### Tabela Nível
+
+| Tabela      | nivel                                                            |
+| ----------- | ---------------------------------------------------------------- |
+| Descrição   | Armazenará os pontos necessários para atingir cada um dos níveis |
+| Observações |                                                                  |
+
+| Nome              | Descrição                                                                                                                                                                     | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| idNivel           | Um número sequencial que indica o nível de um personagem. Quanto maior o nível, mais poderoso o personagem é                                                                  | SERIAL       |         | PK/Not Null                                                        |
+| pontosExperiencia | O número de pontos necessário para atingir o nível. O número de pontos de um nível precisa ser maior do que o anterior. Essa checagem deverá ser feita por meio de um trigger | Int          |         | Not Null                                                           |
+
+### Tabela InimigoConcreto
+
+| Tabela      | inimigoConcreto                                                                                                   |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará as informações da instância de um inimigo                                                              |
+| Observações | Esta tabela existe a fim de reutilizar informações da tabela Inimigo e evitar redundâncias e sobrecarga no banco. |
+
+| Nome         | Descrição                                                                                                                                                                                                                            | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
+| nomeConcreto | O nome que identifica unicamente uma instância de Inimigo                                                                                                                                                                            | SERIAL       |         | PK/Not Null                                                        |
+| vidaAtual    | A vida atual da instância de Inimigo, ao chegar a 0 a instância é derrotada. O valor inicial deste atributo deve ser o mesmo valor do atributo vidaMax do Inimigo gerador da instância, isso poderá ser feito a partir de um trigger | Int          |         | Not Null                                                           |
+| inimigo      | Referência ao Inimigo gerador desta instância                                                                                                                                                                                        | Varchar      | 15      | FK/ Not Null                                                       |
+| areaAtual    | Referência à área que o personagem se encontra dentro do mapa do jogo                                                                                                                                                                | Varchar      | 25      | FK/ Not Null                                                       |
+| loot         | Referência ao item que o jogador ganha ao derrotar esta instância de Inimigo                                                                                                                                                         | Int          |         | FK/ Not Null                                                       |
+
+### Tabela Abate
+
+| Tabela      | abate                                                                                                                                                                                                                                                                                          |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará a quantidade de instâncias de um mesmo Inimigo que um Jogador derrotou                                                                                                                                                                                                              |
+| Observações | Possui uma chave primária composta com os atributos nomeJogador e nomeInimigo. Quando um jogador derrotar um Inimigo, deve verificar se já existe uma tupla de abate com o mesmo Jogador e Inimigo: se não existir, deve criar uma tupla, e se existir, deve incrementar o atributo quantidade |
+
+| Nome        | Descrição                                                                                | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------- | ---------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nomeJogador | Nome do jogador que realizou o abate de um Inimigo                                       | Varchar      | 15      | PK/FK Not Null                                                     |
+| nomeInimigo | nome do Inimigo derrotado por um Jogador                                                 | Varchar      | 15      | PK/FK Not Null                                                     |
+| quantidade  | Número que indica a quantidade de instância de um mesmo Inimigo derrotado por um Jogador | Int          |         | Not Null/ Default = 0                                              |
+
+### Tabela Deus
+
+| Tabela      | deus                                                                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará os atributos iniciais dados ao Personagem que escolhe um Deus/Deusa como seu pai/mãe                                           |
+| Observações | Os atributos iniciais de forca, intelecto, agilidade e combate são definidos pelo Deus/Deusa que o Jogador escolher ao criar o personagem |
+
+| Nome             | Descrição                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ---------------- | --------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nome             | Nome que identifica unicamente um Deus                                | Varchar      | 15      | PK/ Not Null                                                       |
+| forcaInicial     | O número de Força inicial do Jogador descendente desse Deus/Deusa     | Int          |         | Not Null                                                           |
+| intelectoInicial | O número de Intelecto inicial do Jogador descendente desse Deus/Deusa | Int          |         | Not Null                                                           |
+| agilidadeInicial | O número de Agilidade inicial do Jogador descendente desse Deus/Deusa | Int          |         | Not Null                                                           |
+| combateInicial   | O número de Combate inicial do Jogador descendente desse Deus/Deusa   | Int          |         | Not Null                                                           |
 
 ## Referência Bibliográfica
 
@@ -25,6 +122,8 @@
 
 ## Histórico de Versões
 
-|  Versão  | Data | Descrição | Responsável |
-| :---: | :---: | :---: | :---: | 
-| 1.0 | 18/07 | Criação do documento | [@Neitan2001](https://github.com/Neitan2001) |
+| Versão | Data  |                                         Descrição                                         |                 Responsável                  |
+| :----: | :---: | :---------------------------------------------------------------------------------------: | :------------------------------------------: |
+|  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001) |
+|  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
+|  3.0   | 19/07 |      Ajuste das restrições das chaves primárias de Jogador, Inimigo e tipoPersonagem      | [@Neitan2001](https://github.com/Neitan2001) |

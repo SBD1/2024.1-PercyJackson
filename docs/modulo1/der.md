@@ -6,9 +6,9 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 
 ## Versão Final
 
-<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der4.jpg"/>
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der5.jpg"/>
 
-<p style="text-align:center; font-size:15px">Versão Final (Versão 4) do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
+<p style="text-align:center; font-size:15px">Versão Final (Versão 5) do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
 
 ## Versões DER
 
@@ -44,6 +44,14 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 
 </details>
 
+<details><summary>Versão 5</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der5.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 5 do Diagrama Entidade Relacionamento. Autores: Natan. Ferramenta: Miro</p>
+
+</details>
+
 ## Referência Bibliográfica
 
 > 1. O que é um diagrama entidade relacionamento? Disponível em: <https://www.lucidchart.com/pages/pt/o-que-e-diagrama-entidade-relacionamento>.
@@ -55,3 +63,4 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 | 1.0 | 12/07 | Criação da página e adição da versão 1 e 2 do diagrama | [@Neitan2001](https://github.com/Neitan2001) |
 | 2.0 | 15/07 | Adição da Versão 3 do diagrama | [@Neitan2001](https://github.com/Neitan2001) |
 | 3.0 | 18/07 | Adição da Versão 4 do diagrama | [@Neitan2001](https://github.com/Neitan2001) |
+| 4.0 | 18/07 | Adição da Versão 5 do diagrama | [@Neitan2001](https://github.com/Neitan2001) |
