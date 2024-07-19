@@ -16,7 +16,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 - 1° Forma Normal: Todos os atributos são atômicos e monovalorados
 - 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
-- 3° Forma Normal: Nenhum atributo comun depende transitivamente de qualquer superchave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
 
@@ -32,7 +32,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 - 1° Forma Normal: Todos os atributos são atômicos e monovalorados
 - 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
-- 3° Forma Normal: Nenhum atributo comun depende transitivamente de qualquer superchave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
 - 
@@ -48,7 +48,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 - 1° Forma Normal: Todos os atributos são atômicos e monovalorados
 - 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
-- 3° Forma Normal: Nenhum atributo comun depende transitivamente de qualquer superchave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
 
@@ -64,7 +64,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 - 1° Forma Normal: Todos os atributos são atômicos e monovalorados
 - 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
-- 3° Forma Normal: Nenhum atributo comun depende transitivamente de qualquer superchave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
 
@@ -80,7 +80,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 - 1° Forma Normal: Todos os atributos são atômicos e monovalorados
 - 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
-- 3° Forma Normal: Nenhum atributo comun depende transitivamente de qualquer superchave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
 
@@ -96,7 +96,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 - 1° Forma Normal: Todos os atributos são atômicos e monovalorados
 - 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
-- 3° Forma Normal: Nenhum atributo comun depende transitivamente de qualquer superchave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
 
@@ -112,7 +112,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 - 1° Forma Normal: Todos os atributos são atômicos e monovalorados
 - 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
-- 3° Forma Normal: Nenhum atributo comun depende transitivamente de qualquer superchave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
 
@@ -126,3 +126,4 @@ Esta tabela está dentro das seguintes Formas Normais:
 | :----: | :---: | :---------------------------------------------------------------------------------------: | :------------------------------------------: |
 |  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001) |
 |  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
+|  3.0   | 19/07 |                                Correção da palavra "comum"                                | [@Neitan2001](https://github.com/Neitan2001) |

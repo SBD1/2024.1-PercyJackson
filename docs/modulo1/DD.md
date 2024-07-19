@@ -13,7 +13,7 @@
 
 | Nome             | Descrição                                                                                                                                                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
-| nome             | Nome que irá identificar unicamente o personagem do jogador                                                                                                                                                        | Varchar      | 15      | PK/ Not Null                                                       |
+| nome             | Nome que irá identificar unicamente o personagem do jogador                                                                                                                                                        | Varchar      | 15      | PK/ FK/ Not Null                                                   |
 | defesa           | O número de defesa define a dificuldade para um atacante acertar um ataque. Esse valor é calculado com base no valor de agilidade                                                                                  | Int          |         | Not Null/Default = 10                                              |
 | vidaMax          | O limite de vida do personagem. É separado da vida atual do personagem pois ele pode encontrar itens que recuperam a saúde, mas não deve passar desse limite                                                       | Int          |         | Not Null                                                           |
 | forca            | O número de força define o quão forte o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir quebrar/levantar coisas. A força também define quantos itens o personagem pode carregar | Int          |         | Not Null                                                           |
@@ -39,7 +39,7 @@
 
 | Nome              | Descrição                                                                                                                                                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
-| nome              | Nome que irá identificar unicamente o personagem do inimigo                                                                                                                                                        | Varchar      | 15      | PK/ Not Null                                                       |
+| nome              | Nome que irá identificar unicamente o personagem do inimigo                                                                                                                                                        | Varchar      | 15      | PK/ FK/ Not Null                                                   |
 | defesa            | O número de defesa define a dificuldade para um atacante acertar um ataque. Esse valor é calculado com base no valor de agilidade                                                                                  | Int          |         | Not Null/ Default = 10                                             |
 | vidaMax           | O limite de vida do personagem. É separado da vida atual do personagem pois ele pode encontrar itens que recuperam a saúde, mas não deve passar desse limite                                                       | Int          |         | Not Null                                                           |
 | forca             | O número de força define o quão forte o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir quebrar/levantar coisas. A força também define quantos itens o personagem pode carregar | Int          |         | Not Null                                                           |
@@ -58,7 +58,7 @@
 
 | Nome | Descrição                                                                                                                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| nome | Nome que irá identificar unicamente um personagem                                                                                                                     | Varchar      | 15      | PK/FK Not Null                                                     |
+| nome | Nome que irá identificar unicamente um personagem                                                                                                                     | Varchar      | 15      | PK/ Not Null                                                       |
 | tipo | Este atributo especifica se o Personagem é um Jogador ou um Inimigo. Os valores permitidos para este atributo será o caracter 'J', para Jogador, ou 'I', para Inimigo | Char         | 1       | Not Null                                                           |
 
 ### Tabela Nível
@@ -122,7 +122,8 @@
 
 ## Histórico de Versões
 
-| Versão | Data  |      Descrição       |                 Responsável                  |
-| :----: | :---: | :------------------: | :------------------------------------------: |
-|  1.0   | 18/07 | Criação do documento | [@Neitan2001](https://github.com/Neitan2001) |
-|  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus  | [@Neitan2001](https://github.com/Neitan2001) |
+| Versão | Data  |                                         Descrição                                         |                 Responsável                  |
+| :----: | :---: | :---------------------------------------------------------------------------------------: | :------------------------------------------: |
+|  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001) |
+|  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
+|  3.0   | 19/07 |      Ajuste das restrições das chaves primárias de Jogador, Inimigo e tipoPersonagem      | [@Neitan2001](https://github.com/Neitan2001) |
