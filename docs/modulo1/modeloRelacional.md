@@ -22,6 +22,14 @@
 
 </details>
 
+<details><summary>Versão 3</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/relacional/relacional3.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 3 do Modelo Relacional. Autores: Clara Marcelino. Ferramenta: Miro</p>
+
+</details>
+
 ## Referência Bibliográfica
 
 > 1. 
@@ -33,3 +41,4 @@
 |  1.0   | 18/07 |          Criação do documento           | [@Neitan2001](https://github.com/Neitan2001) |
 |  2.0   | 18/07 | Adição da versão 1 do Modelo Relacional | [@Neitan2001](https://github.com/Neitan2001) |
 |  3.0   | 19/07 | Adição da versão 2 do Modelo Relacional | [@Neitan2001](https://github.com/Neitan2001) |
+|  4.0   | 21/07 | Adição da versão 3 do Modelo Relacional | [Clara Ribeiro](https://github.com/clara-ribeiro) |

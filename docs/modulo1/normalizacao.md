@@ -115,6 +115,103 @@ Esta tabela está dentro das seguintes Formas Normais:
 - 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
+Claro, vamos refazer as explicações no formato desejado.
+
+## Tabela Inventário
+
+De acordo com o dicionário de dados da [Tabela inventário](./DD.md#tabela-inventário), a dependência funcional dessa tabela é a seguinte:
+
+jogador, item ➡️ quantidade
+
+"jogador, item" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é jogador, item ➡️ quantidade.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela item
+
+De acordo com o dicionário de dados da [Tabela item](./DD.md#tabela-item), a dependência funcional dessa tabela é a seguinte:
+
+id ➡️ nome, descricao, peso, classificacao
+
+"id" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é id ➡️ nome, descricao, peso, classificacao.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela defesa
+
+De acordo com o dicionário de dados da [Tabela defesa](./DD.md#tabela-defesa), a dependência funcional dessa tabela é a seguinte:
+
+id ➡️ nome, modDefesa
+
+"id" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é id ➡️ nome, modDefesa.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela ataque
+
+De acordo com o dicionário de dados da [Tabela ataque](./DD.md#tabela-ataque), a dependência funcional dessa tabela é a seguinte:
+
+id ➡️ nome, modCombate, modForca
+
+"id" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é id ➡️ nome, modCombate, modForca.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela magico
+
+De acordo com o dicionário de dados da [Tabela magico](./DD.md#tabela-magico), a dependência funcional dessa tabela é a seguinte:
+
+id ➡️ nome, modCombate, modForca, modDefesa, modAgilidade, modCarga, tempoDeRecarga, tempoAtual
+
+"id" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é id ➡️ nome, modCombate, modForca, modDefesa, modAgilidade, modCarga, tempoDeRecarga, tempoAtual.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela consumíveis
+
+De acordo com o dicionário de dados da [Tabela consumíveis](./DD.md#tabela-consumíveis), a dependência funcional dessa tabela é a seguinte:
+
+id ➡️ nome, vidaRecuperada
+
+"id" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é id ➡️ nome, vidaRecuperada.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
 
 ## Referência Bibliográfica
 
@@ -127,3 +224,4 @@ Esta tabela está dentro das seguintes Formas Normais:
 |  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001) |
 |  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
 |  3.0   | 19/07 |                                Correção da palavra "comum"                                | [@Neitan2001](https://github.com/Neitan2001) |
+|  4.0   | 22/07 |                                Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis                               | [Clara Marcelino](https://github.com/clara-ribeiro) |
