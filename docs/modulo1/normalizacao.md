@@ -224,3 +224,4 @@ Esta tabela está dentro das seguintes Formas Normais:
 |  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001) |
 |  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
 |  3.0   | 19/07 |                                Correção da palavra "comum"                                | [@Neitan2001](https://github.com/Neitan2001) |
+|  4.0   | 22/07 |                                Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis                               | [Clara Marcelino](https://github.com/clara-ribeiro) |
