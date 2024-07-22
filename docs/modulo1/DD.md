@@ -138,10 +138,10 @@
 | Nome          | Descrição                          | Tipo de dado | Tamanho | Restrições de domínio                  |
 |---------------|------------------------------------|--------------|---------|----------------------------------------|
 | id            | Identificador único do item        | INTEGER      | -       | PK, Identity                           |
-| nome          | Nome do item                       | VARCHAR      | 100     | Not Null                               |
+| nome          | Nome do item                       | VARCHAR      | 15     | Not Null                               |
 | descricao     | Descrição detalhada do item        | TEXT         | -       |                                        |
 | peso          | Peso do item em unidades de massa  | FLOAT        | -       | Check (peso >= 0)                      |
-| classificacao | Classificação do item              | VARCHAR      | 50      | Not Null, Check (classificacao in ('Arma', 'Armadura', 'Consumível', 'Mágico')) |
+| classificacao | Classificação do item              | VARCHAR      | 15      | Not Null, Check (classificacao in ('Arma', 'Armadura', 'Consumível', 'Mágico')) |
 
 ### Tabela Defesa
 
@@ -153,7 +153,7 @@
 | Nome      | Descrição                      | Tipo de dado | Tamanho | Restrições de domínio                  |
 |-----------|--------------------------------|--------------|---------|----------------------------------------|
 | id        | Identificador único de defesa  | INTEGER      | -       | PK, Identity                           |
-| nome      | Nome do item de defesa         | VARCHAR      | 100     | Not Null, FK                           |
+| nome      | Nome do item de defesa         | VARCHAR      | 15     | Not Null, FK                           |
 | modDefesa | Valor do modificador de defesa | INTEGER      | -       | Check (modDefesa >= 0)                 |
 
 ### Tabela Ataque
@@ -166,7 +166,7 @@
 | Nome       | Descrição                         | Tipo de dado | Tamanho | Restrições de domínio                  |
 |------------|-----------------------------------|--------------|---------|----------------------------------------|
 | id         | Identificador único de ataque     | INTEGER      | -       | PK, Identity                           |
-| nome       | Nome do item de ataque            | VARCHAR      | 100     | Not Null, FK                           |
+| nome       | Nome do item de ataque            | VARCHAR      | 15     | Not Null, FK                           |
 | modCombate | Valor do modificador de combate   | INTEGER      | -       | Check (modCombate >= 0)                |
 | modForca   | Valor do modificador de força     | INTEGER      | -       | Check (modForca >= 0)                  |
 
@@ -180,7 +180,7 @@
 | Nome          | Descrição                              | Tipo de dado | Tamanho | Restrições de domínio                  |
 |---------------|----------------------------------------|--------------|---------|----------------------------------------|
 | id            | Identificador único de item mágico     | INTEGER      | -       | PK, Identity                           |
-| nome          | Nome do item mágico                    | VARCHAR      | 100     | Not Null, FK                           |
+| nome          | Nome do item mágico                    | VARCHAR      | 15     | Not Null, FK                           |
 | modCombate    | Valor do modificador de combate mágico | INTEGER      | -       | Check (modCombate >= 0)                |
 | modForca      | Valor do modificador de força mágica   | INTEGER      | -       | Check (modForca >= 0)                  |
 | modDefesa     | Valor do modificador de defesa mágica  | INTEGER      | -       | Check (modDefesa >= 0)                 |
@@ -199,7 +199,7 @@
 | Nome           | Descrição                                    | Tipo de dado | Tamanho | Restrições de domínio                  |
 |----------------|----------------------------------------------|--------------|---------|----------------------------------------|
 | id             | Identificador único de consumível            | INTEGER      | -       | PK, Identity                           |
-| nome           | Nome do item consumível                      | VARCHAR      | 100     | Not Null, FK                           |
+| nome           | Nome do item consumível                      | VARCHAR      | 15     | Not Null, FK                           |
 | vidaRecuperada | Quantidade de vida recuperada pelo consumível| INTEGER      | -       | Check (vidaRecuperada >= 0)            |
 
 
