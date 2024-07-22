@@ -116,6 +116,86 @@ Esta tabela está dentro das seguintes Formas Normais:
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
 
+## Tabela Região
+
+De acordo com o dicionário de dados da [Tabela de Região](./DD.md#tabela-regiao), a dependência funcional dessa tabela é a seguinte:
+
+nome ➡️ descricao, nivel
+
+"nome" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- 1° Forma Normal: Todos os atributos são atômicos e monovalorados
+- 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
+- Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
+- 4° Forma Normal: Não há dependências multivaloradas
+
+## Tabela Área
+
+De acordo com o dicionário de dados da [Tabela de Área](./DD.md#tabela-area), a dependência funcional dessa tabela é a seguinte:
+
+nome
+
+"nome" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- 1° Forma Normal: Todos os atributos são atômicos e monovalorados
+- 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
+- Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
+- 4° Forma Normal: Não há dependências multivaloradas
+
+## Tabela Desafio
+
+De acordo com o dicionário de dados da [Tabela de Desafio](./DD.md#tabela-desafio), a dependência funcional dessa tabela é a seguinte:
+
+idDesafio ➡️ descricao, DTForca, DTAgilidade, DTInteligencia, areaAtual
+
+"idDesafio" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- 1° Forma Normal: Todos os atributos são atômicos e monovalorados
+- 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
+- Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
+- 4° Forma Normal: Não há dependências multivaloradas
+
+## Tabela Armadilha
+
+De acordo com o dicionário de dados da [Tabela de Armadilha](./DD.md#tabela-armadilha), a dependência funcional dessa tabela é a seguinte:
+
+idArmadilha ➡️ areaTeletransporte
+
+"idArmadilha" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- 1° Forma Normal: Todos os atributos são atômicos e monovalorados
+- 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
+- Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
+- 4° Forma Normal: Não há dependências multivaloradas
+
+## Tabela Provação
+
+De acordo com o dicionário de dados da [Tabela de Provação](./DD.md#tabela-provacao), a dependência funcional dessa tabela é a seguinte:
+
+idProvacao ➡️ recompensa
+
+"idProvacao" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- 1° Forma Normal: Todos os atributos são atômicos e monovalorados
+- 2° Forma Normal: Há somente um único atributo como chave, logo não há atributos comuns dependentes parcialmente de uma chave
+- 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
+- Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
+- 4° Forma Normal: Não há dependências multivaloradas
+
 ## Referência Bibliográfica
 
 > 1. 
@@ -127,3 +207,4 @@ Esta tabela está dentro das seguintes Formas Normais:
 |  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001) |
 |  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
 |  3.0   | 19/07 |                                Correção da palavra "comum"                                | [@Neitan2001](https://github.com/Neitan2001) |
+|  5.0   | 22/07 |                                Criação das tabelas Regiao, Area, Desafio, Armadilha, Provacao, Consumíveis                                | [@Paulo Henrique](https://github.com/owhenrique) |
