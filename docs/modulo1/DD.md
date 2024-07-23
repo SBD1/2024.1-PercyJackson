@@ -225,8 +225,8 @@
 
 | Nome          | Descrição                                   | Tipo de dado | Tamanho | Restrições de domínio |
 |---------------|---------------------------------------------|--------------|---------|-----------------------|
-| numero        | Identificador único do dialogo              | INTEGER      | -       | PK, Identity          |
-| nomeAliado    | Identificador do aliado                     | VARCHAR      | 15      | Not Null, FK          |
+| numero        | Identificador único do dialogo              | INTEGER      | -       | PK, Not Null          |
+| nomeAliado    | Identificador do aliado                     | VARCHAR      | 15      | PK, FK, Not Null      |
 | frase         | Frase a ser apresentada ao jogador          | TEXT         | -       | Not Null              |
 | resposta1     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
 | resposta2     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
@@ -242,7 +242,7 @@
 
 | Nome          | Descrição                              | Tipo de dado | Tamanho | Restrições de domínio |
 |---------------|----------------------------------------|--------------|---------|-----------------------|
-| numero        | Identificador da resposta              | INTEGER      | -       | PK, Identity          |
+| numero        | Identificador da resposta              | INTEGER      | -       | PK, Not Null          |
 | numeroDialogo | Identificador do dialogo               | INTEGER      | -       | PK, FK, Not Null      |
 | nomeAliado    | Identificador do aliado                | VARCHAR      | 15      | PK, FK, Not Null      |
 | frase         | Frase a ser apresentada ao jogador     | TEXT         | -       | Not Null              |
