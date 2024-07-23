@@ -1,7 +1,5 @@
 # Dicionário de Dados
 
-## Introdução
-
 ## Tabelas
 
 ### Tabela Jogador
@@ -82,7 +80,7 @@
 
 | Nome         | Descrição                                                                                                                                                                                                                            | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
-| nomeConcreto | O nome que identifica unicamente uma instância de Inimigo                                                                                                                                                                            | SERIAL       |         | PK, Not Null                                                       |
+| nomeConcreto | O nome que identifica unicamente uma instância de Inimigo                                                                                                                                                                            | VARCGAR      | 15      | PK, Not Null                                                       |
 | vidaAtual    | A vida atual da instância de Inimigo, ao chegar a 0 a instância é derrotada. O valor inicial deste atributo deve ser o mesmo valor do atributo vidaMax do Inimigo gerador da instância, isso poderá ser feito a partir de um trigger | INTEGER      |         | Not Null                                                           |
 | inimigo      | Referência ao Inimigo gerador desta instância                                                                                                                                                                                        | VARCHAR      | 15      | FK, Not Null                                                       |
 | areaAtual    | Referência à área que o personagem se encontra dentro do mapa do jogo                                                                                                                                                                | VARCHAR      | 25      | FK, Not Null                                                       |
@@ -209,11 +207,11 @@
 | Descrição   | Armazenará informações sobre aliados. Cada registro contém o nome deste aliado, a sua descrição e a área que ocupa. |
 | Observações |                                                                                                                     |
 
-| Nome          | Descrição                                                         | Tipo de dado | Tamanho | Restrições de domínio                  |
-|---------------|-------------------------------------------------------------------|--------------|---------|----------------------------------------|
-| nome          | Identificador único de aliado                                     | VARCHAR      | 15      | PK, FK, Not Null                       |
-| descricao     | Descrição do aliado a ser apresentada                             | TEXT         | -       | Not Null                               |
-| nomeArea      | Referência à área que o aliado se encontra dentro do mapa do jogo | VARCHAR      | 15      | FK, Not Null                           |
+| Nome          | Descrição                                                         | Tipo de dado | Tamanho | Restrições de domínio |
+|---------------|-------------------------------------------------------------------|--------------|---------|-----------------------|
+| nome          | Identificador único de aliado                                     | VARCHAR      | 15      | PK, Not Null          |
+| descricao     | Descrição do aliado a ser apresentada                             | TEXT         | -       | Not Null              |
+| nomeArea      | Referência à área que o aliado se encontra dentro do mapa do jogo | VARCHAR      | 15      | FK, Not Null          |
 
 ### Tabela Dialogo
 
@@ -227,10 +225,6 @@
 | numero        | Identificador único do dialogo              | INTEGER      | -       | PK, Not Null          |
 | nomeAliado    | Identificador do aliado                     | VARCHAR      | 15      | PK, FK, Not Null      |
 | frase         | Frase a ser apresentada ao jogador          | TEXT         | -       | Not Null              |
-| resposta1     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
-| resposta2     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
-| resposta3     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
-| resposta4     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
 
 ### Tabela Resposta
 
@@ -255,7 +249,7 @@
 
 | Nome          | Descrição                                      | Tipo de dado | Tamanho | Restrições de domínio |
 |---------------|----------------------------------------------- |--------------|---------|-----------------------|
-| numero        | Identificador da profecia                      | INTEGER      | -       | PK, Identity          |
+| idProfecia    | Identificador da profecia                      | INTEGER      | -       | PK, Identity          |
 | numaroDialogo | Referência ao dialogo                          | INTEGER      | -       | FK, Not Null          |
 | nomeAliado    | Referência ao aliado que fornece a profecia    | VARCHAR      | 15      | FK, Not Null          |
 | nomeInimigo   | Referência ao inimigo a ser derrotado          | VARCHAR      | 15      | FK, Not Null          |
@@ -344,10 +338,6 @@
 | DTAgilidade    | Número de agilidade mínima que um jogador deve possuir para vencer a provação    | INTEGER      |         | Not Null                                                           |
 | DTInteligencia | Número de inteligência mínima que um jogador deve possuir para vencer a provação | INTEGER      |         | Not Null                                                           |
 | recompensa     | Referência ao item que o jogador receberá caso vença a provação                  | VARCHAR      | 15      | FK, Not Null                                                       |
-
-## Referência Bibliográfica
-
-> 1. 
 
 ## Histórico de Versões
 

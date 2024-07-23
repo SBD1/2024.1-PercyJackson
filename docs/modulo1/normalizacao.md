@@ -1,7 +1,5 @@
 # Normalização
 
-## Introdução
-
 ## Tabelas
 
 ## Tabela Jogador
@@ -231,7 +229,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 De acordo com o dicionário de dados da [Tabela Dialogo](./DD.md#tabela-dialogo), a dependência funcional dessa tabela é a seguinte:
 
-nomePersonagem, numeroDialogo ➡️ conteudo
+nomePersonagem, numeroDialogo ➡️ frase
 
 "nomePersonagem, numeroDialogo" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
 
@@ -247,7 +245,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 De acordo com o dicionário de dados da [Tabela Resposta](./DD.md#tabela-resposta), a dependência funcional dessa tabela é a seguinte:
 
-nomePersonagem, numeroDialogo, numeroResposta ➡️ resposta
+nomePersonagem, numeroDialogo, numeroResposta ➡️ frase, numeroDialogoDestino, nomeAliadoDestino
 
 "nomePersonagem, numeroDialogo, numeroResposta" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
 
@@ -263,9 +261,9 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 De acordo com o dicionário de dados da [Tabela Profecia](./DD.md#tabela-profecia), a dependência funcional dessa tabela é a seguinte:
 
-nome ➡️ numeroDialogo, numeroCapitulo, conteudo, descricao
+idProfecia ➡️ numeroDialogo, numeroCapitulo, conteudo, descricao
 
-"nome" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+"idProfecia" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
 
 Esta tabela está dentro das seguintes Formas Normais:
 
@@ -370,10 +368,6 @@ Esta tabela está dentro das seguintes Formas Normais:
 - 3° Forma Normal: Nenhum atributo comum depende transitivamente de qualquer superchave
 - Forma Normal de Boyce-Codd: para cada depedência funcional, o lado esquerdo é uma chave candidata
 - 4° Forma Normal: Não há dependências multivaloradas
-
-## Referência Bibliográfica
-
-> 1. 
 
 ## Histórico de Versões
 
