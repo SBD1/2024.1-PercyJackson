@@ -213,15 +213,96 @@ Esta tabela está dentro das seguintes Formas Normais:
 - **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
 - **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
 
+## Tabela Aliado
+
+De acordo com o dicionário de dados da [Tabela Aliado](./DD.md#tabela-aliado), a dependência funcional dessa tabela é a seguinte:
+
+nome ➡️ descricao, nomeArea
+
+"nome" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é nome ➡️ descricao, nomeArea.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela Dialogo
+
+De acordo com o dicionário de dados da [Tabela Dialogo](./DD.md#tabela-dialogo), a dependência funcional dessa tabela é a seguinte:
+
+nomePersonagem, numeroDialogo ➡️ conteudo
+
+"nomePersonagem, numeroDialogo" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é nomePersonagem, numeroDialogo ➡️ conteudo.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela Resposta
+
+De acordo com o dicionário de dados da [Tabela Resposta](./DD.md#tabela-resposta), a dependência funcional dessa tabela é a seguinte:
+
+nomePersonagem, numeroDialogo, numeroResposta ➡️ resposta
+
+"nomePersonagem, numeroDialogo, numeroResposta" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é nomePersonagem, numeroDialogo, numeroResposta ➡️ resposta.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela Profecia
+
+De acordo com o dicionário de dados da [Tabela Profecia](./DD.md#tabela-profecia), a dependência funcional dessa tabela é a seguinte:
+
+nome ➡️ numeroDialogo, numeroCapitulo, conteudo, descricao
+
+"nome" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é nome ➡️ numeroDialogo, numeroCapitulo, conteudo, descricao.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
+## Tabela Adquire
+
+De acordo com o dicionário de dados da [Tabela Adquire](./DD.md#tabela-adquire), a dependência funcional dessa tabela é a seguinte:
+
+nomePersonagem, nomeItem ➡️ quantidade
+
+"nomePersonagem, nomeItem" é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
+
+Esta tabela está dentro das seguintes Formas Normais:
+
+- **1° Forma Normal:** Está em 1NF, pois todos os atributos contêm valores atômicos.
+- **2° Forma Normal:** Está em 2NF, pois não há dependências parciais; todos os atributos não chave dependem da chave primária inteira.
+- **3° Forma Normal:** Está em 3NF, pois não há dependências transitivas; a única dependência funcional não trivial é nomePersonagem, nomeItem ➡️ quantidade.
+- **Forma Normal de Boyce-Codd:** Está em BCNF, pois cada determinante é uma superchave.
+- **4° Forma Normal:** Está em 4NF, pois não há dependências multivaloradas não triviais.
+
 ## Referência Bibliográfica
 
 > 1. 
 
 ## Histórico de Versões
 
-| Versão | Data  |                                         Descrição                                         |                 Responsável                  |
-| :----: | :---: | :---------------------------------------------------------------------------------------: | :------------------------------------------: |
-|  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001) |
-|  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
-|  3.0   | 19/07 |                                Correção da palavra "comum"                                | [@Neitan2001](https://github.com/Neitan2001) |
-|  4.0   | 22/07 |                                Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis                               | [Clara Marcelino](https://github.com/clara-ribeiro) |
+| Versão | Data  |                                         Descrição                                         |                 Responsável                           |
+| :----: | :---: | :---------------------------------------------------------------------------------------: | :---------------------------------------------------: |
+|  1.0   | 18/07 | Criação do documento                                                                      | [@Neitan2001](https://github.com/Neitan2001)          |
+|  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001)          |
+|  3.0   | 19/07 | Correção da palavra "comum"                                                               | [@Neitan2001](https://github.com/Neitan2001)          |
+|  4.0   | 22/07 | Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis                 | [Clara Marcelino](https://github.com/clara-ribeiro)   |
+|  5.0   | 22/07 | Criação das tabelas Aliado, Dialogo, Resposta, Profecia e Adquire                         | [Charles Serafim](https://github.com/charles-serafim) |
