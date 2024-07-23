@@ -1,8 +1,12 @@
 # Modelo Relacional
 
-## Introdução
-
 ## Versão Final
+
+### Versão 5
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/relacional/relacional5.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão final (versão 5) do Modelo Relacional. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
 
 ## Versões do Modelo Relacional
 
@@ -45,10 +49,6 @@
 <p style="text-align:center; font-size:15px">Versão 5 do Modelo Relacional. Autores: Charles. Ferramenta: Miro</p>
 
 </details>
-
-## Referência Bibliográfica
-
-> 1. 
 
 ## Histórico de Versões
 
