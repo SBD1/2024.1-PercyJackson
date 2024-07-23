@@ -59,7 +59,7 @@
 | Nome | Descrição                                                                                                                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
 | nome | Nome que irá identificar unicamente um personagem                                                                                                                     | Varchar      | 15      | PK/ Not Null                                                       |
-| tipo | Este atributo especifica se o Personagem é um Jogador ou um Inimigo. Os valores permitidos para este atributo será o caracter 'J', para Jogador, ou 'I', para Inimigo | Char         | 1       | Not Null                                                           |
+| tipo | Este atributo especifica se o Personagem é um Jogador ou um Inimigo. Os valores permitidos para este atributo será o caracter 'J', para Jogador, ou 'I', para Inimigo | Char         | 1       | Check (tipo == 'J' or tipo == 'I')                                                           |
 
 ### Tabela Nível
 
@@ -202,7 +202,77 @@
 | nome           | Nome do item consumível                      | VARCHAR      | 15     | Not Null, FK                           |
 | vidaRecuperada | Quantidade de vida recuperada pelo consumível| INTEGER      | -       | Check (vidaRecuperada >= 0)            |
 
+### Tabela Região
 
+| Tabela      | regiao                                                                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará informações referente as diferentes regiões existentes no mapa                                          |
+| Observações | Essa tabela é uma específicação das diferentes regiões, a tabela area é responsável por armazenar as informações das diferentes areas existentes dentro de cada região |
+
+| Nome      | Descrição                                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| --------- | -------------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nome      | Nome que identifica unicamente uma região                                                          | VARCHAR      | 15      | PK/ Not Null                                                       |
+| descricao | Descrição detalhada de uma região e suas singularidades                                            | VARCHAR      | 255     | Not Null                                                           |
+| nivel     | A referência ao nível da região é utilizada como parâmetro para balancear os combates e desafios   | INTEGER      |         | Not Null                                                           |                                                        |
+
+### Tabela Área
+
+| Tabela      | area                                                                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará informações referente as diferentes áreas existentes que compõe uma região                                          |
+| Observações | Essa tabela é uma específicação de área |
+
+| Nome        | Descrição                                                                                 | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------- | ----------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nome        | Nome que identifica unicamente uma área                                                   | VARCHAR      | 15      | PK/ Not Null                                                       |
+| regiaoAtual | Referência à Região que a área se encontra dentro do mapa do jogo                      | VARCHAR      | 15      | FK/ Not Null                                                       |
+| desafio         | Referência ao desafio que se encontra dentro da área                           | INTEGER      |      | FK/ Not Null                                                          |
+
+### Tabela Desafio
+
+| Tabela      | desafio                                                                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará informações referente aos desafios do jogo. Os desafios são situações ou obstáculos que o jogador deve enfrentar pra receber uma recompensa, escapar de uma armadilha ou alcançar um objetivo específico                                        |
+| Observações | Um desafio pode ser uma provação ou armadilha, as tabelas provacao e armadilha, serão responsáveis por armazenar as informações dos diferentes tipos de desafio |
+
+| Nome             | Descrição                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ---------------- | --------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| idDesafio             | Número que identifica unicamente um desafio                                | INTEGER      |      | PK/ Identity                                                       |
+| tipoDesafio           | Variável para identificar o  tipo de desafio (armação ou provação)                                | CHAR     |  15    | Check (tipoDesafio == 'a' or tipoDesafio == 'p') |
+
+
+### Tabela Armadilha
+
+| Tabela      | armadilha                                                                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará informações referente às armadilhas do jogo. Uma armadilha é uma situação perigosa preparada para pegar o jogador desprevenido, exigindo dele forca, agilidade e inteligencia para escapar                                     |
+| Observações | Uma armadilha pode envolver resolver enigmas, enfrentar inimigos, ou superar obstáculos físicos e mentais |
+
+| Nome              | Descrição                                                                                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------------- | ----------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| idArmadilha       | Número que identifica unicamente uma armadilha                                                     | INTEGER       |         | PK/ FK/ Identity                                                       |
+| descricao         | Descrição detalhada de uma armadilha e suas singularidades                                          | VARCHAR      | 255     | Not Null                                                           |
+| DTForca           | Número de força mínima que um jogador deve possuir para vencer a armadilha                        | INTEGER      |         | Not Null                                                           |
+| DTAgilidade       | Número de agilidade mínima que um jogador deve possuir para vencer a armadilha                    | INTEGER      |         | Not Null                                                           |
+| DTInteligencia    | Número de inteligência mínima que um jogador deve possuir para vencer a armadilha                 | INTEGER      |         | Not Null                                                           |                                                     |
+| areaTeletransporte| Referência à área para onde o jogador será teletransportado caso caia na armadilha               | VARCHAR      | 15      | FK/ Not Null                                                       |
+
+
+### Tabela Provação
+
+| Tabela      | provacao                                                                                                                                      |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará informações referente às provações do jogo. Uma provação é uma situação que testa as habilidades e conhecimentos ou moral do jogador                                     |
+| Observações | Assim como as armadilhas, uma provação  pode envolver resolver enigmas, enfrentar inimigos, ou superar obstáculos físicos e mentais |
+
+| Nome              | Descrição                                                                                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------------- | ----------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| idProvacao       | Número que identifica unicamente uma provação                                                     | INTEGER       |         | PK/ Fk/ Identity                                                       |
+| descricao         | Descrição detalhada de uma provação e suas singularidades                                          | VARCHAR      | 255     | Not Null                                                           |
+| DTForca           | Número de força mínima que um jogador deve possuir para vencer a provação                        | INTEGER      |         | Not Null                                                           |
+| DTAgilidade       | Número de agilidade mínima que um jogador deve possuir para vencer a provação                    | INTEGER      |         | Not Null                                                           |
+| DTInteligencia    | Número de inteligência mínima que um jogador deve possuir para vencer a provação                 | INTEGER      |         | Not Null                                                           |                                                    |
+| recompensa | Referência ao item que o jogador receberá caso vença a provação               | VARCHAR      | 15      | FK/ Not Null                                                       |                                                   |
 
 ## Referência Bibliográfica
 
@@ -216,3 +286,4 @@
 |  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
 |  3.0   | 19/07 |      Ajuste das restrições das chaves primárias de Jogador, Inimigo e tipoPersonagem      | [@Neitan2001](https://github.com/Neitan2001) |
 |  4.0   | 22/07 |      Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis            | [Clara Marcelino](https://github.com/clara-ribeiro) |
+|  5.0   | 22/07 |                                Criação das tabelas Regiao, Area, Desafio, Armadilha, Provacao, Consumíveis                                | [Paulo Henrique](https://github.com/owhenrique) |
