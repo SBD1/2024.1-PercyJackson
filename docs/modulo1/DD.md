@@ -203,6 +203,79 @@
 | vidaRecuperada | Quantidade de vida recuperada pelo consumível| INTEGER      | -       | Check (vidaRecuperada >= 0)            |
 
 
+### Tabela Aliado
+
+| Tabela      | aliado                                                                                                              |
+| ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará informações sobre aliados. Cada registro contém o nome deste aliado, a sua descrição e a área que ocupa. |
+| Observações |                                                                                                                     |
+
+| Nome          | Descrição                                                         | Tipo de dado | Tamanho | Restrições de domínio                  |
+|---------------|-------------------------------------------------------------------|--------------|---------|----------------------------------------|
+| nome          | Identificador único de aliado                                     | VARCHAR      | 15      | PK, FK, Not Null                       |
+| descricao     | Descrição do aliado a ser apresentada                             | TEXT         | -       | Not Null                               |
+| nomeArea      | Referência à área que o aliado se encontra dentro do mapa do jogo | VARCHAR      | 15      | FK, Not Null                           |
+
+### Tabela Dialogo
+
+| Tabela      | dialogo                                                                                                           |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará informações sobre os dialogos dos aliados. Cada registro contém o número do diálogo e o nome do aliado |
+| Observações | Esta tabela também possui referências à tabela resposta                                                           |
+
+| Nome          | Descrição                                   | Tipo de dado | Tamanho | Restrições de domínio |
+|---------------|---------------------------------------------|--------------|---------|-----------------------|
+| numero        | Identificador único do dialogo              | INTEGER      | -       | PK, Identity          |
+| nomeAliado    | Identificador do aliado                     | VARCHAR      | 15      | Not Null, FK          |
+| frase         | Frase a ser apresentada ao jogador          | TEXT         | -       | Not Null              |
+| resposta1     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
+| resposta2     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
+| resposta3     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
+| resposta4     | Referência à resposta que pode ser mostrada | INTEGER      | -       | Null                  |
+
+### Tabela Resposta
+
+| Tabela      | resposta                                                                                            |
+| ----------- | ----------------------------------------------------------------------------------------------------|
+| Descrição   | Armazenará informações sobre as respostas. Cada registro contém identificador e a frase da resposta |
+| Observações | Possui referência à entidade dialogo                                                                |
+
+| Nome          | Descrição                              | Tipo de dado | Tamanho | Restrições de domínio |
+|---------------|----------------------------------------|--------------|---------|-----------------------|
+| numero        | Identificador da resposta              | INTEGER      | -       | PK, Identity          |
+| numeroDialogo | Identificador do dialogo               | INTEGER      | -       | PK, FK, Not Null      |
+| nomeAliado    | Identificador do aliado                | VARCHAR      | 15      | PK, FK, Not Null      |
+| frase         | Frase a ser apresentada ao jogador     | TEXT         | -       | Not Null              |
+
+### Tabela Profecia
+
+| Tabela      | profecia                                                                                                                                                        |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará informações sobre as profecias. Cada registro contém identificador, um inimigo a dizimar, quantidade necessária e turnos a serem adicionados ao jogo |
+| Observações | Possui referência à entidade inimigo                                                                                                                            |
+
+| Nome          | Descrição                                      | Tipo de dado | Tamanho | Restrições de domínio |
+|---------------|----------------------------------------------- |--------------|---------|-----------------------|
+| numero        | Identificador da profecia                      | INTEGER      | -       | PK, Identity          |
+| numaroDialogo | Referência ao dialogo                          | INTEGER      | -       | FK, Not Null          |
+| nomeAliado    | Referência ao aliado que fornece a profecia    | VARCHAR      | 15      | FK, Not Null          |
+| nomeInimigo   | Referência ao inimigo a ser derrotado          | VARCHAR      | 15      | FK, Not Null          |
+| quantAbate    | Quantidade de unidades a serem derortadas      | INTEGER      | -       | Not Null              |
+| turnosAMais   | Quantidade de turnos de recompensa da profecia | INTEGER      | -       | Not Null              |
+
+### Tabela Adquire
+
+| Tabela      | adquire                                                                                                                                                 |
+| ----------- | -----------------------------------------------------------------------------------------------------------------                                       |
+| Descrição   | Tabela de relacionamento entre um jogador e uma profecia que ele carrega. Cada registro as referências aos mesmos e o status de cumprimento da profecia |
+| Observações |                                                                                                                                                         |
+
+| Nome           | Descrição                                    | Tipo de dado | Tamanho | Restrições de domínio                  |
+|----------------|----------------------------------------------|--------------|---------|----------------------------------------|
+| nomeJogador    | Referência ao jogador que carrega a profecia | VARCHAR      | 15      | PK, FK, Not Null                       |
+| numeroProfecia | Referência à profecia carregada pelo jogador | INTEGER      | -       | PK, FK, Not Null                       |
+| completado     | Status de cumprimento da profecia            | Boolean      | -       | Not Null                               |
+
 
 ## Referência Bibliográfica
 
@@ -210,9 +283,10 @@
 
 ## Histórico de Versões
 
-| Versão | Data  |                                         Descrição                                         |                 Responsável                  |
-| :----: | :---: | :---------------------------------------------------------------------------------------: | :------------------------------------------: |
-|  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001) |
-|  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001) |
-|  3.0   | 19/07 |      Ajuste das restrições das chaves primárias de Jogador, Inimigo e tipoPersonagem      | [@Neitan2001](https://github.com/Neitan2001) |
-|  4.0   | 22/07 |      Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis            | [Clara Marcelino](https://github.com/clara-ribeiro) |
+| Versão | Data  |                                         Descrição                                         |                 Responsável                           |
+| :----: | :---: | :---------------------------------------------------------------------------------------: | :---------------------------------------------------: |
+|  1.0   | 18/07 |                                   Criação do documento                                    | [@Neitan2001](https://github.com/Neitan2001)          |
+|  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus | [@Neitan2001](https://github.com/Neitan2001)          |
+|  3.0   | 19/07 |      Ajuste das restrições das chaves primárias de Jogador, Inimigo e tipoPersonagem      | [@Neitan2001](https://github.com/Neitan2001)          |
+|  4.0   | 22/07 |      Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis            | [Clara Marcelino](https://github.com/clara-ribeiro)   |
+|  5.0   | 22/07 |           Criação das tabelas Aliado, Dialogo, Resposta, Profecia, Adquire                | [Charles Serafim](https://github.com/charles-serafim) |
