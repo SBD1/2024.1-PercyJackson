@@ -226,6 +226,7 @@
 | ----------- | ----------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
 | nome        | Nome que identifica unicamente uma área                                                   | VARCHAR      | 15      | PK/ Not Null                                                       |
 | regiaoAtual | Referência à Região que o desafio se encontra dentro do mapa do jogo                      | VARCHAR      | 15      | FK/ Not Null                                                       |
+| desafio         | Referência ao desafio que se encontra dentro da área                           | INTEGER      |      | FK/ Not Null                                                          |
 
 ### Tabela Desafio
 
@@ -236,9 +237,8 @@
 
 | Nome             | Descrição                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ---------------- | --------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| idDesafio             | Número que identifica unicamente um desafio                                | SERIAL      |      | PK/ Not Null                                                       |
+| idDesafio             | Número que identifica unicamente um desafio                                | INTEGER      |      | PK/ Identity                                                       |
 | tipoDesafio           | Variável para identificar o  tipo de desafio (armação ou provação)                                | VARCHAR     |  15    | PK/ Not Null
-| areaAtual         | Referência à área em que o desafio se encontra dentro do mapa do jogo                           | VARCHAR      | 15      | FK/ Not Null                                                          |
 
 
 ### Tabela Armadilha
@@ -250,7 +250,7 @@
 
 | Nome              | Descrição                                                                                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ----------------- | ----------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| idArmadilha       | Número que identifica unicamente uma armadilha                                                     | SERIAL       |         | PK/ Not Null                                                       |
+| idArmadilha       | Número que identifica unicamente uma armadilha                                                     | INTEGER       |         | PK/ Identity                                                       |
 | descricao         | Descrição detalhada de uma armadilha e suas singularidades                                          | VARCHAR      | 255     | Not Null                                                           |
 | DTForca           | Número de força mínima que um jogador deve possuir para vencer a armadilha                        | INTEGER      |         | Not Null                                                           |
 | DTAgilidade       | Número de agilidade mínima que um jogador deve possuir para vencer a armadilha                    | INTEGER      |         | Not Null                                                           |
@@ -267,7 +267,7 @@
 
 | Nome              | Descrição                                                                                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ----------------- | ----------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| idProvacao       | Número que identifica unicamente uma provação                                                     | SERIAL       |         | PK/ Not Null                                                       |
+| idProvacao       | Número que identifica unicamente uma provação                                                     | INTEGER       |         | PK/ Identity                                                       |
 | descricao         | Descrição detalhada de uma provação e suas singularidades                                          | VARCHAR      | 255     | Not Null                                                           |
 | DTForca           | Número de força mínima que um jogador deve possuir para vencer a provação                        | INTEGER      |         | Not Null                                                           |
 | DTAgilidade       | Número de agilidade mínima que um jogador deve possuir para vencer a provação                    | INTEGER      |         | Not Null                                                           |

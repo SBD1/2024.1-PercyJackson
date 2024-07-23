@@ -231,7 +231,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 De acordo com o dicionário de dados da [Tabela de Área](./DD.md#tabela-area), a dependência funcional dessa tabela é a seguinte:
 
-nome
+nome ➡️ regiaoAtual, desafio
 
 "nome" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
 
@@ -247,7 +247,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 De acordo com o dicionário de dados da [Tabela de Desafio](./DD.md#tabela-desafio), a dependência funcional dessa tabela é a seguinte:
 
-idDesafio ➡️ descricao, DTForca, DTAgilidade, DTInteligencia, areaAtual
+idDesafio ➡️ tipoDesafio
 
 "idDesafio" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
 
@@ -263,7 +263,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 De acordo com o dicionário de dados da [Tabela de Armadilha](./DD.md#tabela-armadilha), a dependência funcional dessa tabela é a seguinte:
 
-idArmadilha ➡️ areaTeletransporte
+idArmadilha ➡️ descricao, DTForca, DTAgilidade, DTInteligencia, areaTeletransporte
 
 "idArmadilha" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
 
@@ -279,7 +279,7 @@ Esta tabela está dentro das seguintes Formas Normais:
 
 De acordo com o dicionário de dados da [Tabela de Provação](./DD.md#tabela-provacao), a dependência funcional dessa tabela é a seguinte:
 
-idProvacao ➡️ recompensa
+idProvacao ➡️ descricao, DTForca, DTAgilidade, DTInteligencia, recompensa
 
 "idProvacao" é o único atributo que não se repete na tabela, assim é a única Superchave, Superchave Mínima e Chave Candidata desta tabela.
 
