@@ -48,7 +48,23 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 
 <img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der5.jpg"/>
 
-<p style="text-align:center; font-size:15px">Versão 5 do Diagrama Entidade Relacionamento. Autores: Natan. Ferramenta: Miro</p>
+<p style="text-align:center; font-size:15px">Versão 5 do Diagrama Entidade Relacionamento. Autor: Natan. Ferramenta: Miro</p>
+
+</details>
+
+<details><summary>Versão 6</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der6.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 6 do Diagrama Entidade Relacionamento. AAutores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
+
+</details>
+
+<details><summary>Versão 7</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der7.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 7 do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
 
 </details>
 
@@ -65,3 +81,4 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 | 3.0 | 18/07 | Adição da Versão 4 do diagrama | [@Neitan2001](https://github.com/Neitan2001) |
 | 4.0 | 18/07 | Adição da Versão 5 do diagrama | [@Neitan2001](https://github.com/Neitan2001) |
 | 5.0 | 22/07 | Adição da Versão 6 do diagrama | [Paulo Henrique](https://github.com/owhenrique) |
+| 6.0 | 22/07 | Adição da Versão 7 do diagrama | [Charles Serafim](https://github.com/charles-serafim) |
