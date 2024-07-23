@@ -202,9 +202,6 @@
 | nome           | Nome do item consumível                      | VARCHAR      | 15     | Not Null, FK                           |
 | vidaRecuperada | Quantidade de vida recuperada pelo consumível| INTEGER      | -       | Check (vidaRecuperada >= 0)            |
 
-
-
-
 ### Tabela Região
 
 | Tabela      | regiao                                                                                                                                      |
@@ -212,11 +209,11 @@
 | Descrição   | Armazenará informações referente as diferentes regiões existentes no mapa                                          |
 | Observações | Essa tabela é uma específicação das diferentes regiões, a tabela area é responsável por armazenar as informações das diferentes areas existentes dentro de cada região |
 
-| Nome             | Descrição                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
-| ---------------- | --------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| nome             | Nome que identifica unicamente uma região                                | Varchar      | 15      | PK/ Not Null                                                       |
-| descricao    | Descrição detalhada de uma região e suas singularidades     | varchar          |   255      | Not Null                                                           |
-| nivel | Referência ao nível da região, é utilizado como referência a fim de balancear os combates e desafios | Int          |         | Not Null                                                           |
+| Nome      | Descrição                                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| --------- | -------------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nome      | Nome que identifica unicamente uma região                                                          | VARCHAR      | 15      | PK/ Not Null                                                       |
+| descricao | Descrição detalhada de uma região e suas singularidades                                            | VARCHAR      | 255     | Not Null                                                           |
+| nivel     | A referência ao nível da região é utilizada como parâmetro para balancear os combates e desafios   | INTEGER      |         | Not Null                                                           |                                                        |
 
 ### Tabela Área
 
@@ -225,9 +222,10 @@
 | Descrição   | Armazenará informações referente as diferentes áreas existentes que compõe uma região                                          |
 | Observações | Essa tabela é uma específicação de área |
 
-| Nome             | Descrição                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
-| ---------------- | --------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| nome             | Nome que identifica unicamente uma área                                | Varchar      | 15      | PK/ FK/ Not Null                                                       |
+| Nome        | Descrição                                                                                 | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------- | ----------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nome        | Nome que identifica unicamente uma área                                                   | VARCHAR      | 15      | PK/ Not Null                                                       |
+| regiaoAtual | Referência à Região que o desafio se encontra dentro do mapa do jogo                      | VARCHAR      | 15      | FK/ Not Null                                                       |
 
 ### Tabela Desafio
 
@@ -239,11 +237,9 @@
 | Nome             | Descrição                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ---------------- | --------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
 | idDesafio             | Número que identifica unicamente um desafio                                | SERIAL      |      | PK/ Not Null                                                       |
-| descricao             | Descrição detalhada de um desafio e suas singularidades                                | int      |      | Not Null                                                       |
-| DTForca             | Número de força mínima que um jogador deve possuir para vencer o desafio                                | int      |      | Not Null                                                       |
-| DTAgilidade             | Número de agilidade mínima que um jogador deve possuir ppara vencer o desafio                                | int      |      | Not Null
-| DTInteligencia             | Número de inteligencia mínima que um jogador deve possuir ppara vencer o desafio                                | int      |      | Not Null
-| areaAtual             | Referência à área que o desafio se encontra dentro do mapa do jogo                                | varchar      |   15   | FK/Not Null
+| tipoDesafio           | Variável para identificar o  tipo de desafio (armação ou provação)                                | VARCHAR     |  15    | PK/ Not Null
+| areaAtual         | Referência à área em que o desafio se encontra dentro do mapa do jogo                           | VARCHAR      | 15      | FK/ Not Null                                                          |
+
 
 ### Tabela Armadilha
 
@@ -252,10 +248,15 @@
 | Descrição   | Armazenará informações referente às armadilhas do jogo. Uma armadilha é uma situação perigosa preparada para pegar o jogador desprevenido, exigindo dele forca, agilidade e inteligencia para escapar                                     |
 | Observações | Uma armadilha pode envolver resolver enigmas, enfrentar inimigos, ou superar obstáculos físicos e mentais |
 
-| Nome             | Descrição                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
-| ---------------- | --------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| idArmadilha             | Número que identifica unicamente um desafio                                | SERIAL      |      | PK/ Not Null                                                       |
-| areaTeletransporte             | Referência à área que o jogador será teletransportador caso caia na armadilha                                | varchar      |   15   | FK/ Not Null
+| Nome              | Descrição                                                                                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------------- | ----------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| idArmadilha       | Número que identifica unicamente uma armadilha                                                     | SERIAL       |         | PK/ Not Null                                                       |
+| descricao         | Descrição detalhada de uma armadilha e suas singularidades                                          | VARCHAR      | 255     | Not Null                                                           |
+| DTForca           | Número de força mínima que um jogador deve possuir para vencer a armadilha                        | INTEGER      |         | Not Null                                                           |
+| DTAgilidade       | Número de agilidade mínima que um jogador deve possuir para vencer a armadilha                    | INTEGER      |         | Not Null                                                           |
+| DTInteligencia    | Número de inteligência mínima que um jogador deve possuir para vencer a armadilha                 | INTEGER      |         | Not Null                                                           |                                                     |
+| areaTeletransporte| Referência à área para onde o jogador será teletransportado caso caia na armadilha               | VARCHAR      | 15      | FK/ Not Null                                                       |
+
 
 ### Tabela Provação
 
@@ -264,10 +265,14 @@
 | Descrição   | Armazenará informações referente às provações do jogo. Uma provação é uma situação que testa as habilidades e conhecimentos ou moral do jogador                                     |
 | Observações | Assim como as armadilhas, uma provação  pode envolver resolver enigmas, enfrentar inimigos, ou superar obstáculos físicos e mentais |
 
-| Nome             | Descrição                                                             | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
-| ---------------- | --------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| idArmadilha             | Número que identifica unicamente um desafio                                | SERIAL      |      | PK/ Not Null                                                       |
-| recompensa             | Referência a um item liberado para o jogador caso ele vença a provação                                | varchar      |  15    | FK/ Not Null                                                       |                                                       |
+| Nome              | Descrição                                                                                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------------- | ----------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| idProvacao       | Número que identifica unicamente uma provação                                                     | SERIAL       |         | PK/ Not Null                                                       |
+| descricao         | Descrição detalhada de uma provação e suas singularidades                                          | VARCHAR      | 255     | Not Null                                                           |
+| DTForca           | Número de força mínima que um jogador deve possuir para vencer a provação                        | INTEGER      |         | Not Null                                                           |
+| DTAgilidade       | Número de agilidade mínima que um jogador deve possuir para vencer a provação                    | INTEGER      |         | Not Null                                                           |
+| DTInteligencia    | Número de inteligência mínima que um jogador deve possuir para vencer a provação                 | INTEGER      |         | Not Null                                                           |                                                    |
+| recompensa | Referência ao item que o jogador receberá caso vença a provação               | VARCHAR      | 15      | FK/ Not Null                                                       |                                                   |
 
 ## Referência Bibliográfica
 
