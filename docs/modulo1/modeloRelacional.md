@@ -30,6 +30,22 @@
 
 </details>
 
+<details><summary>Versão 4</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/relacional/relacional4.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 4 do Modelo Relacional. Autores: Paulo. Ferramenta: Miro</p>
+
+</details>
+
+<details><summary>Versão 5</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/relacional/relacional5.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 5 do Modelo Relacional. Autores: Charles. Ferramenta: Miro</p>
+
+</details>
+
 ## Referência Bibliográfica
 
 > 1. 
@@ -42,3 +58,5 @@
 |  2.0   | 18/07 | Adição da versão 1 do Modelo Relacional | [@Neitan2001](https://github.com/Neitan2001) |
 |  3.0   | 19/07 | Adição da versão 2 do Modelo Relacional | [@Neitan2001](https://github.com/Neitan2001) |
 |  4.0   | 21/07 | Adição da versão 3 do Modelo Relacional | [Clara Ribeiro](https://github.com/clara-ribeiro) |
+|  5.0   | 22/07 | Adição da versão 4 do Modelo Relacional | [Paulo Henrique](https://github.com/owhenrique) |
+|  6.0   | 22/07 | Adição da versão 5 do Modelo Relacional | [Charles Serafim](https://github.com/charles-serafim) |
