@@ -304,8 +304,8 @@
 
 | Nome        | Descrição                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ----------- | ------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
-| idDesafio   | Número que identifica unicamente um desafio                        | INTEGER      |         | PK, Identity                                                       |
-| tipoDesafio | Variável para identificar o  tipo de desafio (armação ou provação) | CHAR         | 15      | Check (tipoDesafio == 'a' or tipoDesafio == 'p')                   |
+| id   | Número que identifica unicamente um desafio                        | INTEGER      |         | PK, Identity                                                       |
+| tipo | Variável para identificar o  tipo de desafio (armação ou provação) | CHAR         | 1      | Check (tipoDesafio == 'a' or tipoDesafio == 'p')                   |
 
 ### Tabela Armadilha
 
@@ -316,7 +316,7 @@
 
 | Nome               | Descrição                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ------------------ | ---------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| idArmadilha        | Número que identifica unicamente uma armadilha                                     | INTEGER      |         | PK, FK, Identity                                                   |
+| id        | Número que identifica unicamente uma armadilha                                     | INTEGER      |         | PK, FK, Identity                                                   |
 | descricao          | Descrição detalhada de uma armadilha e suas singularidades                         | TEXT         | -       | Not Null                                                           |
 | DTForca            | Número de força mínima que um jogador deve possuir para vencer a armadilha         | INTEGER      |         | Not Null                                                           |
 | DTAgilidade        | Número de agilidade mínima que um jogador deve possuir para vencer a armadilha     | INTEGER      |         | Not Null                                                           |
@@ -332,7 +332,7 @@
 
 | Nome           | Descrição                                                                        | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | -------------- | -------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| idProvacao     | Número que identifica unicamente uma provação                                    | INTEGER      |         | PK, FK, Identity                                                   |
+| id     | Número que identifica unicamente uma provação                                    | INTEGER      |         | PK, FK, Identity                                                   |
 | descricao      | Descrição detalhada de uma provação e suas singularidades                        | TEXT         | -       | Not Null                                                           |
 | DTForca        | Número de força mínima que um jogador deve possuir para vencer a provação        | INTEGER      |         | Not Null                                                           |
 | DTAgilidade    | Número de agilidade mínima que um jogador deve possuir para vencer a provação    | INTEGER      |         | Not Null                                                           |
@@ -350,3 +350,4 @@
 |  5.0   | 22/07 |             Criação das tabelas Aliado, Dialogo, Resposta, Profecia, Adquire              | [Charles Serafim](https://github.com/charles-serafim) |
 |  6.0   | 22/07 |        Criação das tabelas Regiao, Area, Desafio, Armadilha, Provacao, Consumíveis        |    [Paulo Henrique](https://github.com/owhenrique)    |
 |  7.0   | 06/08 |  Correção de inconsistências e adições de checks em atributos de Jogador, tipoPersonagem  |     [@Neitan2001](https://github.com/Neitan2001)      |
+|  8.0   | 06/08 |  Correção de inconsistências e renomeação de atributos em Desafio, Armadilha e Provação  |     [Paulo Henrique](https://github.com/owhenrique)      |
