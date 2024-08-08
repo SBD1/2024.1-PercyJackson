@@ -8,7 +8,7 @@ CREATE TABLE regiao
 (
     nome        VARCHAR(15),
     descricao   TEXT        NOT NULL,
-    nivel       INTEGER     NOT NULL DEFAULT 1,
+    nivel       INTEGER     NOT NULL,
     
     PRIMARY KEY(nome)
 );
