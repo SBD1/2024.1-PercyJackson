@@ -16,7 +16,7 @@ CREATE TABLE regiao
 CREATE TABLE desafio
 (
     id       SERIAL,
-    tipo     CHAR   NOT NULL CHECK(tipo = 'A' OR tipo = 'P')
+    tipo     CHAR   NOT NULL CHECK(tipo = 'A' OR tipo = 'P'),
     
     PRIMARY KEY(id)
 );
