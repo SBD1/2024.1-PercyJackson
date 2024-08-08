@@ -25,7 +25,7 @@ CREATE TABLE area
 (
     nome            VARCHAR(15),
     regiaoAtual     VARCHAR(15) NOT NULL,
-    desafio         INTEGER     NOT NULL,
+    desafio         INTEGER ,
     
     PRIMARY KEY(nome),
     FOREIGN KEY(regiaoAtual)    REFERENCES regiao(nome)         ON DELETE RESTRICT,
