@@ -2,6 +2,19 @@
 
 ## Tabelas
 
+### Tabela Constante
+
+| Tabela      | tipoPersonagem                                                                          |
+| ----------- | --------------------------------------------------------------------------------------- |
+| Descrição   | Armazenará valores de constantes relevantes ao jogo, como defesaBase e tolerânciaNectar |
+| Observações | Esta tabela não possui nenhum relacionamento                                            |
+
+| Nome  | Descrição                                         | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----- | ------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nome  | Nome que irá identificar unicamente uma constante | VARCHAR      | 20      | PK, Not Null                                                       |
+| valor | Valor numérico da constante                       | INTEGER      | -       | Not Null                                                           |
+
+
 ### Tabela Jogador
 
 | Tabela      | jogador                                                                                                                                     |
@@ -12,13 +25,11 @@
 | Nome             | Descrição                                                                                                                                                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
 | nome             | Nome que irá identificar unicamente o personagem do jogador                                                                                                                                                        | VARCHAR      | 15      | PK, FK, Not Null                                                   |
-| defesa           | O número de defesa define a dificuldade para um atacante acertar um ataque. Esse valor é calculado com base no valor de agilidade                                                                                  | INTEGER      | -       | Not Null, Default = 10                                             |
 | vidaMax          | O limite de vida do personagem. É separado da vida atual do personagem pois ele pode encontrar itens que recuperam a saúde, mas não deve passar desse limite                                                       | INTEGER      | -       | Not Null, Default = 50                                             |
 | forca            | O número de força define o quão forte o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir quebrar/levantar coisas. A força também define quantos itens o personagem pode carregar | INTEGER      | -       | Not Null                                                           |
 | intelecto        | O número de intelecto define o quão inteligente o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir desvendar enigmas, confundir/convencer inimigos                               | INTEGER      | -       | Not Null                                                           |
 | agilidade        | O número de agilidade define o quão rápido o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir fugir de armadilhas, escapar de inimigos                                           | INTEGER      | -       | Not Null                                                           |
 | combate          | O número de intelecto define o quão bom em combate o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir acertar ataques                                                            | INTEGER      | -       | Not Null                                                           |
-| carga            | O número de carga define o multiplicador para definir quantos itens o personagem pode carregar. A quantidade de peso que o personagem consegue carregar é definido da seguinte forma: carga x forca                | INTEGER      | -       | Not Null, Default = 2                                              |
 | vidaAtual        | A vida atual do personagem, ao chegar a 0 o personagem morre e o jogo deve começar do zero                                                                                                                         | INTEGER      | -       | Not Null, Default = 50, Check(vidaAtual <= vidaMax)                |
 | experienciaAtual | Número de pontos que determina o nível do personagem                                                                                                                                                               | INTEGER      | -       | Not Null, Default = 0                                              |
 | armadura         | Referência ao item de defesa que o personagem possui equipado. Oferece bônus no atributo de defesa. Quando o valor for "null", então o personagem não possui nenhum Item de defesa equipado                        | INTEGER      | -       | FK                                                                 |
@@ -38,7 +49,6 @@
 | Nome              | Descrição                                                                                                                                                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
 | nome              | Nome que irá identificar unicamente o personagem do inimigo                                                                                                                                                        | VARCHAR      | 15      | PK, FK, Not Null                                                   |
-| defesa            | O número de defesa define a dificuldade para um atacante acertar um ataque. Esse valor é calculado com base no valor de agilidade                                                                                  | INTEGER      |         | Not Null, Default = 10                                             |
 | vidaMax           | O limite de vida do personagem. É separado da vida atual do personagem pois ele pode encontrar itens que recuperam a saúde, mas não deve passar desse limite                                                       | INTEGER      |         | Not Null                                                           |
 | forca             | O número de força define o quão forte o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir quebrar/levantar coisas. A força também define quantos itens o personagem pode carregar | INTEGER      |         | Not Null                                                           |
 | intelecto         | O número de intelecto define o quão inteligente o personagem é. Quanto maior o valor, maiores são as chances do personagem conseguir desvendar enigmas, confundir/convencer inimigos                               | INTEGER      |         | Not Null                                                           |
@@ -93,11 +103,12 @@
 | Descrição   | Armazenará a quantidade de instâncias de um mesmo Inimigo que um Jogador derrotou                                                                                                                                                                                                              |
 | Observações | Possui uma chave primária composta com os atributos nomeJogador e nomeInimigo. Quando um jogador derrotar um Inimigo, deve verificar se já existe uma tupla de abate com o mesmo Jogador e Inimigo: se não existir, deve criar uma tupla, e se existir, deve incrementar o atributo quantidade |
 
-| Nome        | Descrição                                                                                | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
-| ----------- | ---------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| nomeJogador | Nome do jogador que realizou o abate de um Inimigo                                       | VARCHAR      | 15      | PK, FK Not Null                                                    |
-| nomeInimigo | nome do Inimigo derrotado por um Jogador                                                 | VARCHAR      | 15      | PK, FK Not Null                                                    |
-| quantidade  | Número que indica a quantidade de instância de um mesmo Inimigo derrotado por um Jogador | INTEGER      |         | Not Null, Default = 0                                              |
+| Nome        | Descrição                                                                                                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ----------- | --------------------------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
+| nomeJogador | Nome do jogador que realizou o abate de um Inimigo                                                              | VARCHAR      | 15      | PK, FK Not Null                                                    |
+| nomeInimigo | nome do Inimigo derrotado por um Jogador                                                                        | VARCHAR      | 15      | PK, FK Not Null                                                    |
+| dataHorario | data e hora de quando o abate ocorreu, será usado para identificar um único abate entre um jogador e um inimigo | DATE         | -       | PK, Not Null                                                       |
+| resultado   | Booleano que é "true" quando o Jogador derrota o Inimigo e "false" quando o Inimigo derrota o Jogador           | BOOLEAN      | -       | Not Null                                                           |
 
 ### Tabela Deus
 
@@ -220,11 +231,12 @@
 | Descrição   | Armazenará informações sobre os dialogos dos aliados. Cada registro contém o número do diálogo e o nome do aliado |
 | Observações | Esta tabela também possui referências à tabela resposta                                                           |
 
-| Nome       | Descrição                          | Tipo de dado | Tamanho | Restrições de domínio |
-| ---------- | ---------------------------------- | ------------ | ------- | --------------------- |
-| numero     | Identificador único do dialogo     | INTEGER      | -       | PK, Not Null          |
-| nomeAliado | Identificador do aliado            | VARCHAR      | 15      | PK, FK, Not Null      |
-| frase      | Frase a ser apresentada ao jogador | TEXT         | -       | Not Null              |
+| Nome       | Descrição                                                                                                               | Tipo de dado | Tamanho | Restrições de domínio |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------- | ------------ | ------- | --------------------- |
+| numero     | Identificador único do dialogo                                                                                          | INTEGER      | -       | PK, Not Null          |
+| nomeAliado | Identificador do aliado                                                                                                 | VARCHAR      | 15      | PK, FK, Not Null      |
+| frase      | Frase a ser apresentada ao jogador                                                                                      | TEXT         | -       | Not Null              |
+| recompensa | Referência à um item que o diálogo pode recompensar. Nem todos os diálogos recompensam itens, então pode ter valor nulo | VARCHAR      | 15      | FK                    |
 
 ### Tabela Resposta
 
@@ -302,10 +314,10 @@
 | Descrição   | Armazenará informações referente aos desafios do jogo. Os desafios são situações ou obstáculos que o jogador deve enfrentar pra receber uma recompensa, escapar de uma armadilha ou alcançar um objetivo específico |
 | Observações | Um desafio pode ser uma provação ou armadilha, as tabelas provacao e armadilha, serão responsáveis por armazenar as informações dos diferentes tipos de desafio                                                     |
 
-| Nome        | Descrição                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
-| ----------- | ------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
-| id   | Número que identifica unicamente um desafio                        | SERIAL      |         | PK                                                       |
-| tipo | Variável para identificar o  tipo de desafio (armação ou provação) | CHAR         | 1      | Check (tipoDesafio == 'a' or tipoDesafio == 'p')                   |
+| Nome | Descrição                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
+| ---- | ------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
+| id   | Número que identifica unicamente um desafio                        | SERIAL       |         | PK                                                                 |
+| tipo | Variável para identificar o  tipo de desafio (armação ou provação) | CHAR         | 1       | Check (tipoDesafio == 'a' or tipoDesafio == 'p')                   |
 
 ### Tabela Armadilha
 
@@ -316,7 +328,7 @@
 
 | Nome               | Descrição                                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ------------------ | ---------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| id        | Número que identifica unicamente uma armadilha                                     | SERIAL      |         | PK, FK                                                  |
+| id                 | Número que identifica unicamente uma armadilha                                     | SERIAL       |         | PK, FK                                                             |
 | descricao          | Descrição detalhada de uma armadilha e suas singularidades                         | TEXT         | -       | Not Null                                                           |
 | DTForca            | Número de força mínima que um jogador deve possuir para vencer a armadilha         | INTEGER      |         | Not Null                                                           |
 | DTAgilidade        | Número de agilidade mínima que um jogador deve possuir para vencer a armadilha     | INTEGER      |         | Not Null                                                           |
@@ -332,7 +344,7 @@
 
 | Nome           | Descrição                                                                        | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | -------------- | -------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
-| id     | Número que identifica unicamente uma provação                                    | SERIAL     |         | PK, FK                                                  |
+| id             | Número que identifica unicamente uma provação                                    | SERIAL       |         | PK, FK                                                             |
 | descricao      | Descrição detalhada de uma provação e suas singularidades                        | TEXT         | -       | Not Null                                                           |
 | DTForca        | Número de força mínima que um jogador deve possuir para vencer a provação        | INTEGER      |         | Not Null                                                           |
 | DTAgilidade    | Número de agilidade mínima que um jogador deve possuir para vencer a provação    | INTEGER      |         | Not Null                                                           |
@@ -341,13 +353,14 @@
 
 ## Histórico de Versões
 
-| Versão | Data  |                                         Descrição                                         |                      Responsável                      |
-| :----: | :---: | :---------------------------------------------------------------------------------------: | :---------------------------------------------------: |
-|  1.0   | 18/07 |                                   Criação do documento                                    |     [@Neitan2001](https://github.com/Neitan2001)      |
-|  2.0   | 18/07 | Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus |     [@Neitan2001](https://github.com/Neitan2001)      |
-|  3.0   | 19/07 |      Ajuste das restrições das chaves primárias de Jogador, Inimigo e tipoPersonagem      |     [@Neitan2001](https://github.com/Neitan2001)      |
-|  4.0   | 22/07 |         Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis         |  [Clara Marcelino](https://github.com/clara-ribeiro)  |
-|  5.0   | 22/07 |             Criação das tabelas Aliado, Dialogo, Resposta, Profecia, Adquire              | [Charles Serafim](https://github.com/charles-serafim) |
-|  6.0   | 22/07 |        Criação das tabelas Regiao, Area, Desafio, Armadilha, Provacao, Consumíveis        |    [Paulo Henrique](https://github.com/owhenrique)    |
-|  7.0   | 06/08 |  Correção de inconsistências e adições de checks em atributos de Jogador, tipoPersonagem  |     [@Neitan2001](https://github.com/Neitan2001)      |
-|  8.0   | 06/08 |  Correção de inconsistências e renomeação de atributos em Desafio, Armadilha e Provação  |     [Paulo Henrique](https://github.com/owhenrique)      |
+| Versão | Data  |                                                                              Descrição                                                                              |                      Responsável                      |
+| :----: | :---: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------: |
+|  1.0   | 18/07 |                                                                        Criação do documento                                                                         |     [@Neitan2001](https://github.com/Neitan2001)      |
+|  2.0   | 18/07 |                                      Criação das tabelas Jogador, Inimigo, TipoPersonagem, Nível, InimigoConcreto, Abate, Deus                                      |     [@Neitan2001](https://github.com/Neitan2001)      |
+|  3.0   | 19/07 |                                           Ajuste das restrições das chaves primárias de Jogador, Inimigo e tipoPersonagem                                           |     [@Neitan2001](https://github.com/Neitan2001)      |
+|  4.0   | 22/07 |                                              Criação das tabelas Inventário, Item, Defesa, Ataque, Magico, Consumíveis                                              |  [Clara Marcelino](https://github.com/clara-ribeiro)  |
+|  5.0   | 22/07 |                                                  Criação das tabelas Aliado, Dialogo, Resposta, Profecia, Adquire                                                   | [Charles Serafim](https://github.com/charles-serafim) |
+|  6.0   | 22/07 |                                             Criação das tabelas Regiao, Area, Desafio, Armadilha, Provacao, Consumíveis                                             |    [Paulo Henrique](https://github.com/owhenrique)    |
+|  7.0   | 06/08 |                                       Correção de inconsistências e adições de checks em atributos de Jogador, tipoPersonagem                                       |     [@Neitan2001](https://github.com/Neitan2001)      |
+|  8.0   | 06/08 |                                       Correção de inconsistências e renomeação de atributos em Desafio, Armadilha e Provação                                        |    [Paulo Henrique](https://github.com/owhenrique)    |
+|  9.0   | 16/08 | Remoção de defesa do Jogador e Inimigo, Remoção de carga do Jogador, Atualização da tabela de Abate, Atualização da tabela Dialogo, criação da tabela de constantes |     [@Neitan2001](https://github.com/Neitan2001)      |
