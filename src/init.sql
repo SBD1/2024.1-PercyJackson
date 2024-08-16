@@ -31,7 +31,6 @@ CREATE TABLE tipoPersonagem
 CREATE TABLE inimigo
 (
     nome VARCHAR(15),
-    defesa IntPositivo NOT NULL,
     vidaMax IntPositivo NOT NULL,
     forca IntPositivo NOT NULL,
     intelecto IntPositivo NOT NULL,
@@ -47,19 +46,17 @@ CREATE TABLE inimigo
 CREATE TABLE jogador
 (
     nome VARCHAR(15),
-    defesa IntPositivo NOT NULL DEFAULT 10,
     vidaMax IntPositivo NOT NULL DEFAULT 50,
     forca IntPositivo NOT NULL,
     intelecto IntPositivo NOT NULL,
     agilidade IntPositivo NOT NULL,
     combate IntPositivo NOT NULL,
-    carga IntPositivo NOT NULL DEFAULT 2,
     vidaAtual IntPositivo NOT NULL DEFAULT 50 CHECK(vidaAtual <= vidaMax),
     experienciaAtual IntPositivo NOT NULL DEFAULT 0,
     armadura INTEGER,
     arma INTEGER,
     itemMagico INTEGER,
-    deus VARCHAR(15), 
+    deus VARCHAR(15) NOT NULL, 
     areaAtual VARCHAR(15) NOT NULL,
     nivel INTEGER NOT NULL DEFAULT 1,
     PRIMARY KEY(nome),
@@ -82,9 +79,9 @@ CREATE TABLE inimigoConcreto
 (
     nomeConcreto VARCHAR(15),
     vidaAtual IntPositivo NOT NULL, /* Criar Trigger para definir a vidaAtual como a vidaMax do inimigo de referência */
-    inimigo VARCHAR(15),
+    inimigo VARCHAR(15) NOT NULL,
     areaAtual VARCHAR(15) NOT NULL,
-    loot INTEGER NOT NULL,
+    loot VARCHAR(25) NOT NULL,
     PRIMARY KEY(nomeConcreto),
     FOREIGN KEY(inimigo) REFERENCES inimigo(nome) ON DELETE RESTRICT
     /*
@@ -101,8 +98,9 @@ CREATE TABLE abate
 (
     nomeJogador VARCHAR(15),
     nomeInimigo VARCHAR(15),
-    quantidade INTEGER NOT NULL DEFAULT 0,
-    PRIMARY KEY(nomeJogador, nomeInimigo),
+    dataHorario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    resultado BOOLEAN NOT NULL,
+    PRIMARY KEY(nomeJogador, nomeInimigo, dataHorario),
     FOREIGN KEY(nomeJogador) REFERENCES jogador(nome) ON DELETE RESTRICT,
     FOREIGN KEY(nomeInimigo) REFERENCES inimigo(nome) ON DELETE RESTRICT
 );
