@@ -80,7 +80,7 @@ CREATE TABLE inimigoConcreto
     nomeConcreto VARCHAR(15),
     vidaAtual IntPositivo NOT NULL, /* Criar Trigger para definir a vidaAtual como a vidaMax do inimigo de referência */
     inimigo VARCHAR(15) NOT NULL,
-    areaAtual VARCHAR(15) NOT NULL,
+    areaAtual VARCHAR(15),
     loot VARCHAR(25) NOT NULL,
     PRIMARY KEY(nomeConcreto),
     FOREIGN KEY(inimigo) REFERENCES inimigo(nome) ON DELETE RESTRICT
