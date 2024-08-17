@@ -90,7 +90,7 @@
 
 | Nome         | Descrição                                                                                                                                                                                                                            | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
-| nomeConcreto | O nome que identifica unicamente uma instância de Inimigo                                                                                                                                                                            | VARCGAR      | 15      | PK, Not Null                                                       |
+| nomeConcreto | O nome que identifica unicamente uma instância de Inimigo                                                                                                                                                                            | VARCHAR      | 15      | PK, Not Null                                                       |
 | vidaAtual    | A vida atual da instância de Inimigo, ao chegar a 0 a instância é derrotada. O valor inicial deste atributo deve ser o mesmo valor do atributo vidaMax do Inimigo gerador da instância, isso poderá ser feito a partir de um trigger | INTEGER      |         | Not Null                                                           |
 | inimigo      | Referência ao Inimigo gerador desta instância                                                                                                                                                                                        | VARCHAR      | 15      | FK, Not Null                                                       |
 | areaAtual    | Referência à área que o personagem se encontra dentro do mapa do jogo                                                                                                                                                                | VARCHAR      | 25      | FK                                                       |
@@ -101,7 +101,7 @@
 | Tabela      | abate                                                                                                                                                                                                                                                                                          |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Descrição   | Armazenará a quantidade de instâncias de um mesmo Inimigo que um Jogador derrotou                                                                                                                                                                                                              |
-| Observações | Possui uma chave primária composta com os atributos nomeJogador e nomeInimigo. Quando um jogador derrotar um Inimigo, deve verificar se já existe uma tupla de abate com o mesmo Jogador e Inimigo: se não existir, deve criar uma tupla, e se existir, deve incrementar o atributo quantidade |
+| Observações | Possui uma chave primária composta com os atributos nomeJogador, nomeInimigo e dataHorario, que é o registro do momento em que o combate ocorreu. |
 
 | Nome        | Descrição                                                                                                       | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ----------- | --------------------------------------------------------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
@@ -129,67 +129,81 @@
 
 | Tabela    | inventario                                                                                                                                            |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Descrição | Armazenará a relação entre os jogadores e os itens que possuem. Ela registra quantos itens de um determinado tipo cada jogador tem em seu inventário. |
+| Descrição | Armazenará informações sobre o inventário do jogador, incluindo o jogador associado e a carga máxima que ele pode carregar |
 
 | Nome       | Descrição                                | Tipo de dado | Tamanho | Restrições de domínio             |
 | ---------- | ---------------------------------------- | ------------ | ------- | --------------------------------- |
-| jogador    | Identificador do jogador                 | INTEGER      | -       | PK, FK, Not Null                  |
-| item       | Identificador do item                    | INTEGER      | -       | PK, FK, Not Null                  |
-| quantidade | Quantidade do item no estoque do jogador | INTEGER      | -       | Not Null, Check (quantidade >= 0) |
+| jogador    | Identificador do jogador                 | VARCHAR      | 15      | PK, FK, Not Null                  |
+| cargaMaxima | Peso limite da soma dos itens do inventário. Cada item tem um peso e caso o jogador atinja esse limite, não poderá pegar mais itens. A cargaMaxima será atualizada sempre que a força do jogador mudar. Para calcular: (2xForça) + 5 | INTEGER      | -       | Not Null, Check (cargaMaxima ≥ 5)  |
 
-### Tabela Item
+### Tabela TipoItem
 
 | Tabela      | tipoItem                                                                                                                                                                                                                                                                |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Descrição   | Armazenará informações gerais sobre todos os itens disponíveis no jogo. Cada registro representa um item com detalhes como nome, descrição, peso e classificação. A classificação indicará qual especificação o item é, podendo ser: defesa, ataque, magico, consumivel |
+| Descrição   | Armazenará os diferentes tipos de itens que podem existir no jogo, juntamente com sua classificação. A classificação indicará qual especificação o item é, podendo ser: defesa, ataque, magico, consumivel |
 | Observações | Esta tabela possui a finalidade de diferenciar os itens                                                                                                                                                                                                                 |
 
 | Nome          | Descrição                         | Tipo de dado | Tamanho | Restrições de domínio                                                           |
 | ------------- | --------------------------------- | ------------ | ------- | ------------------------------------------------------------------------------- |
-| id            | Identificador único do item       | INTEGER      | -       | PK, Identity                                                                    |
-| nome          | Nome do item                      | VARCHAR      | 15      | Not Null                                                                        |
-| descricao     | Descrição detalhada do item       | TEXT         | -       |                                                                                 |
-| peso          | Peso do item em unidades de massa | FLOAT        | -       | Check (peso >= 0)                                                               |
-| classificacao | Classificação do item             | VARCHAR      | 15      | Not Null, Check (classificacao in ('Arma', 'Armadura', 'Consumível', 'Mágico')) |
+| nome          | Nome do item                      | VARCHAR      | 15      | PK, Identity                                                                    |
+| classificacao | Classificação do item             | VARCHAR      | 15      | Not Null, Check (classificacao in ('Arma', 'Armadura', 'Consumivel', 'Magico')) |
+
+
+### Tabela ItemInventario
+
+| Tabela    | itemInventario                                                                                                                                            |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Descrição | Armazenará os itens que estão no inventário de cada jogador, associando o jogador a cada item específico. Possui uma chave primária composta formada pelos identificadores únicos de jogador e item |
+
+| Nome       | Descrição                                               | Tipo de dado  | Tamanho | Restrições de domínio             |
+| ---------- | ------------------------------------------------------  | ------------  | ------- | --------------------------------- |
+| jogador    | Identificador do jogador que possui o item              | VARCHAR       |    15   | PK, FK, Not Null                  |
+| item       | Identificador do item que está no inventário do jogador | VARCHAR       |    15   | PK, FK, Not Null                  |
 
 ### Tabela Defesa
 
 | Tabela      | defesa                                                                                                                                                                           |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Descrição   | Armazenará informações específicas sobre itens de defesa, como escudos ou armaduras. Cada registro inclui o nome do item e o valor do modificador de defesa que ele proporciona. |
-| Observações | Essa tabela é uma especificação de Item, a tabela tipoItem será a responsável por armazenar o id, nome, descrição, peso e a classificação                                        |
+| Descrição   | Armazenará informações específicas sobre itens de defesa, como escudos ou armaduras. Cada registro inclui o nome do item, a área atual em que o item pode estar, sua descrição, peso e o valor do modificador de defesa que ele proporciona. |
+| Observações | Essa tabela é uma especificação de Item, a tabela tipoItem será a responsável por armazenar o nome do item e sua classificação |
 
-| Nome      | Descrição                      | Tipo de dado | Tamanho | Restrições de domínio  |
-| --------- | ------------------------------ | ------------ | ------- | ---------------------- |
-| id        | Identificador único de defesa  | INTEGER      | -       | PK, Identity           |
-| nome      | Nome do item de defesa         | VARCHAR      | 15      | Not Null, FK           |
-| modDefesa | Valor do modificador de defesa | INTEGER      | -       | Check (modDefesa >= 0) |
+| Nome      | Descrição                              | Tipo de dado | Tamanho | Restrições de domínio  |
+| --------- | -------------------------------------- | ------------ | ------- | ---------------------- |
+| nome      | Nome do item de defesa                 | VARCHAR      | 15      | PK, FK, Not Null       |
+| areaAtual | Área em que o item pode ser encontrado | VARCHAR      | 25      | FK                     |
+| descricao | Descrição detalhada do item            | TEXT         | -       |                        |
+| peso      | Peso do item em unidades               | INTEGER      | -       | Check (peso >= 0)      |
+| modDefesa | Valor do modificador de defesa         | INTEGER      | -       | Check (modDefesa >= 0) |
 
 ### Tabela Ataque
 
 | Tabela      | ataque                                                                                                                                                                  |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Descrição   | Armazenará informações sobre itens de ataque, como armas. Cada registro inclui o nome do item e os valores dos modificadores de combate e de força que ele proporciona. |
-| Observações | Essa tabela é uma especificação de Item, a tabela tipoItem será a responsável por armazenar o id, nome, descrição, peso e a classificação                               |
+| Descrição   | Armazenará informações sobre itens de ataque, como armas. Cada registro inclui o nome do item, a área atual em que o item pode estar, sua descrição, peso e os valores dos modificadores de combate e de força que ele proporciona. |
+| Observações |  Essa tabela é uma especificação de Item, a tabela tipoItem será a responsável por armazenar o nome do item e sua classificação|
 
-| Nome       | Descrição                       | Tipo de dado | Tamanho | Restrições de domínio   |
-| ---------- | ------------------------------- | ------------ | ------- | ----------------------- |
-| id         | Identificador único de ataque   | INTEGER      | -       | PK, Identity            |
-| nome       | Nome do item de ataque          | VARCHAR      | 15      | Not Null, FK            |
-| modCombate | Valor do modificador de combate | INTEGER      | -       | Check (modCombate >= 0) |
-| modForca   | Valor do modificador de força   | INTEGER      | -       | Check (modForca >= 0)   |
+| Nome       | Descrição                              | Tipo de dado | Tamanho | Restrições de domínio   |
+| ---------- | -------------------------------------- | ------------ | ------- | ----------------------- |
+| nome       | Nome do item de ataque                 | VARCHAR      | 15      | PK, FK, Not Null        |
+| areaAtual  | Área em que o item pode ser encontrado | VARCHAR      | 25      | FK                     |
+| descricao  | Descrição detalhada do item            | TEXT         | -       |                        |
+| peso       | Peso do item em unidades               | INTEGER      | -       | Check (peso >= 0)      |
+| modCombate | Valor do modificador de combate        | INTEGER      | -       | Check (modCombate >= 0) |
+| modForca   | Valor do modificador de força          | INTEGER      | -       | Check (modForca >= 0)   |
 
 ### Tabela Magico
 
 | Tabela      | magico                                                                                                                                                                                                 |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Descrição   | Armazenará informações sobre itens mágicos. Cada registro contém o nome do item mágico e os valores dos modificadores de combate, força, defesa, agilidade, carga, além dos tempos de recarga e atual. |
-| Observações | Essa tabela é uma especificação de Item, a tabela tipoItem será a responsável por armazenar o id, nome, descrição, peso e a classificação                                                              |
+| Descrição   | Armazenará informações sobre itens mágicos. Cada registro contém o nome do item mágico, a área atual em que o item pode estar, sua descrição, peso e os valores dos modificadores de combate, força, defesa, agilidade, carga, além dos tempos de recarga e atual. |
+| Observações | Essa tabela é uma especificação de Item, a tabela tipoItem será a responsável por armazenar o nome do item e sua classificação |
 
 | Nome           | Descrição                              | Tipo de dado | Tamanho | Restrições de domínio       |
 | -------------- | -------------------------------------- | ------------ | ------- | --------------------------- |
-| id             | Identificador único de item mágico     | INTEGER      | -       | PK, Identity                |
-| nome           | Nome do item mágico                    | VARCHAR      | 15      | Not Null, FK                |
+| nome           | Nome do item mágico                    | VARCHAR      | 15      | PK, FK, Not Null            |
+| areaAtual      | Área em que o item pode ser encontrado | VARCHAR      | 25      | FK                     |
+| descricao      | Descrição detalhada do item            | TEXT         | -       |                        |
+| peso           | Peso do item em unidades               | INTEGER      | -       | Check (peso >= 0)      |
 | modCombate     | Valor do modificador de combate mágico | INTEGER      | -       | Check (modCombate >= 0)     |
 | modForca       | Valor do modificador de força mágica   | INTEGER      | -       | Check (modForca >= 0)       |
 | modDefesa      | Valor do modificador de defesa mágica  | INTEGER      | -       | Check (modDefesa >= 0)      |
@@ -202,14 +216,17 @@
 
 | Tabela      | consumíveis                                                                                                                                                |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Descrição   | Armazenará informações sobre itens consumíveis, como poções. Cada registro inclui o nome do item e a quantidade de vida que ele recupera quando utilizado. |
-| Observações | Essa tabela é uma especificação de Item, a tabela tipoItem será a responsável por armazenar o id, nome, descrição, peso e a classificação                  |
+| Descrição   | Armazenará informações sobre itens consumíveis, como poções. Cada registro inclui o nome do item, a área atual em que o item pode estar, sua descrição, peso e a quantidade de vida que ele recupera quando utilizado. |
+| Observações | Essa tabela é uma especificação de Item, a tabela tipoItem será a responsável por armazenar o nome do item e sua classificação |
 
-| Nome           | Descrição                                     | Tipo de dado | Tamanho | Restrições de domínio       |
-| -------------- | --------------------------------------------- | ------------ | ------- | --------------------------- |
-| id             | Identificador único de consumível             | INTEGER      | -       | PK, Identity                |
-| nome           | Nome do item consumível                       | VARCHAR      | 15      | Not Null, FK                |
-| vidaRecuperada | Quantidade de vida recuperada pelo consumível | INTEGER      | -       | Check (vidaRecuperada >= 0) |
+| Nome               | Descrição                                      | Tipo de dado | Tamanho | Restrições de domínio       |
+| ------------------ | ---------------------------------------------- | ------------ | ------- | --------------------------- |
+| nome               | Nome do item consumível                        | VARCHAR      | 15      | PK, FK, Not Null            |
+| areaAtual          | Área em que o item pode ser encontrado         | VARCHAR      | 25      | FK                          |
+| descricao          | Descrição detalhada do item                    | TEXT         | -       |                             |
+| peso               | Peso do item em unidades                       | INTEGER      | -       | Check (peso >= 0)           |
+| vidaRecuperada     | Quantidade de vida recuperada pelo consumível  | INTEGER      | -       | Check (vidaRecuperada >= 0) |
+| areaTeletransporte | Área para qual o jogador irá se teletransportar| VARCHAR      | 25      | FK                          |
 
 ### Tabela Aliado
 
@@ -245,12 +262,14 @@
 | Descrição   | Armazenará informações sobre as respostas. Cada registro contém identificador e a frase da resposta |
 | Observações | Possui referência à entidade dialogo                                                                |
 
-| Nome          | Descrição                          | Tipo de dado | Tamanho | Restrições de domínio |
-| ------------- | ---------------------------------- | ------------ | ------- | --------------------- |
-| numero        | Identificador da resposta          | INTEGER      | -       | PK, Not Null          |
-| numeroDialogo | Identificador do dialogo           | INTEGER      | -       | PK, FK, Not Null      |
-| nomeAliado    | Identificador do aliado            | VARCHAR      | 15      | PK, FK, Not Null      |
-| frase         | Frase a ser apresentada ao jogador | TEXT         | -       | Not Null              |
+| Nome                 | Descrição                          | Tipo de dado | Tamanho | Restrições de domínio |
+| -------------------- | ---------------------------------- | ------------ | ------- | --------------------- |
+| numero               | Identificador da resposta          | INTEGER      | -       | PK, Not Null          |
+| numeroDialogo        | Identificador do dialogo           | INTEGER      | -       | PK, FK, Not Null      |
+| nomeAliado           | Identificador do aliado            | VARCHAR      | 15      | PK, FK, Not Null      |
+| frase                | Frase a ser apresentada ao jogador | TEXT         | -       | Not Null              |
+| numeroDialogoDestino |                                    | INTEGER      | -       | FK                    |
+| nomeAliadoDestino    |                                    | VARCHAR      | 15      | FK                    |
 
 ### Tabela Profecia
 
@@ -268,9 +287,9 @@
 | quantAbate    | Quantidade de unidades a serem derortadas      | INTEGER      | -       | Not Null              |
 | turnosAMais   | Quantidade de turnos de recompensa da profecia | INTEGER      | -       | Not Null              |
 
-### Tabela Adquire
+### Tabela AdquireProfecia
 
-| Tabela      | adquire                                                                                                                                                 |
+| Tabela      | adquireProfecia                                                                                                                                                 |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Descrição   | Tabela de relacionamento entre um jogador e uma profecia que ele carrega. Cada registro as referências aos mesmos e o status de cumprimento da profecia |
 | Observações |                                                                                                                                                         |
@@ -304,7 +323,7 @@
 | Nome        | Descrição                                                         | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ----------- | ----------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
 | nome        | Nome que identifica unicamente uma área                           | VARCHAR      | 15      | PK, Not Null                                                       |
-| regiaoAtual | Referência à Região que a área se encontra dentro do mapa do jogo | VARCHAR      | 15      | FK, Not Null                                                       |
+| regiao | Referência à Região que a área se encontra dentro do mapa do jogo | VARCHAR      | 15      | FK, Not Null                                                       |
 | desafio     | Referência ao desafio que se encontra dentro da área              | INTEGER      |         | FK, Not Null                                                       |
 
 ### Tabela Desafio
@@ -317,7 +336,7 @@
 | Nome | Descrição                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ---- | ------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
 | id   | Número que identifica unicamente um desafio                        | SERIAL       |         | PK                                                                 |
-| tipo | Variável para identificar o  tipo de desafio (armação ou provação) | CHAR         | 1       | Check (tipoDesafio == 'a' or tipoDesafio == 'p')                   |
+| tipoDesafio | Variável para identificar o  tipo de desafio (armação ou provação) | CHAR         | 1       | Check (tipoDesafio == 'a' or tipoDesafio == 'p')                   |
 
 ### Tabela Armadilha
 
@@ -364,3 +383,5 @@
 |  7.0   | 06/08 |                                       Correção de inconsistências e adições de checks em atributos de Jogador, tipoPersonagem                                       |     [@Neitan2001](https://github.com/Neitan2001)      |
 |  8.0   | 06/08 |                                       Correção de inconsistências e renomeação de atributos em Desafio, Armadilha e Provação                                        |    [Paulo Henrique](https://github.com/owhenrique)    |
 |  9.0   | 16/08 | Remoção de defesa do Jogador e Inimigo, Remoção de carga do Jogador, Atualização da tabela de Abate, Atualização da tabela Dialogo, criação da tabela de constantes |     [@Neitan2001](https://github.com/Neitan2001)      |
+|  10.0   | 17/08 | Atualização das tabelas Inventario, TipoItem, Defesa, Ataque, Magico e Consumiveis. Criação da tabela ItemInventário |     [Clara Marcelino](https://github.com/clara-ribeiro)      |
+|  11.0   | 17/08 | Ajuste das tabelas Resposta, AdquireProfecia, Área, Desafio |     [Clara Marcelino](https://github.com/clara-ribeiro)      |
