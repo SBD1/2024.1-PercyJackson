@@ -1,4 +1,17 @@
 services:
+  api:
+    platform: linux/amd64
+    depends_on:
+      db:
+        condition: service_healthy
+    build: 
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+
   db:
     image: postgres
     restart: unless-stopped
@@ -11,18 +24,13 @@ services:
       - '5433:5432'
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/create_tables.sql
-
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - '8080:80'
-    depends_on:
-      - db
+      - ./init.sql:/docker-entrypoint-initdb.d/01_init.sql
+      - ./populacao.sql:/docker-entrypoint-initdb.d/02_populacao.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
 
 volumes:
   db_data:
