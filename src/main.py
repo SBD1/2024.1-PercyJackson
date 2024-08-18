@@ -24,7 +24,16 @@ def obter_area_atual(cursor, jogador_nome):
     else:
         raise Exception(f"Jogador {jogador_nome} não encontrado.")
 
-def mover_jogadora(conn, cursor, jogador_nome, area_atual, direcao):
+def obter_regiao(cursor, area_nome):
+    cursor.execute("""
+        SELECT r.nome, r.descricao 
+        FROM area a
+        JOIN regiao r ON a.regiaoAtual = r.nome
+        WHERE a.nome = %s
+    """, (area_nome,))
+    return cursor.fetchone()
+
+def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     # Consultando as coordenadas atuais da área
     cursor.execute("""
         SELECT norte, sul, leste, oeste 
@@ -76,8 +85,24 @@ def mover_jogadora(conn, cursor, jogador_nome, area_atual, direcao):
     """, (nova_area[0], jogador_nome))
     conn.commit()
 
-    print(f"\033[32mVocê se moveu para a nova área: {nova_area[0]} - {nova_area[1]}\033[0m\n")
+    # Obter a nova região
+    nova_regiao = obter_regiao(cursor, nova_area[0])
+
+    print(f"\n\033[43mNova localização\033[0m")
+    print(f"\033[32mVocê se moveu para a nova área: {nova_area[0]} - {nova_area[1]}\033[0m")
+    if nova_regiao:
+        print(f"\033[32mRegião: {nova_regiao[0]} - {nova_regiao[1]}\033[0m\n")
+
     return nova_area[0]
+
+def apresentar_jogo():
+    print("\033[34mBem-vindo ao RPG Percy Jackson!\033[0m")
+    time.sleep(2)
+    print("\033[34mPrepare-se para explorar o Acampamento Meio-Sangue e encontrar a bandeira!\033[0m")
+    time.sleep(3)
+    print("\033[34mA jornada está prestes a começar!\033[0m")
+    time.sleep(2)
+    limpar_terminal()
 
 print("Starting the script...")
 time.sleep(5)
@@ -90,6 +115,8 @@ try:
     print("Connected to the database.")
     time.sleep(1)
     limpar_terminal()
+
+    apresentar_jogo()
 
     # Define jogador
     jogador_nome = 'Clara'
@@ -110,6 +137,7 @@ try:
 
     if area_result:
         regiao_nome, regiao_descricao, area_descricao = area_result
+        print(f"\033[43mSua localização\033[0m")
         print(f"\033[32mRegião: {regiao_nome}\033[0m")
         print(f"\033[32mDescrição da Região: {regiao_descricao}\033[0m")
         print(f"\033[32mDescrição da Área: {area_descricao}\033[0m")
@@ -118,13 +146,13 @@ try:
 
     # Loop principal para comandos de movimento
     while True:
-        comando = input("Digite a direção para onde deseja se mover (norte, sul, leste, oeste) ou 'sair' para encerrar: ").lower()
+        comando = input("\nDigite a direção para onde deseja se mover (norte, sul, leste, oeste) ou 'sair' para encerrar: ").lower()
 
         if comando == "sair":
             print("\033[34mEncerrando o jogo...\033[0m")
             break
         elif comando in ["norte", "sul", "leste", "oeste"]:
-            area_atual = mover_jogadora(conn, cursor, jogador_nome, area_atual, comando)
+            area_atual = mover_jogador(conn, cursor, jogador_nome, area_atual, comando)
         else:
             print("\033[31mComando inválido. Tente novamente.\033[0m")
 
