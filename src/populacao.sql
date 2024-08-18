@@ -109,3 +109,19 @@ INSERT INTO consumivel (nome, areaAtual, descricao, peso, vidaRecuperada, areaTe
 VALUES
     ('Ambrosia', 'A11', 'Comida dos deuses, capaz de curar ferimentos graves.', 1, 50, NULL),
     ('Néctar', 'A12', 'Bebida divina que recupera a energia e vitalidade.', 1, 30, NULL);
+
+INSERT INTO regiao (nome, descricao, nivel)
+VALUES
+    ('Florestas do Norte', 'Uma densa e vasta floresta situada ao norte do acampamento. As árvores altas e a vegetação espessa oferecem um ambiente desafiador para os campistas.', 4);
+
+INSERT INTO area (nome, descricao, regiaoAtual, norte, sul, leste, oeste, temBandeira, desafio)
+VALUES
+    ('Clareira da Lua Prateada', 'Uma pequena clareira onde a luz da lua brilha intensamente à noite.', 'Florestas do Norte', 30, 0, 0, 60, false, NULL),
+    ('O Espelho das Árvores', 'Um lago cristalino que reflete perfeitamente as árvores ao redor.', 'Florestas do Norte', 20, 0, 0, 60, false, NULL),
+    ('Storm Cliff', 'Um penhasco alto que oferece uma vista de toda a floresta, mas é perigoso durante tempestades.', 'Florestas do Norte', 10, 0, 0, 60, false, NULL),
+    ('Mata Sombria', 'Uma área da floresta onde a luz raramente entra, cheia de perigos.', 'Florestas do Norte', 30, 0, 0, 50, false, NULL),
+    (' Gruta das Árvores Anciãs', 'Uma gruta escondida cercada por árvores milenares. É um lugar de descanso e meditação, repleto de antigas runas e segredos esquecidos.', 'Florestas do Norte', 20, 0, 0, 50, false, NULL),
+    ('Gruta Sombria', 'Uma gruta escura onde a luz do sol raramente entra.', 'Florestas do Norte', 10, 0, 0, 50, false, NULL),
+    ('Toca do Lobo', 'Uma caverna escondida onde vivem lobos selvagens.', 'Florestas do Norte', 30, 0, 0, 40, false, NULL),
+    ('Wind Stone', 'Uma pedra gigante que emite um som como um uivo quando o vento passa por ela.', 'Florestas do Norte', 20, 0, 0,40, false, NULL),
+    ('Campos de Espinhos', 'Um campo vasto coberto de espinhos, onde o solo parece respirar.', 'Florestas do Norte', 10, 0, 0, 40, false, NULL);

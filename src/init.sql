@@ -192,3 +192,68 @@ CREATE TABLE consumivel
     -- FOREIGN KEY(areaAtual) REFERENCES area(nome) ON DELETE RESTRICT,
     -- FOREIGN KEY(areaTeletransporte) REFERENCES area(nome) ON DELETE RESTRICT
 );
+
+CREATE TABLE regiao
+(
+    nome        VARCHAR(30),
+    descricao   TEXT        NOT NULL,
+    nivel       INTEGER     NOT NULL,
+
+    PRIMARY KEY(nome)
+);
+
+CREATE TABLE desafio
+(
+    id       SERIAL,
+    tipo     CHAR   NOT NULL CHECK(tipo = 'A' OR tipo = 'P'),
+
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE area
+(
+    nome            VARCHAR(30),
+    descricao       TEXT,
+    regiaoAtual     VARCHAR(30) NOT NULL,
+    norte           IntPositivo,
+    sul             IntPositivo,
+    leste           IntPositivo,
+    oeste           IntPositivo,
+    temBandeira     BOOLEAN,
+    desafio         INTEGER ,
+
+    PRIMARY KEY(nome),
+    FOREIGN KEY(regiaoAtual)    REFERENCES regiao(nome)         ON DELETE RESTRICT,
+    FOREIGN KEY(desafio)        REFERENCES desafio(id)   ON DELETE RESTRICT
+);
+
+CREATE TABLE armadilha
+(
+    id                  SERIAL,
+    descricao           TEXT        NOT NULL,
+    DTForca             INTEGER     NOT NULL,
+    DTAgilidade         INTEGER     NOT NULL,
+    DTInteligencia      INTEGER     NOT NULL,
+    areaTeletransporte  VARCHAR(15) NOT NULL,
+
+    PRIMARY KEY(id),
+    FOREIGN KEY(id)                 REFERENCES desafio(id)          ON DELETE RESTRICT,
+    FOREIGN KEY(areaTeletransporte) REFERENCES area(nome)           ON DELETE RESTRICT
+);
+
+CREATE TABLE provacao
+(
+    id                  SERIAL,
+    descricao           TEXT        NOT NULL,
+    DTForca             INTEGER     NOT NULL,
+    DTAgilidade         INTEGER     NOT NULL,
+    DTInteligencia      INTEGER     NOT NULL,
+    recompensa          INTEGER     NOT NULL,
+
+    PRIMARY KEY(id),
+    FOREIGN KEY(id)     REFERENCES desafio(id)   ON DELETE RESTRICT
+    /*
+    TODO: Descomentar quando as tabelas de itens foram criadas
+    FOREIGN KEY(recompensa) REFERENCES item(id)           ON DELETE RESTRICT
+    */
+);
