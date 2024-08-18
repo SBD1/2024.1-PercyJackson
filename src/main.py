@@ -56,6 +56,73 @@ try:
     else:
         print(f"Jogador {jogador_nome} não encontrado.")
 
+    # Função para mover a jogadora
+    def mover_jogadora(direcao):
+        # Consultando as coordenadas atuais da área
+        cursor.execute("""
+            SELECT norte, sul, leste, oeste 
+            FROM area 
+            WHERE nome = %s
+        """, (area_atual,))
+        area_info = cursor.fetchone()
+
+        if not area_info:
+            print("Área atual não encontrada.")
+            return
+
+        norte, sul, leste, oeste = area_info
+
+        # Definindo novas coordenadas
+        if direcao == "norte" and norte < 30:
+            norte += 10
+            sul = 0
+        elif direcao == "sul" and norte > 10:
+            norte -= 10
+            sul = 0
+        elif direcao == "leste" and oeste > 40:
+            oeste -= 10
+            leste = 0
+        elif direcao == "oeste" and oeste < 60:
+            oeste += 10
+            leste = 0
+        else:
+            print("Você está no limite do mapa e não pode ir mais nessa direção.")
+            return
+
+        # Buscando a nova área com base nas coordenadas
+        cursor.execute("""
+            SELECT nome, descricao 
+            FROM area 
+            WHERE norte = %s AND oeste = %s
+        """, (norte, oeste))
+        nova_area = cursor.fetchone()
+
+        if not nova_area:
+            print("Não foi possível encontrar uma nova área nas coordenadas indicadas.")
+            return
+
+        # Atualizando a área atual no banco de dados
+        cursor.execute("""
+            UPDATE jogador 
+            SET areaAtual = %s 
+            WHERE nome = %s
+        """, (nova_area[0], jogador_nome))
+        conn.commit()
+
+        print(f"Você se moveu para a nova área: {nova_area[0]} - {nova_area[1]}\n")
+
+    # Loop principal para comandos de movimento
+    while True:
+        comando = input("Digite a direção para onde deseja se mover (norte, sul, leste, oeste) ou 'sair' para encerrar: ").lower()
+
+        if comando == "sair":
+            print("Encerrando o jogo...")
+            break
+        elif comando in ["norte", "sul", "leste", "oeste"]:
+            mover_jogadora(comando)
+        else:
+            print("Comando inválido. Tente novamente.")
+
 except Exception as e:
     print(f"An error occurred: {e}")
 
