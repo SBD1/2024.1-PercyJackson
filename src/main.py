@@ -1,12 +1,16 @@
 import time
 import psycopg2
 from psycopg2 import sql
+import os
 
 # Configuração da conexão
 connection_string = "dbname='percyJacksonMUD' user='postgres' host='db' password='postgres'"
 
-print("Starting the script...")
-time.sleep(5)
+def limpar_terminal():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 def obter_area_atual(cursor, jogador_nome):
     cursor.execute("""
@@ -30,7 +34,7 @@ def mover_jogadora(conn, cursor, jogador_nome, area_atual, direcao):
     area_info = cursor.fetchone()
 
     if not area_info:
-        print("Área atual não encontrada.")
+        print("\033[31mÁrea atual não encontrada.\033[0m")
         return area_atual
 
     norte, sul, leste, oeste = area_info
@@ -49,7 +53,7 @@ def mover_jogadora(conn, cursor, jogador_nome, area_atual, direcao):
         oeste += 10
         leste = 0
     else:
-        print("Você está no limite do mapa e não pode ir mais nessa direção.")
+        print("\033[31mVocê está no limite do mapa e não pode ir mais nessa direção.\033[0m")
         return area_atual
 
     # Buscando a nova área com base nas coordenadas
@@ -61,7 +65,7 @@ def mover_jogadora(conn, cursor, jogador_nome, area_atual, direcao):
     nova_area = cursor.fetchone()
 
     if not nova_area:
-        print("Não foi possível encontrar uma nova área nas coordenadas indicadas.")
+        print("\033[31mNão foi possível encontrar uma nova área nas coordenadas indicadas.\033[0m")
         return area_atual
 
     # Atualizando a área atual no banco de dados
@@ -72,8 +76,11 @@ def mover_jogadora(conn, cursor, jogador_nome, area_atual, direcao):
     """, (nova_area[0], jogador_nome))
     conn.commit()
 
-    print(f"Você se moveu para a nova área: {nova_area[0]} - {nova_area[1]}\n")
+    print(f"\033[32mVocê se moveu para a nova área: {nova_area[0]} - {nova_area[1]}\033[0m\n")
     return nova_area[0]
+
+print("Starting the script...")
+time.sleep(5)
 
 try:
     # Conecta ao banco de dados
@@ -81,6 +88,8 @@ try:
     conn = psycopg2.connect(connection_string)
     cursor = conn.cursor()
     print("Connected to the database.")
+    time.sleep(1)
+    limpar_terminal()
 
     # Define jogador
     jogador_nome = 'Clara'
@@ -101,23 +110,23 @@ try:
 
     if area_result:
         regiao_nome, regiao_descricao, area_descricao = area_result
-        print(f"Região: {regiao_nome}")
-        print(f"Descrição da Região: {regiao_descricao}")
-        print(f"Descrição da Área: {area_descricao}")
+        print(f"\033[32mRegião: {regiao_nome}\033[0m")
+        print(f"\033[32mDescrição da Região: {regiao_descricao}\033[0m")
+        print(f"\033[32mDescrição da Área: {area_descricao}\033[0m")
     else:
-        print("Área não encontrada.")
+        print("\033[31mÁrea não encontrada.\033[0m")
 
     # Loop principal para comandos de movimento
     while True:
         comando = input("Digite a direção para onde deseja se mover (norte, sul, leste, oeste) ou 'sair' para encerrar: ").lower()
 
         if comando == "sair":
-            print("Encerrando o jogo...")
+            print("\033[34mEncerrando o jogo...\033[0m")
             break
         elif comando in ["norte", "sul", "leste", "oeste"]:
             area_atual = mover_jogadora(conn, cursor, jogador_nome, area_atual, comando)
         else:
-            print("Comando inválido. Tente novamente.")
+            print("\033[31mComando inválido. Tente novamente.\033[0m")
 
 except Exception as e:
     print(f"An error occurred: {e}")
