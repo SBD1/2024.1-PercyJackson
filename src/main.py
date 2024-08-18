@@ -8,6 +8,73 @@ connection_string = "dbname='percyJacksonMUD' user='postgres' host='db' password
 print("Starting the script...")
 time.sleep(5)
 
+def obter_area_atual(cursor, jogador_nome):
+    cursor.execute("""
+        SELECT areaAtual
+        FROM jogador
+        WHERE nome = %s
+    """, (jogador_nome,))
+    result = cursor.fetchone()
+    if result:
+        return result[0]
+    else:
+        raise Exception(f"Jogador {jogador_nome} não encontrado.")
+
+def mover_jogadora(conn, cursor, jogador_nome, area_atual, direcao):
+    # Consultando as coordenadas atuais da área
+    cursor.execute("""
+        SELECT norte, sul, leste, oeste 
+        FROM area 
+        WHERE nome = %s
+    """, (area_atual,))
+    area_info = cursor.fetchone()
+
+    if not area_info:
+        print("Área atual não encontrada.")
+        return area_atual
+
+    norte, sul, leste, oeste = area_info
+
+    # Definindo novas coordenadas
+    if direcao == "norte" and norte < 30:
+        norte += 10
+        sul = 0
+    elif direcao == "sul" and norte > 10:
+        norte -= 10
+        sul = 0
+    elif direcao == "leste" and oeste > 40:
+        oeste -= 10
+        leste = 0
+    elif direcao == "oeste" and oeste < 60:
+        oeste += 10
+        leste = 0
+    else:
+        print("Você está no limite do mapa e não pode ir mais nessa direção.")
+        return area_atual
+
+    # Buscando a nova área com base nas coordenadas
+    cursor.execute("""
+        SELECT nome, descricao 
+        FROM area 
+        WHERE norte = %s AND oeste = %s
+    """, (norte, oeste))
+    nova_area = cursor.fetchone()
+
+    if not nova_area:
+        print("Não foi possível encontrar uma nova área nas coordenadas indicadas.")
+        return area_atual
+
+    # Atualizando a área atual no banco de dados
+    cursor.execute("""
+        UPDATE jogador 
+        SET areaAtual = %s 
+        WHERE nome = %s
+    """, (nova_area[0], jogador_nome))
+    conn.commit()
+
+    print(f"Você se moveu para a nova área: {nova_area[0]} - {nova_area[1]}\n")
+    return nova_area[0]
+
 try:
     # Conecta ao banco de dados
     print("Connecting to the database...")
@@ -18,98 +85,27 @@ try:
     # Define jogador
     jogador_nome = 'Clara'
 
-    # Consulta SQL para buscar o deus e a localização do jogador
-    query = sql.SQL("""
-        SELECT deus, areaAtual
-        FROM jogador
-        WHERE nome = %s
+    # Obtendo a área atual
+    area_atual = obter_area_atual(cursor, jogador_nome)
+
+    # Consulta SQL para buscar o deus e a descrição da área atual
+    query_area = sql.SQL("""
+        SELECT r.nome, r.descricao, a.descricao
+        FROM area a
+        JOIN regiao r ON a.regiaoAtual = r.nome
+        WHERE a.nome = %s
     """)
+    
+    cursor.execute(query_area, (area_atual,))
+    area_result = cursor.fetchone()
 
-    print("Executing the query...")
-    cursor.execute(query, (jogador_nome,))
-    result = cursor.fetchone()
-
-    if result:
-        deus, area_atual = result
-        print(f"Jogador: {jogador_nome}")
-        print(f"Deus: {deus}")
-        print(f"Área Atual: {area_atual}")
-
-        # Consulta SQL para buscar a região e descrição da área atual
-        query_area = sql.SQL("""
-            SELECT r.nome, r.descricao, a.descricao
-            FROM area a
-            JOIN regiao r ON a.regiaoAtual = r.nome
-            WHERE a.nome = %s
-        """)
-        
-        cursor.execute(query_area, (area_atual,))
-        area_result = cursor.fetchone()
-
-        if area_result:
-            regiao_nome, regiao_descricao, area_descricao = area_result
-            print(f"Região: {regiao_nome}")
-            print(f"Descrição da Região: {regiao_descricao}")
-            print(f"Descrição da Área: {area_descricao}")
-        else:
-            print("Área não encontrada.")
+    if area_result:
+        regiao_nome, regiao_descricao, area_descricao = area_result
+        print(f"Região: {regiao_nome}")
+        print(f"Descrição da Região: {regiao_descricao}")
+        print(f"Descrição da Área: {area_descricao}")
     else:
-        print(f"Jogador {jogador_nome} não encontrado.")
-
-    # Função para mover a jogadora
-    def mover_jogadora(direcao):
-        # Consultando as coordenadas atuais da área
-        cursor.execute("""
-            SELECT norte, sul, leste, oeste 
-            FROM area 
-            WHERE nome = %s
-        """, (area_atual,))
-        area_info = cursor.fetchone()
-
-        if not area_info:
-            print("Área atual não encontrada.")
-            return
-
-        norte, sul, leste, oeste = area_info
-
-        # Definindo novas coordenadas
-        if direcao == "norte" and norte < 30:
-            norte += 10
-            sul = 0
-        elif direcao == "sul" and norte > 10:
-            norte -= 10
-            sul = 0
-        elif direcao == "leste" and oeste > 40:
-            oeste -= 10
-            leste = 0
-        elif direcao == "oeste" and oeste < 60:
-            oeste += 10
-            leste = 0
-        else:
-            print("Você está no limite do mapa e não pode ir mais nessa direção.")
-            return
-
-        # Buscando a nova área com base nas coordenadas
-        cursor.execute("""
-            SELECT nome, descricao 
-            FROM area 
-            WHERE norte = %s AND oeste = %s
-        """, (norte, oeste))
-        nova_area = cursor.fetchone()
-
-        if not nova_area:
-            print("Não foi possível encontrar uma nova área nas coordenadas indicadas.")
-            return
-
-        # Atualizando a área atual no banco de dados
-        cursor.execute("""
-            UPDATE jogador 
-            SET areaAtual = %s 
-            WHERE nome = %s
-        """, (nova_area[0], jogador_nome))
-        conn.commit()
-
-        print(f"Você se moveu para a nova área: {nova_area[0]} - {nova_area[1]}\n")
+        print("Área não encontrada.")
 
     # Loop principal para comandos de movimento
     while True:
@@ -119,7 +115,7 @@ try:
             print("Encerrando o jogo...")
             break
         elif comando in ["norte", "sul", "leste", "oeste"]:
-            mover_jogadora(comando)
+            area_atual = mover_jogadora(conn, cursor, jogador_nome, area_atual, comando)
         else:
             print("Comando inválido. Tente novamente.")
 
