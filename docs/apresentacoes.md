@@ -2,7 +2,9 @@
 
 ## Módulo 1
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/J4tYsr-XStw?si=jl2CoP7j9FC1yCH6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p align="center">
+  <iframe  width="560" height="315" src="https://www.youtube.com/embed/J4tYsr-XStw?si=jl2CoP7j9FC1yCH6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</p>
 
 O arquivo desse vídeo pode ser acesso por meio deste [zip](../assets/apresentacao1.zip).
 
