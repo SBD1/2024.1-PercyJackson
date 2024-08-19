@@ -124,7 +124,7 @@ try:
     # Obtendo a área atual
     area_atual = obter_area_atual(cursor, jogador_nome)
 
-    # Consulta SQL para buscar o deus e a descrição da área atual
+    # Consulta SQL para buscar a descrição da área atual
     query_area = sql.SQL("""
         SELECT r.nome, r.descricao, a.descricao
         FROM area a
