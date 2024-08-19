@@ -2,8 +2,6 @@
 
 ## Versão Final
 
-### Versão 5
-
 <img display:block; margin-right: auto; margin-left:auto" src="../../assets/relacional/relacional7.jpg"/>
 
 <p style="text-align:center; font-size:15px">Versão final (versão 7) do Modelo Relacional. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
