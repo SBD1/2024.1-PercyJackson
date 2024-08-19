@@ -4,6 +4,47 @@ CREATE DOMAIN AtributoInicial AS INTEGER
 CREATE DOMAIN IntPositivo AS INTEGER
     CHECK (VALUE >= 0);
 
+CREATE TABLE constante
+(
+    nome VARCHAR(20),
+    valor IntPositivo NOT NULL,
+    PRIMARY KEY(nome)
+);
+
+CREATE TABLE desafio
+(
+    id       SERIAL,
+    tipo     CHAR   NOT NULL CHECK(tipo = 'A' OR tipo = 'P'),
+
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE regiao
+(
+    nome        VARCHAR(30),
+    descricao   TEXT        NOT NULL,
+    nivel       INTEGER     NOT NULL,
+
+    PRIMARY KEY(nome)
+);
+
+CREATE TABLE area
+(
+    nome            VARCHAR(30),
+    descricao       TEXT,
+    regiaoAtual     VARCHAR(30) NOT NULL,
+    norte           IntPositivo,
+    sul             IntPositivo,
+    leste           IntPositivo,
+    oeste           IntPositivo,
+    temBandeira     BOOLEAN,
+    desafio         INTEGER ,
+
+    PRIMARY KEY(nome),
+    FOREIGN KEY(regiaoAtual)    REFERENCES regiao(nome)         ON DELETE RESTRICT,
+    FOREIGN KEY(desafio)        REFERENCES desafio(id)   ON DELETE RESTRICT
+);
+
 CREATE TABLE nivel
 (
     id INTEGER,
@@ -57,7 +98,7 @@ CREATE TABLE jogador
     arma INTEGER,
     itemMagico INTEGER,
     deus VARCHAR(15) NOT NULL, 
-    areaAtual VARCHAR(15) NOT NULL,
+    areaAtual VARCHAR(30) NOT NULL,
     nivel INTEGER NOT NULL DEFAULT 1,
     PRIMARY KEY(nome),
     FOREIGN KEY(nome) REFERENCES tipoPersonagem(nome) ON DELETE RESTRICT,
@@ -80,17 +121,15 @@ CREATE TABLE inimigoConcreto
     nomeConcreto VARCHAR(15),
     vidaAtual IntPositivo NOT NULL, /* Criar Trigger para definir a vidaAtual como a vidaMax do inimigo de referência */
     inimigo VARCHAR(15) NOT NULL,
-    areaAtual VARCHAR(15),
+    areaAtual VARCHAR(30),
     loot VARCHAR(25) NOT NULL,
     PRIMARY KEY(nomeConcreto),
+    FOREIGN KEY(areaAtual) REFERENCES area(nome) ON DELETE RESTRICT,
     FOREIGN KEY(inimigo) REFERENCES inimigo(nome) ON DELETE RESTRICT
     /*
     TODO: Descomentar quando as tabelas de itens foram criadas
 
     FOREIGN KEY(loot) REFERENCES tipoItem(id) ON DELETE RESTRICT,
-
-    TODO: Descomentar quando a tabela de Área for criada
-    FOREIGN KEY(areaAtual) REFERENCES area(nome) ON DELETE RESTRICT,
     */
 );
 
@@ -103,4 +142,116 @@ CREATE TABLE abate
     PRIMARY KEY(nomeJogador, nomeInimigo, dataHorario),
     FOREIGN KEY(nomeJogador) REFERENCES jogador(nome) ON DELETE RESTRICT,
     FOREIGN KEY(nomeInimigo) REFERENCES inimigo(nome) ON DELETE RESTRICT
+);
+
+CREATE TABLE inventario
+(
+    jogador VARCHAR(15),
+    cargaMaxima INTEGER NOT NULL CHECK (cargaMaxima >= 5),
+    PRIMARY KEY(jogador),
+    FOREIGN KEY(jogador) REFERENCES jogador(nome) ON DELETE CASCADE
+);
+
+CREATE TABLE tipoItem
+(
+    nome VARCHAR(30),
+    classificacao VARCHAR(15) NOT NULL CHECK (classificacao IN ('Defesa', 'Ataque', 'Consumivel', 'Magico')),
+    PRIMARY KEY(nome)
+);
+
+CREATE TABLE itemInventario
+(
+    jogador VARCHAR(15),
+    item VARCHAR(30),
+    PRIMARY KEY(jogador, item),
+    FOREIGN KEY(jogador) REFERENCES jogador(nome) ON DELETE CASCADE,
+    FOREIGN KEY(item) REFERENCES tipoItem(nome) ON DELETE CASCADE
+);
+
+CREATE TABLE defesa
+(
+    nome VARCHAR(30),
+    areaAtual VARCHAR(30),
+    descricao TEXT,
+    peso IntPositivo,
+    modDefesa IntPositivo,
+    PRIMARY KEY(nome), 
+    FOREIGN KEY(nome) REFERENCES tipoItem(nome) ON DELETE CASCADE
+    -- FOREIGN KEY(areaAtual) REFERENCES area(nome) ON DELETE RESTRICT,
+);
+
+CREATE TABLE ataque
+(
+    nome VARCHAR(30),
+    areaAtual VARCHAR(30),
+    descricao TEXT,
+    peso IntPositivo,
+    modCombate IntPositivo,
+    modForca IntPositivo,
+    PRIMARY KEY(nome), 
+    FOREIGN KEY(nome) REFERENCES tipoItem(nome) ON DELETE CASCADE
+    -- FOREIGN KEY(areaAtual) REFERENCES area(nome) ON DELETE RESTRICT,
+);
+
+CREATE TABLE magico
+(
+    nome VARCHAR(30),
+    areaAtual VARCHAR(30),
+    descricao TEXT,
+    peso IntPositivo,
+    modCombate IntPositivo,
+    modForca IntPositivo,
+    modDefesa IntPositivo,
+    modAgilidade IntPositivo,
+    modCarga IntPositivo,
+    tempoDeRecarga IntPositivo,
+    tempoAtual IntPositivo,
+    PRIMARY KEY(nome), 
+    FOREIGN KEY(nome) REFERENCES tipoItem(nome) ON DELETE CASCADE
+    -- FOREIGN KEY(areaAtual) REFERENCES area(nome) ON DELETE RESTRICT,
+);
+
+CREATE TABLE consumivel
+(
+    nome VARCHAR(30),
+    areaAtual VARCHAR(30),
+    descricao TEXT,
+    peso IntPositivo,
+    vidaRecuperada IntPositivo,
+    areaTeletransporte VARCHAR(15),
+    PRIMARY KEY(nome), 
+    FOREIGN KEY(nome) REFERENCES tipoItem(nome) ON DELETE CASCADE
+    -- FOREIGN KEY(areaAtual) REFERENCES area(nome) ON DELETE RESTRICT,
+    -- FOREIGN KEY(areaTeletransporte) REFERENCES area(nome) ON DELETE RESTRICT
+);
+
+CREATE TABLE armadilha
+(
+    id                  SERIAL,
+    descricao           TEXT        NOT NULL,
+    DTForca             INTEGER     NOT NULL,
+    DTAgilidade         INTEGER     NOT NULL,
+    DTInteligencia      INTEGER     NOT NULL,
+    areaTeletransporte  VARCHAR(15) NOT NULL,
+
+    PRIMARY KEY(id),
+    FOREIGN KEY(id)                 REFERENCES desafio(id)          ON DELETE RESTRICT,
+    FOREIGN KEY(areaTeletransporte) REFERENCES area(nome)           ON DELETE RESTRICT
+);
+
+CREATE TABLE provacao
+(
+    id                  SERIAL,
+    descricao           TEXT        NOT NULL,
+    DTForca             INTEGER     NOT NULL,
+    DTAgilidade         INTEGER     NOT NULL,
+    DTInteligencia      INTEGER     NOT NULL,
+    recompensa          INTEGER     NOT NULL,
+
+    PRIMARY KEY(id),
+    FOREIGN KEY(id)     REFERENCES desafio(id)   ON DELETE RESTRICT
+    /*
+    TODO: Descomentar quando as tabelas de itens foram criadas
+    FOREIGN KEY(recompensa) REFERENCES item(id)           ON DELETE RESTRICT
+    */
 );

@@ -102,3 +102,16 @@ VALUES
     ('nomeJogador', 'nomeInimigo', 'resultado');
 
 -- Fim Combate --
+
+INSERT INTO itemInventario (jogador, item)
+VALUES ('nome', 'item');
+
+-- Inserção de Item no inventário de um jogador
+
+DELETE FROM itemInventario
+WHERE jogador = 'nome'
+  AND item = 'item';
+
+-- Exclusão de Item do inventário de um jogador
+
+-- Deve ter um trigger para calcular a carga máxima do inventário. O cálculo deve ser 2 * força + 5
