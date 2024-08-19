@@ -16,7 +16,7 @@ Na álgebra relacional, os dados são organizados em relações (ou tabelas), qu
 
 ## Álgebra Relacional de algumas Query's do jogo Percy Jackson: Captura a Bandeira
 
-As consultas envolvem interações entre jogadores, áreas, inimigos, e itens mágicos, refletindo as complexidades de um ambiente de jogo, como na imagem abaixo. Todas as consultas podem ser visualizadas no seguinte [link](../assets/algebrarelacional.pdf).
+As consultas envolvem interações entre jogadores, áreas, inimigos, e itens mágicos, refletindo as complexidades de um ambiente de jogo, como na imagem abaixo. Todas as consultas podem ser visualizadas no seguinte [link](https://github.com/SBD1/2024.1-PercyJackson/blob/docs/docs/assets/ar/algebrarelacional.pdf).
 
 <img display:block; margin-right: auto; margin-left:auto" src="https://raw.githubusercontent.com/SBD1/2024.1-PercyJackson/docs/docs/assets/ar/ar-exemplo.png"/>
 
