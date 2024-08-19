@@ -142,10 +142,10 @@ CREATE TABLE inimigoConcreto
 
 CREATE TABLE abate
 (
-    nomeJogador VARCHAR(15),
-    nomeInimigo VARCHAR(15),
-    dataHorario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    resultado   BOOLEAN NOT NULL,
+    nomeJogador     VARCHAR(15),
+    nomeInimigo     VARCHAR(15),
+    dataHorario     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    vitoriaJogador  BOOLEAN NOT NULL,
     
     PRIMARY KEY(nomeJogador, nomeInimigo, dataHorario),
     FOREIGN KEY(nomeJogador) REFERENCES jogador(nome) ON DELETE RESTRICT,
