@@ -325,6 +325,12 @@
 | nome        | Nome que identifica unicamente uma área                           | VARCHAR      | 30      | PK, Not Null                                                       |
 | regiao | Referência à Região que a área se encontra dentro do mapa do jogo | VARCHAR      | 30      | FK, Not Null                                                       |
 | desafio     | Referência ao desafio que se encontra dentro da área              | INTEGER      |         | FK, Not Null                                                       |
+| descricao | Descrição detalhada de uma área e suas singularidades                                          | TEXT         | -       | Not Null                                                           |
+| norte | Coordenada norte no mapa                                          | INTEGER         | -       |                                                            |
+| sul | Coordenada sul no mapa                                          | INTEGER         | -       |                                                            |
+| leste | Coordenada leste no mapa                                          | INTEGER         | -       |                                                            |
+| oeste | Coordenada oeste no mapa                                          | INTEGER         | -       |                                                           |
+| temBandeira |  Variável para identificar se a área possui bandeira ou não                                        | BOOLEAN         | -       |                                                           |
 
 ### Tabela Desafio
 
@@ -336,7 +342,7 @@
 | Nome | Descrição                                                          | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ---- | ------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
 | id   | Número que identifica unicamente um desafio                        | SERIAL       |         | PK                                                                 |
-| tipoDesafio | Variável para identificar o  tipo de desafio (armação ou provação) | CHAR         | 1       | Check (tipoDesafio == 'a' or tipoDesafio == 'p')                   |
+| tipo | Variável para identificar o  tipo de desafio (armação ou provação) | CHAR         | 1       | Check (tipo == 'a' or tipo == 'p')                   |
 
 ### Tabela Armadilha
 
@@ -385,4 +391,5 @@
 |  9.0   | 16/08 | Remoção de defesa do Jogador e Inimigo, Remoção de carga do Jogador, Atualização da tabela de Abate, Atualização da tabela Dialogo, criação da tabela de constantes |     [@Neitan2001](https://github.com/Neitan2001)      |
 |  10.0   | 17/08 | Atualização das tabelas Inventario, TipoItem, Defesa, Ataque, Magico e Consumiveis. Criação da tabela ItemInventário |     [Clara Marcelino](https://github.com/clara-ribeiro)      |
 |  11.0   | 17/08 | Ajuste das tabelas Resposta, AdquireProfecia, Área, Desafio |     [Clara Marcelino](https://github.com/clara-ribeiro)      |
-|  12.0   | 19/08 | Atualização tamanho PK's e FK'S de área | [Paulo Henrique](https://github.com/owhenrique)      |
+|  12.0   | 19/08 | Atualização tamanho PK's e FK'S de área | [Paulo Henrique](https://github.com/owhenrique) |
+|  13.0   | 19/08 | Atualização da tábela área | [Paulo Henrique](https://github.com/owhenrique) |
