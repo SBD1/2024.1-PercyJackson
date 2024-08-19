@@ -248,9 +248,10 @@ CREATE TABLE armadilha
     DTAgilidade         INTEGER     NOT NULL,
     DTInteligencia      INTEGER     NOT NULL,
     areaTeletransporte  VARCHAR(30) NOT NULL,
+    desafio             INTEGER,
 
-    PRIMARY KEY(id),
-    FOREIGN KEY(id)                 REFERENCES desafio(id)          ON DELETE RESTRICT,
+    PRIMARY KEY(id, desafio),
+    FOREIGN KEY(desafio)            REFERENCES desafio(id)          ON DELETE RESTRICT,
     FOREIGN KEY(areaTeletransporte) REFERENCES area(nome)           ON DELETE RESTRICT
 );
 
@@ -261,12 +262,14 @@ CREATE TABLE provacao
     DTForca             INTEGER     NOT NULL,
     DTAgilidade         INTEGER     NOT NULL,
     DTInteligencia      INTEGER     NOT NULL,
-    recompensa          INTEGER     NOT NULL,
+    recompensa          VARCHAR(30) NOT NULL,
+    desafio             INTEGER,
 
-    PRIMARY KEY(id),
-    FOREIGN KEY(id)     REFERENCES desafio(id)   ON DELETE RESTRICT
+    PRIMARY KEY(id, desafio),
+    FOREIGN KEY(desafio)     REFERENCES desafio(id)   ON DELETE RESTRICT,
+    FOREIGN KEY(recompensa) REFERENCES tipoItem(nome)           ON DELETE RESTRICT
+    
     /*
     TODO: Descomentar quando as tabelas de itens foram criadas
-    FOREIGN KEY(recompensa) REFERENCES item(id)           ON DELETE RESTRICT
     */
 );
