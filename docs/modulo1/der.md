@@ -6,9 +6,9 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 
 ## Versão Final
 
-<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der7.jpg"/>
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der10.jpg"/>
 
-<p style="text-align:center; font-size:15px">Versão Final (Versão 7) do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
+<p style="text-align:center; font-size:15px">Versão Final (Versão 10) do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
 
 ## Versões DER
 
@@ -68,6 +68,30 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 
 </details>
 
+<details><summary>Versão 8</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der8.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 8 do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
+
+</details>
+
+<details><summary>Versão 9</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der9.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 9 do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
+
+</details>
+
+<details><summary>Versão 10</summary>
+
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/der/der10.jpg"/>
+
+<p style="text-align:center; font-size:15px">Versão 10 do Diagrama Entidade Relacionamento. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
+
+</details>
+
 ## Referência Bibliográfica
 
 > 1. O que é um diagrama entidade relacionamento? Disponível em: <https://www.lucidchart.com/pages/pt/o-que-e-diagrama-entidade-relacionamento>.
@@ -82,3 +106,4 @@ Um Diagrama Entidade Relacionamento  (DER) possui como objetivo demonstrar como 
 | 4.0 | 18/07 | Adição da Versão 5 do diagrama | [@Neitan2001](https://github.com/Neitan2001) |
 | 5.0 | 22/07 | Adição da Versão 6 do diagrama | [Paulo Henrique](https://github.com/owhenrique) |
 | 6.0 | 22/07 | Adição da Versão 7 do diagrama | [Charles Serafim](https://github.com/charles-serafim) |
+| 7.0 | 19/07 | Adição das Versões 8, 9 e 10 do diagrama | [Paulo Henrique](https://github.com/owhenrique) |
