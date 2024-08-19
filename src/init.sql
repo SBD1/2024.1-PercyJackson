@@ -270,3 +270,69 @@ CREATE TABLE provacao
     FOREIGN KEY(recompensa) REFERENCES item(id)           ON DELETE RESTRICT
     */
 );
+
+-- charles
+
+CREATE TABLE Aliado
+(   
+    nome        VARCHAR(15) NOT NULL,
+    descricao   TEXT        NOT NULL,
+    nomeArea    VARCHAR(15) NOT NULL,
+
+    PRIMARY KEY (nome),
+    FOREIGN KEY (nomeArea)  REFERENCES Area(nomeArea)   ON DELETE RESTRICT
+);
+
+CREATE TABLE Dialogo
+(   
+    numero      INTEGER     NOT NULL,
+    nomeAliado  VARCHAR(15) NOT NULL,
+    frase       TEXT        NOT NULL,
+    recompensa  VARCHAR(30) NOT NULL,
+
+    PRIMARY KEY (numero, nomeAliado),
+    FOREIGN KEY (nomeAliado)            REFERENCES Aliado(nome) ON DELETE CASCADE,
+    FOREIGN KEY (recompensa)            REFERENCES tipoItem(nome) ON DELETE RESTRICT
+);
+
+CREATE TABLE Resposta
+(
+    numero                  INTEGER     NOT NULL,
+    numeroDialogo           INTEGER     NOT NULL,
+    nomeAliado              VARCHAR(15) NOT NULL,
+    frase                   TEXT        NOT NULL,
+    numeroDialogoDestino    INTEGER     NOT NULL,
+    nomeAliadoDestino       VARCHAR(15) NOT NULL,
+
+    PRIMARY KEY (numero, numeroDialogo, nomeAliado),
+    FOREIGN KEY (numeroDialogo)             REFERENCES Dialogo(numero)  ON DELETE RESTRICT,
+    FOREIGN KEY (nomeAliado)                REFERENCES Aliado(nome)  ON DELETE RESTRICT,
+    FOREIGN KEY (numeroDialogoDestino)      REFERENCES Dialogo(numero)  ON DELETE RESTRICT,
+    FOREIGN KEY (nomeAliadoDestino)         REFERENCES Aliado(nome)  ON DELETE RESTRICT
+);
+
+CREATE TABLE Profecia
+(    
+    idProfecia      SERIAL,
+    numeroDialogo   INTEGER     NOT NULL,
+    nomeAliado      VARCHAR(15) NOT NULL,
+    nomeInimigo     VARCHAR(15) NOT NULL,    
+    quantAbate      INTEGER     NOT NULL,
+    turnosAMais     INTEGER     NOT NULL,    
+    
+    PRIMARY KEY (idProfecia),
+    FOREIGN KEY (numeroDialogo) REFERENCES Dialogo(numero)  ON DELETE CASCADE,
+    FOREIGN KEY (nomeAliado)    REFERENCES Aliado(nome)     ON DELETE CASCADE,
+    FOREIGN KEY (nomeInimigo)   REFERENCES Inimigo(nome)    ON DELETE RESTRICT,
+);
+
+CREATE TABLE Adquire
+(    
+    nomeJogador     VARCHAR(15) NOT NULL,
+    numeroProfecia  INTEGER     NOT NULL,   
+    completado      BOOLEAN     NOT NULL,
+
+    PRIMARY KEY (nomeJogador, numeroProfecia),    
+    FOREIGN KEY (nomeJogador)                   REFERENCES Jogador(nome)        ON DELETE RESTRICT,
+    FOREIGN KEY (numeroProfecia)                REFERENCES Profecia(idProfecia) ON DELETE RESTRICT
+);
