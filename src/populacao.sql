@@ -148,3 +148,33 @@ INSERT INTO consumivel (nome, areaAtual, descricao, peso, vidaRecuperada, areaTe
 VALUES
     ('Ambrosia', NULL, 'Comida dos deuses, capaz de curar ferimentos graves.', 1, 50, NULL),
     ('Néctar', NULL, 'Bebida divina que recupera a energia e vitalidade.', 1, 30, NULL);
+
+INSERT INTO Aliado (nome, descricao, nomeArea)
+VALUES
+    ('Quíron', 'O centauro e treinador dos heróis.', 'Clareira da Lua Prateada'),
+    ('Grover', 'O sátiro e melhor amigo de Percy.', 'O Espelho das Arvores'),
+    ('Annabeth', 'Filha de Atena, inteligente e estratégica.', 'Mata Sombria');
+
+INSERT INTO Dialogo (numero, frase, nomeAliado, recompensa)
+VALUES
+    (1, 'Bem-vindo ao Acampamento Meio-Sangue!', 'Quíron', 'Ambrosia'),
+    (2, 'Precisamos encontrar Percy antes que seja tarde.', 'Grover', 'Néctar'),
+    (3, 'Você deve ser rápido e inteligente para sobreviver.', 'Annabeth', 'Elmo de Ares');
+
+
+INSERT INTO Resposta (numero, numeroDialogo, nomeAliado, frase, numeroDialogoDestino, nomeAliadoDestino)
+VALUES
+    (1, 1, 'Quíron', 'Estou pronto para o treinamento.', 2, 'Grover'),
+    (2, 1, 'Quíron', 'Preciso de mais informações.', 3, 'Annabeth'),
+    (3, 2, 'Grover', 'Onde podemos começar a procurar?', 3, 'Annabeth'),
+    (4, 3, 'Annabeth', 'Estou pronto para o desafio.', NULL, NULL);
+
+INSERT INTO Profecia (idProfecia, numeroDialogo, nomeAliado, nomeInimigo, quantAbate, turnosAMais)
+VALUES
+    (1, 3, 'Annabeth', 'Ciclope', 2, 2),
+    (2, 2, 'Grover', 'Harpia', 3, 1);
+
+INSERT INTO Adquire (nomeJogador, numeroProfecia, status)
+VALUES
+    ('Natan', 1, 'completado'),
+    ('Clara', 2, 'pendente');
