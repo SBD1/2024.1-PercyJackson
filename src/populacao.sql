@@ -4,21 +4,32 @@ VALUES
     ('baseDefesaPersonagem', 10),
     ('toleranciaNectar', 4);
 
+INSERT INTO desafio (tipo)
+VALUES
+    ('A'),
+    ('P'),
+    ('A'),
+    ('P'),
+    ('A'),
+    ('P');
+
 INSERT INTO regiao (nome, descricao, nivel)
 VALUES
-    ('Florestas do Norte', 'Uma densa e vasta floresta situada ao norte do acampamento. As árvores altas e a vegetação espessa oferecem um ambiente desafiador para os campistas.', 4);
+    ('Florestas do Norte', 'Uma densa e vasta floresta situada ao norte do acampamento. As árvores altas e a vegetação espessa oferecem um ambiente desafiador para os campistas.', 4),
+    ('Praia dos fogos de artifício', 'Uma praia lendária no acampamento, onde os campistas se reúnem para celebrar suas vitórias e festividades. A areia fina e dourada contrasta com o céu noturno iluminado por fogos de artifício mágicos, que parecem ser invocados pelos próprios deuses.', 8),
+    ('Punho de Zeus', 'Uma formação rochosa imponente que se ergue sobre o acampamento, assemelhando-se a um punho cerrado apontado para os céus. Diz-se que foi esculpida pela própria mão de Zeus em um momento de ira divina. Quando as tempestades se aproximam, raios parecem dançar ao redor do punho, como se o próprio Zeus estivesse observando os campistas de perto.', 12);
 
 INSERT INTO area (nome, descricao, regiaoAtual, norte, sul, leste, oeste, temBandeira, desafio)
 VALUES
     ('Clareira da Lua Prateada', 'Uma pequena clareira onde a luz da lua brilha intensamente à noite.', 'Florestas do Norte', 30, 0, 0, 60, false, NULL),
     ('O Espelho das Arvores', 'Um lago cristalino que reflete perfeitamente as árvores ao redor.', 'Florestas do Norte', 20, 0, 0, 60, false, NULL),
     ('Storm Cliff', 'Um penhasco alto que oferece uma vista de toda a floresta, mas é perigoso durante tempestades.', 'Florestas do Norte', 10, 0, 0, 60, false, NULL),
-    ('Mata Sombria', 'Uma área da floresta onde a luz raramente entra, cheia de perigos.', 'Florestas do Norte', 30, 0, 0, 50, false, NULL),
-    ('Gruta das Arvores Ancias', 'Uma gruta escondida cercada por árvores milenares. É um lugar de descanso e meditação, repleto de antigas runas e segredos esquecidos.', 'Florestas do Norte', 20, 0, 0, 50, false, NULL),
+    ('Mata Sombria', 'Uma área da floresta onde a luz raramente entra, cheia de perigos.', 'Florestas do Norte', 30, 0, 0, 50, false, 2),
+    ('Gruta das Arvores Ancias', 'Uma gruta escondida cercada por árvores milenares. É um lugar de descanso e meditação, repleto de antigas runas e segredos esquecidos.', 'Florestas do Norte', 20, 0, 0, 50, false, 1),
     ('Gruta Sombria', 'Uma gruta escura onde a luz do sol raramente entra.', 'Florestas do Norte', 10, 0, 0, 50, false, NULL),
     ('Toca do Lobo', 'Uma caverna escondida onde vivem lobos selvagens.', 'Florestas do Norte', 30, 0, 0, 40, false, NULL),
     ('Wind Stone', 'Uma pedra gigante que emite um som como um uivo quando o vento passa por ela.', 'Florestas do Norte', 20, 0, 0,40, false, NULL),
-    ('Campos de Espinhos', 'Um campo vasto coberto de espinhos, onde o solo parece respirar.', 'Florestas do Norte', 10, 0, 0, 40, false, NULL);
+    ('Campos de Espinhos', 'Um campo vasto coberto de espinhos, onde o solo parece respirar.', 'Florestas do Norte', 10, 0, 0, 40, false, 3);
 
 INSERT INTO nivel (id, pontosExperiencia)
 VALUES
@@ -99,6 +110,18 @@ VALUES
     ('Clara', 'Anel de Hermes'),
     ('Charles', 'Elmo de Ares'),
     ('Paulo', 'Ambrosia');
+
+INSERT INTO armadilha (descricao, DTForca, DTAgilidade, DTInteligencia, areaTeletransporte, desafio)
+VALUES
+    ('Armadilha de Espinhos', 5, 3, 2, 'Campos de Espinhos', 1),
+    ('Caverna de Merlin', 6, 4, 5, 'Toca do Lobo', 3),
+    ('Jardim da Medusa', 2, 4, 7, 'Wind Stone', 5);
+
+INSERT INTO provacao (descricao, DTForca, DTAgilidade, DTInteligencia, recompensa, desafio)
+VALUES
+    ('Arena de Ares', 6, 3, 7, 'Elmo de Ares', 2),
+    ('Labirinto de Atena', 7, 6, 9, 'Escudo de Atena', 4),
+    ('Panteão olimpico', 2, 4, 7, 'Ambrosia', 6);
 
 -- Ajustar o nome das áreas quando a tabela estiver pronta
 
