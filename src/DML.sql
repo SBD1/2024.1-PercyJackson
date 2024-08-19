@@ -103,36 +103,26 @@ VALUES
 
 -- Fim Combate --
 
+-- Inserção de Item no inventário de um jogador
+
 INSERT INTO itemInventario (jogador, item)
 VALUES ('nome', 'item');
 
--- Inserção de Item no inventário de um jogador
+/*
+    Deve ter um trigger para calcular a carga máxima do inventário. O cálculo deve ser 2 * força + 5
+*/
+
+
+-- Exclusão de Item do inventário de um jogador
 
 DELETE FROM itemInventario
 WHERE jogador = 'nome'
   AND item = 'item';
 
--- Exclusão de Item do inventário de um jogador
-
--- Deve ter um trigger para calcular a carga máxima do inventário. O cálculo deve ser 2 * força + 5
-
-INSERT INTO abate (nomeJogador, nomeInimigo, resultado)
-VALUES
-    ('nomeJogador', 'nomeInimigo', 'resultado');
-
-
-INSERT INTO itemInventario (jogador, item)
-VALUES
-    ('Clara', 'Escudo de Atena');
-
-INSERT INTO inimigoConcreto (nomeConcreto, vidaAtual, inimigo, areaAtual, loot)
-VALUES
-    ('Ella', 40, 'Harpia', 'Storm Cliff', 'Pingente de Afrodite');
-
 -- Recupera todos os itens de inventário de um jogador específico
 SELECT item, classificacao
 FROM itemInventario item
-JOIN tipoItem classificacao ON item = nome
+JOIN tipoItem ON item = nome
 WHERE item.jogador = 'Clara';
 
 -- Exibe todas as áreas onde um determinado inimigo pode ser encontrado e a quantidade de vida que ele ainda possui
