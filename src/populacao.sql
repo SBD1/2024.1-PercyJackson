@@ -69,12 +69,6 @@ VALUES
     ('Charles', 3, 2, 2, 5, 'Aries', 'Mata Sombria'),
     ('Paulo', 5, 2, 2, 3, 'Zeus', 'Toca do Lobo');
 
-INSERT INTO inimigoConcreto (nomeConcreto, vidaAtual, inimigo, areaAtual, loot)
-VALUES
-    ('Ulfa', 10, 'Lobo', 'Clareira da Lua Prateada', 'Nectar'),
-    ('Scott', 30, 'Ciclope', 'O Espelho das Arvores', 'Machado do Scott'),
-    ('Alecto', 50, 'Harpia', 'Gruta das Arvores Ancias', 'ContraCorrente');
-
 INSERT INTO abate (nomeJogador, nomeInimigo, vitoriaJogador)
 VALUES
     ('Natan', 'Lobo', true),
@@ -104,6 +98,12 @@ VALUES
     ('Bastão de Hécate', 'Magico'),
     ('Néctar', 'Consumivel');
 
+INSERT INTO inimigoConcreto (nomeConcreto, vidaAtual, inimigo, areaAtual, loot)
+VALUES
+    ('Ulfa', 10, 'Lobo', 'Clareira da Lua Prateada', 'Néctar'),
+    ('Scott', 30, 'Ciclope', 'O Espelho das Arvores', 'Machado de Ares'),
+    ('Alecto', 50, 'Harpia', 'Gruta das Arvores Ancias', 'Bastão de Hécate');
+
 INSERT INTO itemInventario (jogador, item)
 VALUES
     ('Natan', 'Espada de Bronze Celestial'),
@@ -127,24 +127,24 @@ VALUES
 
 INSERT INTO defesa (nome, areaAtual, descricao, peso, modDefesa)
 VALUES
-    ('Elmo de Ares', 'A1', 'Um elmo pesado e resistente forjado para os guerreiros mais temidos.', 4, 7),
-    ('Escudo de Atena', 'A2', 'Escudo abençoado com a sabedoria de Atena.', 5, 10),
-    ('Armadura de Zeus', 'A3', 'A armadura reluzente que protege contra os ataques mais poderosos.', 6, 12),
-    ('Cota de Malha de Hefesto', 'A4', 'Armadura reforçada com os metais mais resistentes.', 8, 15);
+    ('Elmo de Ares', NULL, 'Um elmo pesado e resistente forjado para os guerreiros mais temidos.', 4, 7),
+    ('Escudo de Atena', NULL, 'Escudo abençoado com a sabedoria de Atena.', 5, 10),
+    ('Armadura de Zeus', NULL, 'A armadura reluzente que protege contra os ataques mais poderosos.', 6, 12),
+    ('Cota de Malha de Hefesto', NULL, 'Armadura reforçada com os metais mais resistentes.', 8, 15);
 
 INSERT INTO ataque (nome, areaAtual, descricao, peso, modCombate, modForca)
 VALUES
-    ('Espada de Bronze Celestial', 'A5', 'Uma espada poderosa forjada para derrotar monstros mitológicos.', 5, 10, 3),
-    ('Machado de Ares', 'A6', 'Uma arma brutal usada por guerreiros que seguem Ares.', 7, 15, 5);
+    ('Espada de Bronze Celestial', NULL, 'Uma espada poderosa forjada para derrotar monstros mitológicos.', 5, 10, 3),
+    ('Machado de Ares', NULL, 'Uma arma brutal usada por guerreiros que seguem Ares.', 7, 15, 5);
 
 INSERT INTO magico (nome, areaAtual, descricao, peso, modCombate, modForca, modDefesa, modAgilidade, modCarga, tempoDeRecarga, tempoAtual)
 VALUES
-    ('Anel de Hermes', 'A7', 'Um anel encantado que aumenta a velocidade e agilidade.', 1, 4, 2, 2, 5, 3, 10, 5),
-    ('Escudo Mágico de Atena', 'A8', 'Um escudo com proteção mágica e bônus de combate.', 3, 7, 0, 10, 2, 5, 8, 8),
-    ('Pingente de Afrodite', 'A9', 'Um amuleto que fortalece a defesa e combate, atraindo sorte.', 1, 3, 1, 5, 1, 2, 6, 6),
-    ('Bastão de Hécate', 'A10', 'Um bastão poderoso que concede poderes mágicos únicos.', 5, 12, 6, 8, 4, 10, 20, 15);
+    ('Anel de Hermes', NULL, 'Um anel encantado que aumenta a velocidade e agilidade.', 1, 4, 2, 2, 5, 3, 10, 5),
+    ('Escudo Mágico de Atena', NULL, 'Um escudo com proteção mágica e bônus de combate.', 3, 7, 0, 10, 2, 5, 8, 8),
+    ('Pingente de Afrodite', NULL, 'Um amuleto que fortalece a defesa e combate, atraindo sorte.', 1, 3, 1, 5, 1, 2, 6, 6),
+    ('Bastão de Hécate', NULL, 'Um bastão poderoso que concede poderes mágicos únicos.', 5, 12, 6, 8, 4, 10, 20, 15);
 
 INSERT INTO consumivel (nome, areaAtual, descricao, peso, vidaRecuperada, areaTeletransporte)
 VALUES
-    ('Ambrosia', 'A11', 'Comida dos deuses, capaz de curar ferimentos graves.', 1, 50, NULL),
-    ('Néctar', 'A12', 'Bebida divina que recupera a energia e vitalidade.', 1, 30, NULL);
+    ('Ambrosia', NULL, 'Comida dos deuses, capaz de curar ferimentos graves.', 1, 50, NULL),
+    ('Néctar', NULL, 'Bebida divina que recupera a energia e vitalidade.', 1, 30, NULL);
