@@ -51,5 +51,7 @@ nav:
     - modulo1/modeloRelacional.md
     - modulo1/DD.md
     - modulo1/normalizacao.md
+  - Módulo 2:
+    - modulo2/algebrarelacional.md
   - apresentacoes.md
 
