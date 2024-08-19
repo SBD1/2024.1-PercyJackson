@@ -277,10 +277,10 @@ CREATE TABLE Aliado
 (   
     nome        VARCHAR(15) NOT NULL,
     descricao   TEXT        NOT NULL,
-    nomeArea    VARCHAR(15) NOT NULL,
+    nomeArea    VARCHAR(30) NOT NULL,
 
     PRIMARY KEY (nome),
-    FOREIGN KEY (nomeArea)  REFERENCES Area(nomeArea)   ON DELETE RESTRICT
+    FOREIGN KEY (nomeArea)  REFERENCES area(nome)   ON DELETE RESTRICT
 );
 
 CREATE TABLE Dialogo
@@ -305,10 +305,8 @@ CREATE TABLE Resposta
     nomeAliadoDestino       VARCHAR(15) NOT NULL,
 
     PRIMARY KEY (numero, numeroDialogo, nomeAliado),
-    FOREIGN KEY (numeroDialogo)             REFERENCES Dialogo(numero)  ON DELETE RESTRICT,
-    FOREIGN KEY (nomeAliado)                REFERENCES Aliado(nome)  ON DELETE RESTRICT,
-    FOREIGN KEY (numeroDialogoDestino)      REFERENCES Dialogo(numero)  ON DELETE RESTRICT,
-    FOREIGN KEY (nomeAliadoDestino)         REFERENCES Aliado(nome)  ON DELETE RESTRICT
+    FOREIGN KEY (numeroDialogo, nomeAliado)                 REFERENCES Dialogo(numero, nomeAliado)  ON DELETE RESTRICT,
+    FOREIGN KEY (numeroDialogoDestino, nomeAliadoDestino)   REFERENCES Dialogo(numero, nomeAliado)  ON DELETE RESTRICT
 );
 
 CREATE TABLE Profecia
@@ -321,9 +319,8 @@ CREATE TABLE Profecia
     turnosAMais     INTEGER     NOT NULL,    
     
     PRIMARY KEY (idProfecia),
-    FOREIGN KEY (numeroDialogo) REFERENCES Dialogo(numero)  ON DELETE CASCADE,
-    FOREIGN KEY (nomeAliado)    REFERENCES Aliado(nome)     ON DELETE CASCADE,
-    FOREIGN KEY (nomeInimigo)   REFERENCES Inimigo(nome)    ON DELETE RESTRICT,
+    FOREIGN KEY (numeroDialogo, nomeAliado) REFERENCES Dialogo(numero, nomeAliado)  ON DELETE CASCADE,
+    FOREIGN KEY (nomeInimigo)               REFERENCES Inimigo(nome)    ON DELETE RESTRICT
 );
 
 CREATE TABLE Adquire
