@@ -103,15 +103,53 @@ VALUES
 
 -- Fim Combate --
 
+-- Inserção de Item no inventário de um jogador
+
 INSERT INTO itemInventario (jogador, item)
 VALUES ('nome', 'item');
 
--- Inserção de Item no inventário de um jogador
+/*
+    Deve ter um trigger para calcular a carga máxima do inventário. O cálculo deve ser 2 * força + 5
+*/
+
+
+-- Exclusão de Item do inventário de um jogador
 
 DELETE FROM itemInventario
 WHERE jogador = 'nome'
   AND item = 'item';
 
--- Exclusão de Item do inventário de um jogador
+-- Recupera todos os itens de inventário de um jogador específico
+SELECT item, classificacao
+FROM itemInventario item
+JOIN tipoItem ON item = nome
+WHERE item.jogador = 'Clara';
 
--- Deve ter um trigger para calcular a carga máxima do inventário. O cálculo deve ser 2 * força + 5
+-- Exibe todas as áreas onde um determinado inimigo pode ser encontrado e a quantidade de vida que ele ainda possui
+SELECT nomeConcreto, areaAtual, vidaAtual, nome
+FROM inimigoConcreto
+JOIN inimigo ON inimigoConcreto.inimigo = inimigo.nome
+WHERE inimigo.nome = 'Harpia';
+
+-- Encontrar jogadores que possuem pelo menos um item de defesa.
+SELECT DISTINCT jogador.nome
+FROM jogador
+JOIN itemInventario item ON jogador.nome = item.jogador
+JOIN tipoItem ON item.item = tipoItem.nome
+WHERE tipoItem.classificacao = 'Defesa';
+
+--  Listar todos os jogadores que foram derrotados em combate contra um inimigo específico.
+SELECT nomeJogador, nomeInimigo
+FROM abate
+WHERE vitoriaJogador = false AND nomeInimigo = 'Ciclope';
+
+-- Listar Itens Mágicos que Melhoram o Combate e a Defesa
+SELECT nome, modCombate, modDefesa
+FROM magico
+WHERE modCombate > 0 AND modDefesa > 0;
+
+-- Listar as áreas onde há pelo menos um jogador e um monstro ao mesmo tempo.
+SELECT area.nome, jogador.nome, inimigoConcreto.nomeconcreto
+FROM area
+JOIN jogador ON jogador.areaAtual = area.nome
+JOIN inimigoConcreto ON inimigoConcreto.areaAtual = area.nome;

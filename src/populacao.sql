@@ -64,12 +64,12 @@ VALUES
     ('Scott', 30, 'Ciclope', 'O Espelho das Arvores', 'Machado do Scott'),
     ('Alecto', 50, 'Harpia', 'Gruta das Arvores Ancias', 'ContraCorrente');
 
-INSERT INTO abate (nomeJogador, nomeInimigo, resultado)
+INSERT INTO abate (nomeJogador, nomeInimigo, vitoriaJogador)
 VALUES
-    ('Natan', 'Lobo', 'true'),
-    ('Charles', 'Ciclope', 'false'),
-    ('Clara', 'Ciclope', 'true'),
-    ('Paulo', 'Harpia', 'true');
+    ('Natan', 'Lobo', true),
+    ('Charles', 'Ciclope', false),
+    ('Clara', 'Ciclope', true),
+    ('Paulo', 'Harpia', true);
 
 INSERT INTO inventario (jogador, cargaMaxima)
 VALUES
