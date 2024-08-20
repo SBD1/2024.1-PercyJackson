@@ -97,9 +97,9 @@ WHERE nome = nomeJogador;
     Se o inimigo vencer o combate, o resultado será "false".
 */
 
-INSERT INTO abate (nomeJogador, nomeInimigo, resultado)
+INSERT INTO abate (nomeJogador, nomeInimigo, vitoriaJogador)
 VALUES
-    ('nomeJogador', 'nomeInimigo', 'resultado');
+    ('nomeJogador', 'nomeInimigo', true);
 
 -- Fim Combate --
 
