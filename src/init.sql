@@ -288,7 +288,7 @@ CREATE TABLE Dialogo
     numero      INTEGER     NOT NULL,
     nomeAliado  VARCHAR(15) NOT NULL,
     frase       TEXT        NOT NULL,
-    recompensa  VARCHAR(30) NOT NULL,
+    recompensa  VARCHAR(30),
 
     PRIMARY KEY (numero, nomeAliado),
     FOREIGN KEY (nomeAliado)            REFERENCES Aliado(nome) ON DELETE CASCADE,
@@ -301,8 +301,8 @@ CREATE TABLE Resposta
     numeroDialogo           INTEGER     NOT NULL,
     nomeAliado              VARCHAR(15) NOT NULL,
     frase                   TEXT        NOT NULL,
-    numeroDialogoDestino    INTEGER     NOT NULL,
-    nomeAliadoDestino       VARCHAR(15) NOT NULL,
+    numeroDialogoDestino    INTEGER,
+    nomeAliadoDestino       VARCHAR(15),
 
     PRIMARY KEY (numero, numeroDialogo, nomeAliado),
     FOREIGN KEY (numeroDialogo, nomeAliado)                 REFERENCES Dialogo(numero, nomeAliado)  ON DELETE RESTRICT,

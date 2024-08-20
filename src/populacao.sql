@@ -125,3 +125,37 @@ INSERT INTO consumivel (nome, areaAtual, descricao, peso, vidaRecuperada, areaTe
 VALUES
     ('Ambrosia', 'A11', 'Comida dos deuses, capaz de curar ferimentos graves.', 1, 50, NULL),
     ('Néctar', 'A12', 'Bebida divina que recupera a energia e vitalidade.', 1, 30, NULL);
+
+INSERT INTO Aliado (nome, descricao, nomeArea)
+VALUES
+    ('Quíron', 'O centauro e treinador dos heróis.', 'Clareira da Lua Prateada'),
+    ('Grover', 'O sátiro e melhor amigo de Percy.', 'O Espelho das Arvores'),
+    ('Annabeth', 'Filha de Atena, inteligente e estratégica.', 'Mata Sombria');
+
+INSERT INTO Dialogo (numero, frase, nomeAliado, recompensa)
+VALUES
+    (1, 'Precisamos de sua ajuda, alguns Lobos estão atrapalhando nossos colegas. Pode derrotar 5 deles por nós?', 'Annabeth', NULL),
+    (2, 'Muito obrigada! Tome este item para te ajudar nessa missão.', 'Annabeth', 'Néctar'),
+    (3, 'Se continuar com essa atitude, iremos perder esta competição!', 'Annabeth', NULL),
+    (1, 'Preciso que você mate uma Harpia que está pertubando o Labirinto', 'Quíron', NULL),
+    (1, 'Socorroooo, tem um ciclope solto por ai. Acabe com ele por favooorr', 'Grover', NULL);
+
+
+INSERT INTO Resposta (numero, numeroDialogo, nomeAliado, frase, numeroDialogoDestino, nomeAliadoDestino)
+VALUES
+    (1, 1, 'Annabeth', 'Pode deixar comigo!', 2, 'Annabeth'),
+    (2, 1, 'Annabeth', 'Eles que se virem com esses Lobos. Tenho uma bandeira para capturar!', 3, 'Annabeth'),
+    (1, 1, 'Quíron', 'Pode deixar comigo!', NULL, NULL),
+    (1, 1, 'Grover', 'Irei acabar com ele!', NULL, NULL);
+
+INSERT INTO Profecia (numeroDialogo, nomeAliado, nomeInimigo, quantAbate, turnosAMais)
+VALUES
+    (1, 'Annabeth', 'Lobo', 5, 5),
+    (1, 'Quíron', 'Harpia', 1, 15),
+    (1, 'Grover', 'Ciclope', 1, 8);
+
+INSERT INTO Adquire (nomeJogador, numeroProfecia, completado)
+VALUES
+    ('Natan', 1, true),
+    ('Clara', 2, false),
+    ('Charles', 3, true);
