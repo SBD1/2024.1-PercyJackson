@@ -3,13 +3,13 @@ from psycopg2 import sql
 from utils import limpar_terminal
 
 def apresentar_jogo():
+    limpar_terminal()
     print("\033[34mBem-vindo ao RPG Percy Jackson!\033[0m")
     time.sleep(2)
     print("\033[34mPrepare-se para explorar o Acampamento Meio-Sangue e encontrar a bandeira!\033[0m")
     time.sleep(3)
-    print("\033[34mA jornada está prestes a começar!\033[0m")
+    print("\033[34mA jornada está prestes a começar!\033[0m\n\n")
     time.sleep(2)
-    limpar_terminal()
 
 def obter_area_atual(cursor, jogador_nome):
     cursor.execute("""
