@@ -22,7 +22,7 @@ CREATE TABLE desafio
 
 CREATE TABLE regiao
 (
-    nome        VARCHAR(30),
+    nome        VARCHAR(35),
     descricao   TEXT        NOT NULL,
     nivel       INTEGER     NOT NULL,
 
@@ -31,9 +31,9 @@ CREATE TABLE regiao
 
 CREATE TABLE area
 (
-    nome            VARCHAR(30),
+    nome            VARCHAR(35),
     descricao       TEXT,
-    regiaoAtual     VARCHAR(30) NOT NULL,
+    regiaoAtual     VARCHAR(35) NOT NULL,
     norte           IntPositivo,
     sul             IntPositivo,
     leste           IntPositivo,
@@ -43,7 +43,8 @@ CREATE TABLE area
 
     PRIMARY KEY(nome),
     FOREIGN KEY(regiaoAtual)    REFERENCES regiao(nome)         ON DELETE RESTRICT,
-    FOREIGN KEY(desafio)        REFERENCES desafio(id)   ON DELETE RESTRICT
+    FOREIGN KEY(desafio)        REFERENCES desafio(id)   ON DELETE RESTRICT,
+    UNIQUE (norte, sul, leste, oeste)
 );
 
 CREATE TABLE nivel
@@ -100,7 +101,7 @@ CREATE TABLE tipoItem
 CREATE TABLE defesa
 (
     nome        VARCHAR(30),
-    areaAtual   VARCHAR(30),
+    areaAtual   VARCHAR(35),
     descricao   TEXT NOT NULL,
     peso        IntPositivo NOT NULL,
     modDefesa   IntPositivo,
@@ -113,7 +114,7 @@ CREATE TABLE defesa
 CREATE TABLE ataque
 (
     nome        VARCHAR(30),
-    areaAtual   VARCHAR(30),
+    areaAtual   VARCHAR(35),
     descricao   TEXT NOT NULL,
     peso        IntPositivo NOT NULL,
     modCombate  IntPositivo,
@@ -127,7 +128,7 @@ CREATE TABLE ataque
 CREATE TABLE magico
 (
     nome            VARCHAR(30),
-    areaAtual       VARCHAR(30),
+    areaAtual       VARCHAR(35),
     descricao       TEXT NOT NULL,
     peso            IntPositivo NOT NULL,
     modCombate      IntPositivo,
@@ -146,7 +147,7 @@ CREATE TABLE magico
 CREATE TABLE consumivel
 (
     nome                VARCHAR(30),
-    areaAtual           VARCHAR(30),
+    areaAtual           VARCHAR(35),
     descricao           TEXT NOT NULL,
     peso                IntPositivo NOT NULL,
     vidaRecuperada      IntPositivo,
@@ -202,7 +203,7 @@ CREATE TABLE jogador
     arma                VARCHAR(30),
     itemMagico          VARCHAR(30),
     deus                VARCHAR(15) NOT NULL, 
-    areaAtual           VARCHAR(30) NOT NULL,
+    areaAtual           VARCHAR(35) NOT NULL,
     nivel               INTEGER NOT NULL DEFAULT 1,
     
     PRIMARY KEY(nome),
@@ -220,7 +221,7 @@ CREATE TABLE inimigoConcreto
     nomeConcreto    VARCHAR(15),
     vidaAtual       IntPositivo NOT NULL, /* Criar Trigger para definir a vidaAtual como a vidaMax do inimigo de referência */
     inimigo         VARCHAR(15) NOT NULL,
-    areaAtual       VARCHAR(30),
+    areaAtual       VARCHAR(35),
     loot            VARCHAR(30) NOT NULL,
     
     PRIMARY KEY(nomeConcreto),
