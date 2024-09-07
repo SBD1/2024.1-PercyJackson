@@ -58,6 +58,98 @@ def exibir_informacoes_area(cursor, area_nome):
     else:
         print("\033[31mInformações da área não encontradas.\033[0m")
 
+def processar_desafio(conn, cursor, jogador_nome, area, desafio_id):
+    print(f"\033[33mVocê encontrou um desafio na área: {area}!\033[0m")
+
+    cursor.execute("""
+        SELECT tipo 
+        FROM desafio
+        WHERE id = %s
+    """, (desafio_id,))
+    tipo_desafio = cursor.fetchone()
+
+    if not tipo_desafio:
+        print("\033[31mErro: Desafio não encontrado.\033[0m")
+        return
+
+    cursor.execute("""
+        SELECT forca, agilidade, intelecto
+        FROM jogador
+        WHERE nome = %s
+    """, (jogador_nome,))
+    atributos_jogador = cursor.fetchone()
+
+    if not atributos_jogador:
+        print("\033[31mErro: Jogador não encontrado.\033[0m")
+        return
+
+    forca_jogador, agilidade_jogador, intelecto_jogador = atributos_jogador
+
+    if tipo_desafio[0] == 'A':
+        print(f"\033[33mOh não! Você caiu em uma armadilha. \033[0m")
+
+        cursor.execute("""
+            SELECT descricao, DTForca, DTAgilidade, DTInteligencia, areaTeletransporte 
+            FROM armadilha
+            WHERE desafio = %s
+        """, (desafio_id,))
+        armadilha = cursor.fetchone()
+
+        if not armadilha:
+            print("\033[31mErro: Armadilha não encontrada.\033[0m")
+            return
+
+        descricao, DTForca, DTAgilidade, DTInteligencia, area_teletransporte = armadilha
+        print(f"\033[33mDetalhes da armadilha: {descricao}\033[0m")
+
+        if (forca_jogador >= DTForca and
+            agilidade_jogador >= DTAgilidade and
+            intelecto_jogador >= DTInteligencia):
+            print(f"\033[32mParabéns {jogador_nome}, você escapou da armadilha!\033[0m")
+        else:
+            print(f"\033[31mVocê não conseguiu escapar. Você será teletransportado para {area_teletransporte}.\033[0m")
+            cursor.execute("""
+                UPDATE jogador
+                SET areaAtual = %s
+                WHERE nome = %s
+            """, (area_teletransporte, jogador_nome))
+            conn.commit()
+
+    else:
+        print(f"\033[33mOk {jogador_nome}! Você tem uma provação pela frente. \033[0m")
+
+        cursor.execute("""
+            SELECT descricao, DTForca, DTAgilidade, DTInteligencia, recompensa 
+            FROM provacao
+            WHERE desafio = %s
+        """, (desafio_id,))
+        provacao = cursor.fetchone()
+
+        if not provacao:
+            print("\033[31mErro: Provação não encontrada.\033[0m")
+            return
+
+        descricao, DTForca, DTAgilidade, DTInteligencia, recompensa = provacao
+        print(f"\033[33mDetalhes da provação: {descricao}\033[0m")
+
+        if (forca_jogador >= DTForca and
+            agilidade_jogador >= DTAgilidade and
+            intelecto_jogador >= DTInteligencia):
+            print(f"\033[32mParabéns {jogador_nome}, você superou a provação! Você recebeu a recompensa: {recompensa}.\033[0m")
+
+        else:
+            print(f"\033[31mVocê falhou na provação e não receberá a recompensa.\033[0m")
+
+def capturar_bandeira(conn, cursor, jogador_nome, area):
+    print(f"\033[33mVocê encontrou uma bandeira na área: {area}!\033[0m")
+    # cursor.execute("""
+    #     UPDATE area 
+    #     SET temBandeira = FALSE 
+    #     WHERE nome = %s
+    # """, (area,))
+    # conn.commit()
+    print(f"\033[33mParabéns {jogador_nome}, você venceu o jogo!\033[0m")
+
 
 def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     # Consultando as coordenadas atuais da área
@@ -147,11 +239,14 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
 
     # Buscando a nova área com base nas coordenadas atualizadas
     cursor.execute("""
-        SELECT nome, descricao 
+        SELECT nome, descricao, temBandeira, desafio 
         FROM area 
         WHERE norte = %s AND sul = %s AND leste = %s AND oeste = %s
     """, (norte, sul, leste, oeste))
     nova_area = cursor.fetchone()
+
+    temBandeira = nova_area[2]
+    desafio = nova_area[3]
 
     if not nova_area:
         print("\033[31mNão foi possível encontrar uma nova área nas coordenadas indicadas.\033[0m")
@@ -167,4 +262,10 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     print(f"\033[43mNova localização\033[0m")
     exibir_informacoes_area(cursor, nova_area[0])
 
+    if temBandeira:
+        capturar_bandeira(conn, cursor, jogador_nome, nova_area[0])
+    
+    if desafio:
+        processar_desafio(conn, cursor, jogador_nome, nova_area[0], desafio)
+    
     return nova_area[0]
