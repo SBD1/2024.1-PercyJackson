@@ -46,14 +46,14 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
         return area_atual
 
     norte, sul, leste, oeste = area_info
-    fronteira = False
+    fronteira = False  # Flag para verificar se o jogador está na fronteira
 
     # Movimentação para o Norte
     if direcao == "norte":
         if sul == 0:  # Jogador está no Norte
             if norte == 30:  # Está na fronteira do Norte
-                fronteira = True
                 print("\033[31mVocê está na fronteira do mapa ao norte e não pode ir mais nessa direção.\033[0m")
+                fronteira = True
             else:  # Pode mover-se para o Norte
                 norte += 10
         elif norte == 0:  # Jogador está no Sul
@@ -67,8 +67,8 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     elif direcao == "sul":
         if norte == 0:  # Jogador está no Sul
             if sul == 30:  # Está na fronteira do Sul
-                fronteira = True
                 print("\033[31mVocê está na fronteira do mapa ao sul e não pode ir mais nessa direção.\033[0m")
+                fronteira = True
             else:  # Pode mover-se para o Sul
                 sul += 10
         elif sul == 0:  # Jogador está no Norte
@@ -82,8 +82,8 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     elif direcao == "leste":
         if oeste == 0:  # Jogador está no Leste
             if leste == 90:  # Está na fronteira do Leste
-                fronteira = True
                 print("\033[31mVocê está na fronteira do mapa ao leste e não pode ir mais nessa direção.\033[0m")
+                fronteira = True
             else:  # Pode mover-se para o Leste
                 leste += 10
         elif leste == 0:  # Jogador está no Oeste
@@ -97,8 +97,8 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     elif direcao == "oeste":
         if leste == 0:  # Jogador está no Oeste
             if oeste == 90:  # Está na fronteira do Oeste
-                fronteira = True
                 print("\033[31mVocê está na fronteira do mapa ao oeste e não pode ir mais nessa direção.\033[0m")
+                fronteira = True
             else:  # Pode mover-se para o Oeste
                 oeste += 10
         elif oeste == 0:  # Jogador está no Leste
@@ -110,6 +110,12 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
 
     else:
         print("\033[31mDireção inválida.\033[0m")
+        return area_atual
+
+    # Se o jogador estiver na fronteira, exibe a localização atual e retorna
+    if fronteira:
+        print(f"\033[43mLocalização atual\033[0m")
+        print(f"\033[32mVocê continua na área: {area_atual}\033[0m")
         return area_atual
 
     # Buscando a nova área com base nas coordenadas atualizadas
@@ -136,7 +142,7 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     nova_regiao = obter_regiao(cursor, nova_area[0])
 
     print(f"\n\033[43mNova localização\033[0m")
-    print(f"\033[32mVocê se moveu para a nova área: {nova_area[0]} - {nova_area[1]}\033[0m")
+    print(f"\033[32m{nova_area[0]} - {nova_area[1]}\033[0m")
     if nova_regiao:
         print(f"\033[32mRegião: {nova_regiao[0]} - {nova_regiao[1]}\033[0m\n")
 
