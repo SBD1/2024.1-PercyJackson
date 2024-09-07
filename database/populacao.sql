@@ -223,12 +223,6 @@ VALUES
     ('Charles', 3, 2, 2, 5, 'Aries', 'Mata Sombria'),
     ('Paulo', 5, 2, 2, 3, 'Zeus', 'Toca do Lobo');
 
--- INSERT INTO abate (nomeJogador, nomeInimigo, vitoriaJogador)
--- VALUES
---     ('Ulfa', 10, 'Lobo', 'Clareira da Lua Prateada', 'Nectar'),
---     ('Scott', 30, 'Ciclope', 'O Espelho das Arvores', 'Machado do Scott'),
---     ('Alecto', 50, 'Harpia', 'Gruta das Arvores Ancias', 'ContraCorrente');
-
 INSERT INTO abate (nomeJogador, nomeInimigo, vitoriaJogador)
 VALUES
     ('Natan', 'Lobo', true),
