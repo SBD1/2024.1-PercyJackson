@@ -1,3 +1,32 @@
+-- DROP TABLE IF EXISTS adquire;
+-- DROP TABLE IF EXISTS profecia;
+-- DROP TABLE IF EXISTS resposta;
+-- DROP TABLE IF EXISTS dialogo;
+-- DROP TABLE IF EXISTS aliado;
+-- DROP TABLE IF EXISTS itemInventario;
+-- DROP TABLE IF EXISTS inventario;
+-- DROP TABLE IF EXISTS abate;
+-- DROP TABLE IF EXISTS inimigoConcreto;
+-- DROP TABLE IF EXISTS jogador;
+-- DROP TABLE IF EXISTS provacao;
+-- DROP TABLE IF EXISTS armadilha;
+-- DROP TABLE IF EXISTS consumivel;
+-- DROP TABLE IF EXISTS magico;
+-- DROP TABLE IF EXISTS ataque;
+-- DROP TABLE IF EXISTS defesa;
+-- DROP TABLE IF EXISTS tipoItem;
+-- DROP TABLE IF EXISTS inimigo;
+-- DROP TABLE IF EXISTS tipoPersonagem;
+-- DROP TABLE IF EXISTS deus;
+-- DROP TABLE IF EXISTS nivel;
+-- DROP TABLE IF EXISTS area;
+-- DROP TABLE IF EXISTS regiao;
+-- DROP TABLE IF EXISTS desafio;
+-- DROP TABLE IF EXISTS constante;
+
+-- DROP DOMAIN IF EXISTS AtributoInicial;
+-- DROP DOMAIN IF EXISTS IntPositivo;
+
 CREATE DOMAIN AtributoInicial AS INTEGER
     CHECK (VALUE >= 0 AND VALUE <= 5);
 
