@@ -57,9 +57,9 @@ VALUES
 -- População da região Praia dos Fogos de Artifício
 INSERT INTO area (nome, descricao, regiaoAtual, norte, sul, leste, oeste, temBandeira, desafio)
 VALUES
-    ('Mar Sul Oeste', 'Descrição', 'Praia dos Fogos de Artifício', 30, 0, 0, 30, false, NULL),
-    ('Mar Sul', 'Descrição', 'Praia dos Fogos de Artifício', 30, 0, 0, 20, false, NULL),
-    ('Mar Sul Leste', 'Descrição', 'Praia dos Fogos de Artifício', 30, 0, 0, 10, false, NULL),
+    ('Mar Sul Oeste', 'Mar localizado a oeste da praia', 'Praia dos Fogos de Artifício', 30, 0, 0, 30, false, NULL),
+    ('Mar Sul', 'Mar', 'Praia dos Fogos de Artifício', 30, 0, 0, 20, false, NULL),
+    ('Mar Sul Leste', 'Mar localizado a leste da praia', 'Praia dos Fogos de Artifício', 30, 0, 0, 10, false, NULL),
     ('Área de Mergulho Oeste', 'Seção do mar onde se pode mergulhar e explorar vida marinha.', 'Praia dos Fogos de Artifício', 20, 0, 0, 30, false, NULL),
     ('Praia dos Fogos', 'Área principal onde ocorrem os fogos de artifício.', 'Praia dos Fogos de Artifício', 20, 0, 0, 20, false, NULL),
     ('Área de Mergulho Leste', 'Seção do mar onde se pode mergulhar e explorar vida marinha.', 'Praia dos Fogos de Artifício', 20, 0, 0, 10, false, NULL),
