@@ -32,6 +32,33 @@ def obter_regiao(cursor, area_nome):
     """, (area_nome,))
     return cursor.fetchone()
 
+def exibir_informacoes_area(cursor, area_nome):
+    regiao_info = obter_regiao(cursor, area_nome)
+    
+    if regiao_info:
+        regiao_nome, regiao_descricao = regiao_info
+    else:
+        print("\033[31mInformações da região não encontradas.\033[0m")
+        return
+
+    # Consulta SQL para obter as informações da área
+    cursor.execute("""
+        SELECT nome, descricao 
+        FROM area 
+        WHERE nome = %s
+    """, (area_nome,))
+    area_info = cursor.fetchone()
+
+    if area_info:
+        area_nome, area_descricao = area_info
+        print(f"\033[32mRegião: {regiao_nome}\033[0m")
+        print(f"\033[32mDescrição: {regiao_descricao}\033[0m")
+        print(f"\033[32mÁrea: {area_nome}\033[0m")
+        print(f"\033[32mDescrição: {area_descricao}\033[0m\n")
+    else:
+        print("\033[31mInformações da área não encontradas.\033[0m")
+
+
 def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     # Consultando as coordenadas atuais da área
     cursor.execute("""
@@ -137,13 +164,7 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
         WHERE nome = %s
     """, (nova_area[0], jogador_nome))
     conn.commit()
-
-    # Obter a nova região
-    nova_regiao = obter_regiao(cursor, nova_area[0])
-
-    print(f"\n\033[43mNova localização\033[0m")
-    print(f"\033[32m{nova_area[0]} - {nova_area[1]}\033[0m")
-    if nova_regiao:
-        print(f"\033[32mRegião: {nova_regiao[0]} - {nova_regiao[1]}\033[0m\n")
+    print(f"\033[43mNova localização\033[0m")
+    exibir_informacoes_area(cursor, nova_area[0])
 
     return nova_area[0]
