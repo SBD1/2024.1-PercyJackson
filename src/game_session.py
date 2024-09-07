@@ -13,7 +13,7 @@ def start_game():
         area_atual = obter_area_atual(cursor, jogador_nome)
 
         query_area = sql.SQL("""
-            SELECT r.nome, r.descricao, a.descricao
+            SELECT r.nome, r.descricao, a.nome, a.descricao
             FROM area a
             JOIN regiao r ON a.regiaoAtual = r.nome
             WHERE a.nome = %s
@@ -23,10 +23,11 @@ def start_game():
         area_result = cursor.fetchone()
 
         if area_result:
-            regiao_nome, regiao_descricao, area_descricao = area_result
+            regiao_nome, regiao_descricao, area_nome, area_descricao = area_result
             print(f"\033[43mSua localização\033[0m")
             print(f"\033[32mRegião: {regiao_nome}\033[0m")
             print(f"\033[32mDescrição da Região: {regiao_descricao}\033[0m")
+            print(f"\033[32mÁrea: {area_nome}\033[0m")
             print(f"\033[32mDescrição da Área: {area_descricao}\033[0m")
         else:
             print("\033[31mÁrea não encontrada.\033[0m")
