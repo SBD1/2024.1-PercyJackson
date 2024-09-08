@@ -261,7 +261,14 @@ def processar_desafio(conn, cursor, jogador_nome, area, desafio_id):
         if (forca_jogador >= DTForca and
             agilidade_jogador >= DTAgilidade and
             intelecto_jogador >= DTInteligencia):
+            
             print(f"\033[32mParabéns {jogador_nome}, você superou a provação! Você recebeu a recompensa: {recompensa}.\033[0m")
+            
+            cursor.execute("""
+                INSERT INTO itemInventario (jogador, item)
+                VALUES (%s, %s)
+            """, (jogador_nome, recompensa))
+            conn.commit()
 
         else:
             print(f"\033[31mVocê falhou na provação e não receberá a recompensa.\033[0m")
@@ -395,5 +402,75 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
         processar_desafio(conn, cursor, jogador_nome, nova_area[0], desafio)
     
     enfrentar_inimigo(cursor, nova_area[0], jogador_nome)
-    
     return nova_area[0]
+
+def pegar_item_area(conn, cursor, jogador_nome):
+    try:
+        # Obter a área atual do jogador
+        cursor.execute("""
+            SELECT areaAtual
+            FROM jogador
+            WHERE nome = %s
+        """, (jogador_nome,))
+        area_atual = cursor.fetchone()
+
+        if not area_atual:
+            print(f"\033[31mJogador {jogador_nome} não encontrado ou área atual inválida.\033[0m")
+            return
+
+        area_atual = area_atual[0]
+
+        # Listar itens disponíveis na área atual em todas as tabelas específicas de itens
+        cursor.execute("""
+            SELECT nome, 'Defesa' AS classificacao FROM defesa WHERE areaAtual = %s
+            UNION ALL
+            SELECT nome, 'Ataque' AS classificacao FROM ataque WHERE areaAtual = %s
+            UNION ALL
+            SELECT nome, 'Magico' AS classificacao FROM magico WHERE areaAtual = %s
+            UNION ALL
+            SELECT nome, 'Consumivel' AS classificacao FROM consumivel WHERE areaAtual = %s
+        """, (area_atual, area_atual, area_atual, area_atual))
+        itens_disponiveis = cursor.fetchall()
+
+        if not itens_disponiveis:
+            print("\033[33mNenhum item disponível nesta área.\033[0m")
+            return
+
+        print(f"\033[32mItens disponíveis na área {area_atual}:\033[0m")
+        for item in itens_disponiveis:
+            item_nome, classificacao = item
+            print(f"- {item_nome} ({classificacao})")
+
+            # Perguntar ao usuário se deseja pegar o item
+            pegar = input(f"Deseja pegar o item '{item_nome}'? (s/n): ").lower()
+            if pegar != 's':
+                print(f"\033[33mVocê decidiu não pegar o item {item_nome}.\033[0m")
+                continue  # Vai para o próximo item
+
+            try:
+                # Tentar adicionar o item ao inventário do jogador
+                cursor.execute("""
+                    INSERT INTO itemInventario (jogador, item)
+                    VALUES (%s, %s)
+                """, (jogador_nome, item_nome))
+                conn.commit()
+
+                print(f"\033[32mItem {item_nome} adicionado ao inventário de {jogador_nome}.\033[0m")
+
+                # Remover o item da área na tabela correspondente
+                if classificacao == 'Defesa':
+                    cursor.execute("UPDATE defesa SET areaAtual = NULL WHERE nome = %s", (item_nome,))
+                elif classificacao == 'Ataque':
+                    cursor.execute("UPDATE ataque SET areaAtual = NULL WHERE nome = %s", (item_nome,))
+                elif classificacao == 'Magico':
+                    cursor.execute("UPDATE magico SET areaAtual = NULL WHERE nome = %s", (item_nome,))
+                elif classificacao == 'Consumivel':
+                    cursor.execute("UPDATE consumivel SET areaAtual = NULL WHERE nome = %s", (item_nome,))
+                conn.commit()
+                print(f"\033[32mItem {item_nome} removido da área {area_atual}.\033[0m")
+                
+            except Exception as e:
+                print(f"\033[31mErro ao adicionar o item {item_nome} ao inventário: {e}\033[0m")
+
+    except Exception as e:
+        print(f"\033[31mErro ao tentar pegar o item: {e}\033[0m")
