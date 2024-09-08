@@ -1,6 +1,6 @@
 import time
 from databaseConection import connect_to_db, close_connection
-from game import apresentar_jogo, obter_area_atual, mover_jogador
+from game import apresentar_jogo, obter_area_atual, mover_jogador, pegar_item_area
 from psycopg2 import sql
 
 def start_game():
@@ -18,7 +18,7 @@ def start_game():
             JOIN regiao r ON a.regiaoAtual = r.nome
             WHERE a.nome = %s
         """)
-        
+
         cursor.execute(query_area, (area_atual,))
         area_result = cursor.fetchone()
 
@@ -32,6 +32,9 @@ def start_game():
         else:
             print("\033[31mÁrea não encontrada.\033[0m")
 
+        # Chamar a função para pegar itens disponíveis na área atual
+        pegar_item_area(conn, cursor, jogador_nome)
+
         while True:
             comando = input("\nDigite a direção para onde deseja se mover (norte, sul, leste, oeste) ou 'sair' para encerrar: ").lower()
 
@@ -39,7 +42,11 @@ def start_game():
                 print("\033[34mEncerrando o jogo...\033[0m")
                 break
             elif comando in ["norte", "sul", "leste", "oeste"]:
+                # Mover o jogador para a nova área
                 area_atual = mover_jogador(conn, cursor, jogador_nome, area_atual, comando)
+
+                # Após mover, verificar se há itens na nova área
+                pegar_item_area(conn, cursor, jogador_nome)
             else:
                 print("\033[31mComando inválido. Tente novamente.\033[0m")
 
@@ -47,5 +54,6 @@ def start_game():
         print(f"An error occurred: {e}")
 
     finally:
+        # Fechar a conexão com o banco de dados
         close_connection(conn, cursor)
         print("Script finished.")
