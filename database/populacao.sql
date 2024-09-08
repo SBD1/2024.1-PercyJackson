@@ -273,7 +273,7 @@ VALUES
 
 INSERT INTO inimigoConcreto (nomeConcreto, vidaAtual, inimigo, areaAtual, loot)
 VALUES
-    ('Ulfa', 10, 'Lobo', 'Clareira da Lua Prateada', 'Néctar'),
+    ('Ulfa', 10, 'Lobo', 'Wind Stone', 'Néctar'),
     ('Scott', 30, 'Ciclope', 'O Espelho das Arvores', 'Machado de Ares'),
     ('Alecto', 50, 'Harpia', 'Gruta das Arvores Ancias', 'Bastão de Hécate');
 
@@ -316,7 +316,7 @@ VALUES
     ('Escudo de Atena', NULL, 'Escudo abençoado com a sabedoria de Atena.', 5, 10),
     ('Armadura de Zeus', NULL, 'A armadura reluzente que protege contra os ataques mais poderosos.', 6, 12),
     ('Cota de Malha de Hefesto', NULL, 'Armadura reforçada com os metais mais resistentes.', 8, 15),
-    ('Escama da Hidra', NULL, 'Armadura alcochoada feita da escama de Hidra.' 3, 8);
+    ('Escama da Hidra', NULL, 'Armadura alcochoada feita da escama de Hidra.', 3, 8);
 
 INSERT INTO ataque (nome, areaAtual, descricao, peso, modCombate, modForca)
 VALUES

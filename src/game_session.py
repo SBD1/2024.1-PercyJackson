@@ -1,6 +1,6 @@
 import time
 from databaseConection import connect_to_db, close_connection
-from game import apresentar_jogo, obter_area_atual, mover_jogador
+from game import criar_jogador, apresentar_jogo, obter_area_atual, mover_jogador
 from psycopg2 import sql
 
 def start_game():
@@ -8,8 +8,8 @@ def start_game():
         conn, cursor = connect_to_db()
 
         apresentar_jogo()
-
-        jogador_nome = 'Clara'
+        
+        jogador_nome = criar_jogador(cursor, conn)
         area_atual = obter_area_atual(cursor, jogador_nome)
 
         query_area = sql.SQL("""

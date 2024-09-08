@@ -197,13 +197,13 @@ CREATE TABLE jogador
     intelecto           IntPositivo NOT NULL,
     agilidade           IntPositivo NOT NULL,
     combate             IntPositivo NOT NULL,
-    vidaAtual           IntPositivo NOT NULL DEFAULT 50 CHECK(vidaAtual <= vidaMax),
+    vidaAtual           INTEGER NOT NULL DEFAULT 50 CHECK(vidaAtual <= vidaMax),
     experienciaAtual    IntPositivo NOT NULL DEFAULT 0,
     armadura            VARCHAR(30),
     arma                VARCHAR(30),
     itemMagico          VARCHAR(30),
     deus                VARCHAR(15) NOT NULL, 
-    areaAtual           VARCHAR(35) NOT NULL,
+    areaAtual           VARCHAR(35) NOT NULL DEFAULT 'Campos de Espinhos',
     nivel               INTEGER NOT NULL DEFAULT 1,
     
     PRIMARY KEY(nome),
@@ -219,7 +219,7 @@ CREATE TABLE jogador
 CREATE TABLE inimigoConcreto
 (
     nomeConcreto    VARCHAR(15),
-    vidaAtual       IntPositivo NOT NULL, /* Criar Trigger para definir a vidaAtual como a vidaMax do inimigo de referência */
+    vidaAtual       INTEGER NOT NULL, /* Criar Trigger para definir a vidaAtual como a vidaMax do inimigo de referência */
     inimigo         VARCHAR(15) NOT NULL,
     areaAtual       VARCHAR(35),
     loot            VARCHAR(30) NOT NULL,

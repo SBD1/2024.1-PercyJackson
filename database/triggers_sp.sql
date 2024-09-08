@@ -75,3 +75,57 @@ BEFORE INSERT ON provacao
 FOR EACH ROW
 EXECUTE FUNCTION verificar_provacao();
 
+CREATE FUNCTION criar_jogador(nome VARCHAR(15), deus VARCHAR(15)) RETURNS VOID AS $criarJogador$
+DECLARE
+    forcaInicialTemp AtributoInicial;
+    agilidadeInicialTemp AtributoInicial;
+    intelectoInicialTemp AtributoInicial;
+    combateInicialTemp AtributoInicial;
+BEGIN
+
+    SELECT forcaInicial, agilidadeInicial, intelectoInicial, combateInicial 
+    INTO forcaInicialTemp, agilidadeInicialTemp, intelectoInicialTemp, combateInicialTemp
+    FROM deus D
+    WHERE D.nome = deus;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'Deus não encontrado!';
+    END IF;
+
+    INSERT INTO tipoPersonagem(nome, tipo)
+    VALUES (nome, 'J');
+
+    INSERT INTO Jogador(nome, forca, intelecto, agilidade, combate, deus)
+    VALUES (nome, forcaInicialTemp, intelectoInicialTemp, agilidadeInicialTemp, combateInicialTemp, deus);
+
+END;
+$criarJogador$ LANGUAGE plpgsql;
+
+CREATE FUNCTION atualizaVidaInimigo() RETURNS TRIGGER AS $atualizaVidaInimigo$
+BEGIN
+    IF new.vidaatual <= 0 THEN
+        new.vidaatual := 0;
+        new.areaatual := null;
+    END IF;
+
+    RETURN NEW;
+END;
+$atualizaVidaInimigo$ LANGUAGE plpgsql;
+
+CREATE TRIGGER updateInimigoConcreto
+BEFORE UPDATE ON inimigoConcreto
+FOR EACH ROW EXECUTE FUNCTION atualizaVidaInimigo();
+
+CREATE FUNCTION atualizaVidaJogador() RETURNS TRIGGER AS $atualizaVidaJogador$
+BEGIN
+    IF new.vidaatual <= 0 THEN
+        new.vidaatual := 1;
+    END IF;
+
+    RETURN NEW;
+END;
+$atualizaVidaJogador$ LANGUAGE plpgsql;
+
+CREATE TRIGGER updateJogador
+BEFORE UPDATE ON jogador
+FOR EACH ROW EXECUTE FUNCTION atualizaVidaJogador();
