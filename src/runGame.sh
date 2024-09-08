@@ -1,5 +1,7 @@
-sudo docker compose down
-sudo docker volume rm src_db_data
+sudo docker compose down --volumes
+
+# sudo docker volume rm percy-jackson_db_data 
+
 sudo docker compose up --build -d # Executa em modo detached (em segundo plano)
 
 # Aguarda alguns segundos para garantir que o banco de dados esteja pronto
