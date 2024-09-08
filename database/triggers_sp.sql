@@ -268,3 +268,50 @@ CREATE TRIGGER subtrair_atributos_apos_remocao
 AFTER DELETE ON itemInventario
 FOR EACH ROW
 EXECUTE FUNCTION trigger_subtrair_atributos();
+
+-- Ao criar um jogador deve ser criado a tabela inventario
+CREATE OR REPLACE FUNCTION criar_inventario_jogador()
+RETURNS TRIGGER AS $$
+DECLARE
+    carga_maxima INTEGER;
+BEGIN
+    -- Calcula a carga máxima com base na força do jogador
+    carga_maxima := (2 * NEW.forca) + 5;
+
+    -- Insere o inventário do jogador com a carga máxima calculada
+    INSERT INTO inventario (jogador, cargaMaxima)
+    VALUES (NEW.nome, carga_maxima);
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger associada à tabela jogador para criar o inventário automaticamente
+CREATE TRIGGER trigger_criar_inventario
+AFTER INSERT ON jogador
+FOR EACH ROW
+EXECUTE FUNCTION criar_inventario_jogador();
+
+
+CREATE OR REPLACE FUNCTION atualizar_carga_maxima_inventario()
+RETURNS TRIGGER AS $$
+DECLARE
+    nova_carga_maxima INTEGER;
+BEGIN
+    -- Recalcula a carga máxima com base na nova força do jogador
+    nova_carga_maxima := (2 * NEW.forca) + 5;
+
+    -- Atualiza a carga máxima no inventário do jogador
+    UPDATE inventario
+    SET cargaMaxima = nova_carga_maxima
+    WHERE jogador = NEW.nome;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger associada à tabela jogador para atualizar a carga máxima automaticamente
+CREATE TRIGGER trigger_atualizar_carga_maxima
+AFTER UPDATE OF forca ON jogador
+FOR EACH ROW
+EXECUTE FUNCTION atualizar_carga_maxima_inventario();

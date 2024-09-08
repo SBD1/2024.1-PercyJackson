@@ -230,12 +230,7 @@ VALUES
     ('Clara', 'Ciclope', true),
     ('Paulo', 'Harpia', true);
 
-INSERT INTO inventario (jogador, cargaMaxima)
-VALUES
-    ('Natan', 9),
-    ('Charles', 11),
-    ('Clara', 9),
-    ('Paulo', 15);
+-- A tabela inventário será criada pelo Trigger trigger_criar_inventario ao criar um novo personagem
 
 INSERT INTO tipoItem (nome, classificacao)
 VALUES
