@@ -232,22 +232,23 @@ VALUES
 
 -- A tabela inventário será criada pelo Trigger trigger_criar_inventario ao criar um novo personagem
 
-INSERT INTO tipoItem (nome, classificacao)
-VALUES
-    ('Espada de Bronze Celestial', 'Ataque'),
-    ('ContraCorrente', 'Ataque'),
-    ('Elmo de Ares', 'Defesa'),
-    ('Ambrosia', 'Consumivel'),
-    ('Anel de Hermes', 'Magico'),
-    ('Machado de Ares', 'Ataque'),
-    ('Escudo de Atena', 'Defesa'),
-    ('Armadura de Zeus', 'Defesa'),
-    ('Cota de Malha de Hefesto', 'Defesa'),
-    ('Escudo Mágico de Atena', 'Magico'),
-    ('Pingente de Afrodite', 'Magico'),
-    ('Bastão de Hécate', 'Magico'),
-    ('Pedra de teletransporte', 'Consumivel'),
-    ('Néctar', 'Consumivel');
+SELECT inserir_item('Elmo de Ares', 'Defesa', 'Toca do Lobo', 'Um elmo pesado e resistente forjado para os guerreiros mais temidos.', 4, 7);
+SELECT inserir_item('Escudo de Atena', 'Defesa', NULL, 'Escudo abençoado com a sabedoria de Atena.', 5, 10);
+SELECT inserir_item('Armadura de Zeus', 'Defesa', NULL, 'A armadura reluzente que protege contra os ataques mais poderosos.', 6, 12);
+SELECT inserir_item('Cota de Malha de Hefesto', 'Defesa', NULL, 'Armadura reforçada com os metais mais resistentes.', 8, 15);
+
+SELECT inserir_item('Espada de Bronze Celestial', 'Ataque', NULL, 'Uma espada poderosa forjada para derrotar monstros mitológicos.', 5, NULL, 10, 3);
+SELECT inserir_item('Machado de Ares', 'Ataque', NULL, 'Uma arma brutal usada por guerreiros que seguem Ares.', 7, NULL, 15, 5);
+SELECT inserir_item('ContraCorrente', 'Ataque', NULL, 'A famosa arma de Percy Jackson', 7, NULL, 5, 0);
+
+SELECT inserir_item('Anel de Hermes', 'Magico', NULL, 'Um anel encantado que aumenta a velocidade e agilidade.', 1, 4, 2, 2, 5, 3, 10, 5);
+SELECT inserir_item('Escudo Mágico de Atena', 'Magico', 'Caminho das Fumarolas', 'Um escudo com proteção mágica e bônus de combate.', 3, 7, 0, 10, 2, 5, 8, 8);
+SELECT inserir_item('Pingente de Afrodite', 'Magico', NULL, 'Um amuleto que fortalece a defesa e combate, atraindo sorte.', 1, 3, 1, 5, 1, 2, 6, 6);
+SELECT inserir_item('Bastão de Hécate', 'Magico', NULL, 'Um bastão poderoso que concede poderes mágicos únicos.', 5, 12, 6, 8, 4, 10, 20, 15);
+
+SELECT inserir_item('Ambrosia', 'Consumivel', NULL, 'Comida dos deuses, capaz de curar ferimentos graves.', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 50, NULL);
+SELECT inserir_item('Néctar', 'Consumivel', NULL, 'Bebida divina que recupera a energia e vitalidade.', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 30, NULL);
+SELECT inserir_item('Pedra de teletransporte', 'Consumivel', NULL, 'Uma pedra que abre um portal para uma área desconhecida', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Clareira da Lua Prateada');
 
 INSERT INTO inimigoConcreto (nomeConcreto, vidaAtual, inimigo, areaAtual, loot)
 VALUES
@@ -275,32 +276,6 @@ VALUES
     ('Panteão olimpico', 2, 4, 7, 'Ambrosia', 6);
 
 -- Ajustar o nome das áreas quando a tabela estiver pronta
-
-INSERT INTO defesa (nome, areaAtual, descricao, peso, modAgilidade)
-VALUES
-    ('Elmo de Ares', NULL, 'Um elmo pesado e resistente forjado para os guerreiros mais temidos.', 4, 7),
-    ('Escudo de Atena', NULL, 'Escudo abençoado com a sabedoria de Atena.', 5, 10),
-    ('Armadura de Zeus', NULL, 'A armadura reluzente que protege contra os ataques mais poderosos.', 6, 12),
-    ('Cota de Malha de Hefesto', NULL, 'Armadura reforçada com os metais mais resistentes.', 8, 15);
-
-INSERT INTO ataque (nome, areaAtual, descricao, peso, modCombate, modForca)
-VALUES
-    ('Espada de Bronze Celestial', NULL, 'Uma espada poderosa forjada para derrotar monstros mitológicos.', 5, 10, 3),
-    ('Machado de Ares', NULL, 'Uma arma brutal usada por guerreiros que seguem Ares.', 7, 15, 5),
-    ('ContraCorrente', NULL, 'A famosa arma de Percy Jackson', 7, 5, 0);
-
-INSERT INTO magico (nome, areaAtual, descricao, peso, modCombate, modForca, modIntelecto, modAgilidade, modCarga, tempoDeRecarga, tempoAtual)
-VALUES
-    ('Anel de Hermes', NULL, 'Um anel encantado que aumenta a velocidade e agilidade.', 1, 4, 2, 2, 5, 3, 10, 5),
-    ('Escudo Mágico de Atena', NULL, 'Um escudo com proteção mágica e bônus de combate.', 3, 7, 0, 10, 2, 5, 8, 8),
-    ('Pingente de Afrodite', NULL, 'Um amuleto que fortalece a defesa e combate, atraindo sorte.', 1, 3, 1, 5, 1, 2, 6, 6),
-    ('Bastão de Hécate', NULL, 'Um bastão poderoso que concede poderes mágicos únicos.', 5, 12, 6, 8, 4, 10, 20, 15);
-
-INSERT INTO consumivel (nome, areaAtual, descricao, peso, vidaRecuperada, areaTeletransporte)
-VALUES
-    ('Ambrosia', NULL, 'Comida dos deuses, capaz de curar ferimentos graves.', 1, 50, NULL),
-    ('Néctar', NULL, 'Bebida divina que recupera a energia e vitalidade.', 1, 30, NULL),
-    ('Pedra de teletransporte', NULL, 'Uma pedra que abre um portal para uma área desconhecida', 1, NULL, 'Clareira da Lua Prateada');
 
 INSERT INTO Aliado (nome, descricao, nomeArea)
 VALUES
