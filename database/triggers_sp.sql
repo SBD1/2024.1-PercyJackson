@@ -315,3 +315,93 @@ CREATE TRIGGER trigger_atualizar_carga_maxima
 AFTER UPDATE OF forca ON jogador
 FOR EACH ROW
 EXECUTE FUNCTION atualizar_carga_maxima_inventario();
+
+--------------------INSERE ITEM--------------------------------
+CREATE OR REPLACE FUNCTION inserir_item(
+    p_nome VARCHAR(30),
+    p_classificacao VARCHAR(15),
+    p_areaAtual VARCHAR(35),
+    p_descricao TEXT,
+    p_peso IntPositivo,
+    p_modAgilidade IntPositivo DEFAULT NULL,
+    p_modCombate IntPositivo DEFAULT NULL,
+    p_modForca IntPositivo DEFAULT NULL,
+    p_modIntelecto IntPositivo DEFAULT NULL,
+    p_modCarga IntPositivo DEFAULT NULL,
+    p_tempoDeRecarga IntPositivo DEFAULT NULL,
+    p_tempoAtual IntPositivo DEFAULT 0,
+    p_vidaRecuperada IntPositivo DEFAULT NULL,
+    p_areaTeletransporte VARCHAR(30) DEFAULT NULL
+) RETURNS VOID AS $$
+DECLARE
+    v_count INT;
+BEGIN
+    -- Verificar se a área especificada existe na tabela 'area'
+    SELECT COUNT(*) INTO v_count FROM area WHERE nome = p_areaAtual;
+    IF v_count = 0 THEN
+        RAISE EXCEPTION 'Área inválida: %', p_areaAtual;
+    END IF;
+
+    -- Verificar se a classificação é válida
+    IF p_classificacao NOT IN ('Defesa', 'Ataque', 'Consumivel', 'Magico') THEN
+        RAISE EXCEPTION 'Classificação inválida';
+    END IF;
+
+    -- Verificar se o item já existe na tabela tipoItem
+    SELECT COUNT(*) INTO v_count FROM tipoItem WHERE nome = p_nome;
+    IF v_count > 0 THEN
+        RAISE EXCEPTION 'Item com este nome já existe';
+    END IF;
+
+    -- Inserir o item na tabela correspondente com base na classificação
+    IF p_classificacao = 'Defesa' THEN
+        -- Verificar se os dados necessários para a tabela 'defesa' estão presentes
+        IF p_modAgilidade IS NULL THEN
+            RAISE EXCEPTION 'modAgilidade é necessário para itens de Defesa.';
+        END IF;
+        -- Inserir o item na tabela tipoItem após validação da classificação
+        INSERT INTO tipoItem (nome, classificacao) VALUES (p_nome, p_classificacao);
+        -- Inserir na tabela 'defesa'
+        INSERT INTO defesa (nome, areaAtual, descricao, peso, modAgilidade)
+        VALUES (p_nome, p_areaAtual, p_descricao, p_peso, p_modAgilidade);
+
+    ELSIF p_classificacao = 'Ataque' THEN
+        -- Verificar se os dados necessários para a tabela 'ataque' estão presentes
+        IF p_modCombate IS NULL OR p_modForca IS NULL THEN
+            RAISE EXCEPTION 'modCombate e modForca são necessários para itens de Ataque.';
+        END IF;
+        -- Inserir o item na tabela tipoItem após validação da classificação
+        INSERT INTO tipoItem (nome, classificacao) VALUES (p_nome, p_classificacao);
+        -- Inserir na tabela 'ataque'
+        INSERT INTO ataque (nome, areaAtual, descricao, peso, modCombate, modForca)
+        VALUES (p_nome, p_areaAtual, p_descricao, p_peso, p_modCombate, p_modForca);
+
+    ELSIF p_classificacao = 'Magico' THEN
+        -- Verificar se os dados necessários para a tabela 'magico' estão presentes
+        IF p_modCombate IS NULL OR p_modForca IS NULL OR p_modIntelecto IS NULL OR p_modAgilidade IS NULL OR p_modCarga IS NULL OR p_tempoDeRecarga IS NULL THEN
+            RAISE EXCEPTION 'modCombate, modForca, modIntelecto, modAgilidade, modCarga e tempoDeRecarga são necessários para itens Mágicos.';
+        END IF;
+        -- Inserir o item na tabela tipoItem após validação da classificação
+        INSERT INTO tipoItem (nome, classificacao) VALUES (p_nome, p_classificacao);
+        -- Inserir na tabela 'magico'
+        INSERT INTO magico (nome, areaAtual, descricao, peso, modCombate, modForca, modIntelecto, modAgilidade, modCarga, tempoDeRecarga, tempoAtual)
+        VALUES (p_nome, p_areaAtual, p_descricao, p_peso, p_modCombate, p_modForca, p_modIntelecto, p_modAgilidade, p_modCarga, p_tempoDeRecarga, p_tempoAtual);
+
+    ELSIF p_classificacao = 'Consumivel' THEN
+        -- Verificar se os dados necessários para a tabela 'consumivel' estão presentes
+        IF p_vidaRecuperada IS NULL THEN
+            RAISE EXCEPTION 'vidaRecuperada é necessário para itens Consumíveis.';
+        END IF;
+        -- Inserir o item na tabela tipoItem após validação da classificação
+        INSERT INTO tipoItem (nome, classificacao) VALUES (p_nome, p_classificacao);
+        -- Inserir na tabela 'consumivel'
+        INSERT INTO consumivel (nome, areaAtual, descricao, peso, vidaRecuperada, areaTeletransporte)
+        VALUES (p_nome, p_areaAtual, p_descricao, p_peso, p_vidaRecuperada, p_areaTeletransporte);
+    END IF;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        -- Rollback implícito se ocorrer algum erro
+        RAISE;
+END;
+$$ LANGUAGE plpgsql;
