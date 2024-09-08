@@ -281,7 +281,7 @@ VALUES
 
 -- Ajustar o nome das áreas quando a tabela estiver pronta
 
-INSERT INTO defesa (nome, areaAtual, descricao, peso, modDefesa)
+INSERT INTO defesa (nome, areaAtual, descricao, peso, modAgilidade)
 VALUES
     ('Elmo de Ares', NULL, 'Um elmo pesado e resistente forjado para os guerreiros mais temidos.', 4, 7),
     ('Escudo de Atena', NULL, 'Escudo abençoado com a sabedoria de Atena.', 5, 10),
@@ -294,7 +294,7 @@ VALUES
     ('Machado de Ares', NULL, 'Uma arma brutal usada por guerreiros que seguem Ares.', 7, 15, 5),
     ('ContraCorrente', NULL, 'A famosa arma de Percy Jackson', 7, 5, 0);
 
-INSERT INTO magico (nome, areaAtual, descricao, peso, modCombate, modForca, modDefesa, modAgilidade, modCarga, tempoDeRecarga, tempoAtual)
+INSERT INTO magico (nome, areaAtual, descricao, peso, modCombate, modForca, modIntelecto, modAgilidade, modCarga, tempoDeRecarga, tempoAtual)
 VALUES
     ('Anel de Hermes', NULL, 'Um anel encantado que aumenta a velocidade e agilidade.', 1, 4, 2, 2, 5, 3, 10, 5),
     ('Escudo Mágico de Atena', NULL, 'Um escudo com proteção mágica e bônus de combate.', 3, 7, 0, 10, 2, 5, 8, 8),

@@ -129,11 +129,11 @@ CREATE TABLE tipoItem
 
 CREATE TABLE defesa
 (
-    nome        VARCHAR(30),
-    areaAtual   VARCHAR(35),
-    descricao   TEXT NOT NULL,
-    peso        IntPositivo NOT NULL,
-    modDefesa   IntPositivo,
+    nome         VARCHAR(30),
+    areaAtual    VARCHAR(35),
+    descricao    TEXT NOT NULL,
+    peso         IntPositivo NOT NULL,
+    modAgilidade IntPositivo,
     
     PRIMARY KEY(nome), 
     FOREIGN KEY(nome) REFERENCES tipoItem(nome) ON DELETE RESTRICT,
@@ -162,7 +162,7 @@ CREATE TABLE magico
     peso            IntPositivo NOT NULL,
     modCombate      IntPositivo,
     modForca        IntPositivo,
-    modDefesa       IntPositivo,
+    modIntelecto    IntPositivo,
     modAgilidade    IntPositivo,
     modCarga        IntPositivo,
     tempoDeRecarga  IntPositivo NOT NULL,
