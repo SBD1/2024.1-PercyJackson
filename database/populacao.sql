@@ -233,7 +233,7 @@ VALUES
 INSERT INTO jogador (nome, forca, intelecto, agilidade, combate, deus, areaAtual)
 VALUES
     ('Natan', 2, 5, 3, 2, 'Atena', 'Storm Cliff'),
-    ('Clara', 2, 2, 5, 3, 'Hermes', 'Campos de Espinhos'),
+    ('Clara', 10, 10, 10, 10, 'Hermes', 'Campos de Espinhos'),
     ('Charles', 3, 2, 2, 5, 'Aries', 'Mata Sombria'),
     ('Paulo', 5, 2, 2, 3, 'Zeus', 'Toca do Lobo');
 
@@ -310,13 +310,13 @@ VALUES
     ('No Desafio da Fúria de Tifão, os jogadores enfrentam tempestades e forças da natureza descontroladas. Eles devem usar sua agilidade e inteligência para se proteger e encontrar a calmaria no meio do caos.', 4, 8, 7, 'Machado de Ares', 19),
     ('Na Prova de Odisseu, os jogadores enfrentam uma série de testes que simulam as aventuras e perigos enfrentados pelo herói grego. Cada desafio testa um aspecto diferente das habilidades dos jogadores, desde a astúcia até a força.', 6, 6, 8, 'Espada de Bronze Celestial', 20);
 
-
 INSERT INTO defesa (nome, areaAtual, descricao, peso, modDefesa)
 VALUES
     ('Elmo de Ares', NULL, 'Um elmo pesado e resistente forjado para os guerreiros mais temidos.', 4, 7),
     ('Escudo de Atena', NULL, 'Escudo abençoado com a sabedoria de Atena.', 5, 10),
     ('Armadura de Zeus', NULL, 'A armadura reluzente que protege contra os ataques mais poderosos.', 6, 12),
-    ('Cota de Malha de Hefesto', NULL, 'Armadura reforçada com os metais mais resistentes.', 8, 15);
+    ('Cota de Malha de Hefesto', NULL, 'Armadura reforçada com os metais mais resistentes.', 8, 15),
+    ('Escama da Hidra', NULL, 'Armadura alcochoada feita da escama de Hidra.' 3, 8);
 
 INSERT INTO ataque (nome, areaAtual, descricao, peso, modCombate, modForca)
 VALUES
@@ -329,7 +329,9 @@ VALUES
     ('Anel de Hermes', NULL, 'Um anel encantado que aumenta a velocidade e agilidade.', 1, 4, 2, 2, 5, 3, 10, 5),
     ('Escudo Mágico de Atena', NULL, 'Um escudo com proteção mágica e bônus de combate.', 3, 7, 0, 10, 2, 5, 8, 8),
     ('Pingente de Afrodite', NULL, 'Um amuleto que fortalece a defesa e combate, atraindo sorte.', 1, 3, 1, 5, 1, 2, 6, 6),
-    ('Bastão de Hécate', NULL, 'Um bastão poderoso que concede poderes mágicos únicos.', 5, 12, 6, 8, 4, 10, 20, 15);
+    ('Bastão de Hécate', NULL, 'Um bastão poderoso que concede poderes mágicos únicos.', 5, 12, 6, 8, 4, 10, 20, 15),
+    ('Relíquia das Moiras', NULL, 'Um antigo artefato mágico ligado às três irmãs do destino. Forjada nos teares do tempo, esta relíquia permite ao portador vislumbrar fragmentos do futuro ou alterar pequenos eventos do passado.', 2, 1, 5, 5, 20, 3, 20, 15),
+    ('Cinto de Atlas', NULL, 'Um artefato lendário que carrega a força incomparável do titã que sustentava o céu. Ao vesti-lo, o portador adquire um aumento significativo de força e resistência física, capaz de suportar cargas colossais e desafios que exigem grande vigor.', 10, 5, 10, 4, 1, 15, 7, 7);
 
 INSERT INTO consumivel (nome, areaAtual, descricao, peso, vidaRecuperada, areaTeletransporte)
 VALUES
