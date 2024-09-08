@@ -336,11 +336,14 @@ CREATE OR REPLACE FUNCTION inserir_item(
 DECLARE
     v_count INT;
 BEGIN
-    -- Verificar se a área especificada existe na tabela 'area'
-    SELECT COUNT(*) INTO v_count FROM area WHERE nome = p_areaAtual;
-    IF v_count = 0 THEN
-        RAISE EXCEPTION 'Área inválida: %', p_areaAtual;
+    -- Verificar se a área especificada existe na tabela 'area' apenas se p_areaAtual não for nulo
+    IF p_areaAtual IS NOT NULL THEN
+        SELECT COUNT(*) INTO v_count FROM area WHERE nome = p_areaAtual;
+        IF v_count = 0 THEN
+            RAISE EXCEPTION 'Área inválida: %', p_areaAtual;
+        END IF;
     END IF;
+
 
     -- Verificar se a classificação é válida
     IF p_classificacao NOT IN ('Defesa', 'Ataque', 'Consumivel', 'Magico') THEN
@@ -405,3 +408,35 @@ EXCEPTION
         RAISE;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION bloquear_insercao_direta() RETURNS TRIGGER AS $$
+BEGIN
+    RAISE EXCEPTION 'Inserções diretas não são permitidas. Use a função inserir_item().';
+END;
+$$ LANGUAGE plpgsql;
+
+-- Criar triggers para cada tabela específica
+CREATE TRIGGER trg_defesa
+BEFORE INSERT ON defesa
+FOR EACH ROW
+EXECUTE FUNCTION bloquear_insercao_direta();
+
+CREATE TRIGGER trg_ataque
+BEFORE INSERT ON ataque
+FOR EACH ROW
+EXECUTE FUNCTION bloquear_insercao_direta();
+
+CREATE TRIGGER trg_magico
+BEFORE INSERT ON magico
+FOR EACH ROW
+EXECUTE FUNCTION bloquear_insercao_direta();
+
+CREATE TRIGGER trg_consumivel
+BEFORE INSERT ON consumivel
+FOR EACH ROW
+EXECUTE FUNCTION bloquear_insercao_direta();
+
+CREATE TRIGGER trg_tipoItem
+BEFORE INSERT ON tipoItem
+FOR EACH ROW
+EXECUTE FUNCTION bloquear_insercao_direta();
