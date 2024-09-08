@@ -356,6 +356,8 @@ BEGIN
         RAISE EXCEPTION 'Item com este nome já existe';
     END IF;
 
+    -- Desativar triggers que impedem inserção direta
+    PERFORM set_config('session_replication_role', 'replica', true);
     -- Inserir o item na tabela correspondente com base na classificação
     IF p_classificacao = 'Defesa' THEN
         -- Verificar se os dados necessários para a tabela 'defesa' estão presentes
@@ -401,6 +403,7 @@ BEGIN
         INSERT INTO consumivel (nome, areaAtual, descricao, peso, vidaRecuperada, areaTeletransporte)
         VALUES (p_nome, p_areaAtual, p_descricao, p_peso, p_vidaRecuperada, p_areaTeletransporte);
     END IF;
+    PERFORM set_config('session_replication_role', 'origin', true);
 
 EXCEPTION
     WHEN OTHERS THEN
