@@ -135,7 +135,14 @@ def processar_desafio(conn, cursor, jogador_nome, area, desafio_id):
         if (forca_jogador >= DTForca and
             agilidade_jogador >= DTAgilidade and
             intelecto_jogador >= DTInteligencia):
+            
             print(f"\033[32mParabéns {jogador_nome}, você superou a provação! Você recebeu a recompensa: {recompensa}.\033[0m")
+            
+            cursor.execute("""
+                INSERT INTO itemInventario (jogador, item)
+                VALUES (%s, %s)
+            """, (jogador_nome, recompensa))
+            conn.commit()
 
         else:
             print(f"\033[31mVocê falhou na provação e não receberá a recompensa.\033[0m")
