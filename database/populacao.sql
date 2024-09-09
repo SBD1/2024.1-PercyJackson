@@ -310,23 +310,29 @@ INSERT INTO Aliado (nome, descricao, nomeArea)
 VALUES
     ('Quíron', 'O centauro e treinador dos heróis.', 'Clareira da Lua Prateada'),
     ('Grover', 'O sátiro e melhor amigo de Percy.', 'O Espelho das Arvores'),
-    ('Annabeth', 'Filha de Atena, inteligente e estratégica.', 'Mata Sombria');
+    ('Annabeth', 'Filha de Atena, inteligente e estratégica.', 'Mata Sombria'),
+    ('Percy Jackson', 'Filho de Poseidon, responsável por salvar o mundo várias vezes', 'Campos de Espinhos');
 
 INSERT INTO Dialogo (numero, frase, nomeAliado, recompensa)
 VALUES
-    (1, 'Precisamos de sua ajuda, alguns Lobos estão atrapalhando nossos colegas. Pode derrotar 5 deles por nós?', 'Annabeth', NULL),
-    (2, 'Muito obrigada! Tome este item para te ajudar nessa missão.', 'Annabeth', 'Néctar'),
-    (3, 'Se continuar com essa atitude, iremos perder esta competição!', 'Annabeth', NULL),
-    (1, 'Preciso que você mate uma Harpia que está pertubando o Labirinto', 'Quíron', NULL),
-    (1, 'Socorroooo, tem um ciclope solto por ai. Acabe com ele por favooorr', 'Grover', NULL);
+    (0, 'Precisamos de sua ajuda, alguns Lobos estão atrapalhando nossos colegas. Pode derrotar 5 deles por nós?', 'Annabeth', NULL),
+    (1, 'Muito obrigada! Tome este item para te ajudar nessa missão.', 'Annabeth', 'Néctar'),
+    (2, 'Se continuar com essa atitude, iremos perder esta competição!', 'Annabeth', NULL),
+    (0, 'Preciso que você mate uma Harpia que está pertubando o Labirinto', 'Quíron', NULL),
+    (0, 'Socorroooo, tem um ciclope solto por ai. Acabe com ele por favooorr', 'Grover', NULL),
+    (0, 'Olá, essa é a sua primeira caça à bandeira?', 'Percy Jackson', NULL),
+    (1, 'Meu nome é Percy Jackson, filho de Poseidon, à seu dispor. Parece que estamos no mesmo time, isso é muito bom para você. Bom, o jogo é simples: o time que achar a bandeira do outro primeiro, ganha. Se todos do time sobreviverem, é melhor ainda. Preciso que você vá atrás da bandeira enquanto eu e outros defendemos a nossa. Como você é um novato, os outros irão te subestimar e aí você terá a vantagem. Aqui está um Néctar para te ajudar. Agora, vá acabar com eles!', 'Percy Jackson', 'Néctar')
+    ;
 
 
 INSERT INTO Resposta (numero, numeroDialogo, nomeAliado, frase, numeroDialogoDestino, nomeAliadoDestino)
 VALUES
-    (1, 1, 'Annabeth', 'Pode deixar comigo!', 2, 'Annabeth'),
-    (2, 1, 'Annabeth', 'Eles que se virem com esses Lobos. Tenho uma bandeira para capturar!', 3, 'Annabeth'),
-    (1, 1, 'Quíron', 'Pode deixar comigo!', NULL, NULL),
-    (1, 1, 'Grover', 'Irei acabar com ele!', NULL, NULL);
+    (0, 0, 'Annabeth', 'Pode deixar comigo!', 1, 'Annabeth'),
+    (1, 0, 'Annabeth', 'Eles que se virem com esses Lobos. Tenho uma bandeira para capturar!', 2, 'Annabeth'),
+    (0, 0, 'Quíron', 'Pode deixar comigo!', NULL, NULL),
+    (0, 0, 'Grover', 'Irei acabar com ele!', NULL, NULL),
+    (0, 0, 'Percy Jackson', 'Sim, estou muito perdido. Quem é você?', 1, 'Percy Jackson'),
+    (1, 0, 'Percy Jackson', 'Sim, mas consigo me virar!', NULL, NULL);
 
 INSERT INTO Profecia (numeroDialogo, nomeAliado, nomeInimigo, quantAbate, turnosAMais)
 VALUES
