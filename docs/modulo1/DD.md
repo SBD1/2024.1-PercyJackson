@@ -331,12 +331,6 @@
 | oeste | Coordenada da posição oeste da área no mapa | INTEGER     |      |
 | temBandeira | Variável responsável por identificar se a área possui ou não | BOOLEAN     |      |                                                       |
 | desafio     | Referência ao desafio que se encontra dentro da área              | INTEGER      |         | FK, Not Null                                                       |
-| descricao | Descrição detalhada de uma área e suas singularidades                                          | TEXT         | -       | Not Null                                                           |
-| norte | Coordenada norte no mapa                                          | INTEGER         | -       |                                                            |
-| sul | Coordenada sul no mapa                                          | INTEGER         | -       |                                                            |
-| leste | Coordenada leste no mapa                                          | INTEGER         | -       |                                                            |
-| oeste | Coordenada oeste no mapa                                          | INTEGER         | -       |                                                           |
-| temBandeira |  Variável para identificar se a área possui bandeira ou não                                        | BOOLEAN         | -       |                                                           |
 
 ### Tabela Desafio
 
