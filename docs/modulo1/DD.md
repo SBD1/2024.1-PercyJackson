@@ -325,10 +325,10 @@
 | nome        | Nome que identifica unicamente uma área                           | VARCHAR      | 15      | PK, Not Null                                                       |
 | descricao | Descrição detalhada de uma área e suas singularidades                                          | TEXT         | -       |                                                           |
 | regiaoAtual | Referência à Região que a área se encontra dentro do mapa do jogo | VARCHAR      | 35      | FK, Not Null                                                       |
-| norte | Coordenada da posição norte da área no mapa | INTEGER     |      |
-| sul | Coordenada da posição sul da área no mapa | INTEGER     |      |
-| leste | Coordenada da posição leste da área no mapa | INTEGER     |      |
-| oeste | Coordenada da posição oeste da área no mapa | INTEGER     |      |
+| norte | Coordenada da posição norte da área no mapa | INTEGER     |  CK1    |
+| sul | Coordenada da posição sul da área no mapa | INTEGER     |   CK1   |
+| leste | Coordenada da posição leste da área no mapa | INTEGER     |   CK1   |
+| oeste | Coordenada da posição oeste da área no mapa | INTEGER     |   CK1   |
 | temBandeira | Variável responsável por identificar se a área possui ou não | BOOLEAN     |      |                                                       |
 | desafio     | Referência ao desafio que se encontra dentro da área              | INTEGER      |         | FK, Not Null                                                       |
 
