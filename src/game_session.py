@@ -1,6 +1,6 @@
 import time
 from databaseConection import connect_to_db, close_connection
-from game import criar_jogador, apresentar_jogo, obter_area_atual, mover_jogador, pegar_item_area
+from game import criar_jogador, apresentar_jogo, obter_area_atual, mover_jogador, pegar_item_area, conversar_com_aliado
 from psycopg2 import sql
 
 def start_game():
@@ -35,6 +35,9 @@ def start_game():
         # Chamar a função para pegar itens disponíveis na área atual
         pegar_item_area(conn, cursor, jogador_nome)
 
+        conversar_com_aliado(conn, cursor, area_nome, jogador_nome)
+        
+
         while True:
             comando = input("\nDigite a direção para onde deseja se mover (norte, sul, leste, oeste) ou 'sair' para encerrar: ").lower()
 
@@ -47,6 +50,8 @@ def start_game():
 
                 # Após mover, verificar se há itens na nova área
                 pegar_item_area(conn, cursor, jogador_nome)
+
+                conversar_com_aliado(conn, cursor, area_atual, jogador_nome)
             else:
                 print("\033[31mComando inválido. Tente novamente.\033[0m")
 

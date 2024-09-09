@@ -205,12 +205,6 @@ EXECUTE FUNCTION validar_insercao_item_inventario();
 
 
 -- Modifica os pontos de força, agilidade, intelecto e combate do jogador ao pegar um item
-DROP TRIGGER IF EXISTS verificar_carga_antes_insercao ON itemInventario;
-DROP TRIGGER IF EXISTS atualizar_atributos_apos_insercao ON itemInventario;
-DROP FUNCTION IF EXISTS verificar_carga_inventario(VARCHAR, VARCHAR);
-DROP FUNCTION IF EXISTS validar_insercao_item_inventario();
-DROP FUNCTION IF EXISTS atualizar_atributos_jogador(VARCHAR, VARCHAR);
-DROP FUNCTION IF EXISTS trigger_atualizar_atributos();
 
 CREATE OR REPLACE FUNCTION atualizar_atributos_jogador(jogador_nome VARCHAR, item_nome VARCHAR)
 RETURNS VOID AS $$

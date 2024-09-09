@@ -474,3 +474,88 @@ def pegar_item_area(conn, cursor, jogador_nome):
 
     except Exception as e:
         print(f"\033[31mErro ao tentar pegar o item: {e}\033[0m")
+
+def conversar_com_aliado(conn, cursor, areaAtual, nomeJogador):
+    cursor.execute("""
+        SELECT *
+        FROM aliado
+        WHERE nomeArea = %s
+    """, (areaAtual,))
+    aliado = cursor.fetchone()
+
+    if aliado:
+        aliado_nome, aliado_descricao, aliado_area = aliado
+        index_dialogo = 0
+        while True:
+            cursor.execute("""
+                SELECT *
+                FROM dialogo
+                WHERE nomeAliado = %s
+                AND numero = %s
+            """, (aliado[0], index_dialogo))
+            dialogo = cursor.fetchone()
+            if dialogo:
+                if index_dialogo == 0:
+                    print(f"\033[35mHá um aliado nesta área querendo conversar com você. Seu nome é {aliado_nome}. {aliado_descricao}\033[0m")
+                
+                print(f"\033[35m{aliado_nome}: {dialogo[2]}\033[0m")
+
+                if dialogo[3]:
+                    pegar = input(f"Deseja pegar o item '{dialogo[3]}'? (s/n): ").lower()
+                    if pegar != 's':
+                        print(f"\033[33mVocê decidiu não pegar o item {dialogo[3]}.\033[0m")
+                    else:
+                        try:
+                            cursor.execute("""
+                                INSERT INTO itemInventario (jogador, item)
+                                VALUES (%s, %s)
+                            """, (nomeJogador, dialogo[3]))
+                            conn.commit()
+
+                            print(f"\033[32mItem {dialogo[3]} adicionado ao inventário de {nomeJogador}.\033[0m")
+
+                            cursor.execute("""
+                                UPDATE dialogo
+                                SET recompensa = NULL
+                                WHERE numero = %s
+                                AND nomeAliado = %s
+                            """, (index_dialogo, aliado_nome))
+                            conn.commit()
+                            
+                            print(f"\033[32mItem {dialogo[3]} removido do Aliado {aliado_nome}.\033[0m")
+                        except Exception as e:
+                            print(f"\033[31mErro ao adicionar o item {dialogo[3]} ao inventário: {e}\033[0m")
+                            
+
+                cursor.execute("""
+                    SELECT *
+                    FROM resposta
+                    WHERE numeroDialogo = %s
+                    AND nomeAliado = %s
+                    ORDER BY numero
+                """, (index_dialogo, aliado[0],))
+                respostas = cursor.fetchall()
+
+                if len(respostas):
+                    for resposta in respostas:
+                        print(f"{resposta[0]} - {resposta[3]}")
+                    
+                    while True:
+                        try:
+                            numResposta = int(input("Digite o número correspondente à sua resposta: "))
+
+                            if 0 <= numResposta < len(respostas):
+                                break
+                            else: 
+                                print("Resposta inexistente!")
+                        except ValueError:
+                            print("Entrada inválida. Digite um número.")
+                    
+                    print(f"\033[35m{nomeJogador}: {respostas[numResposta][3]}\033[0m")
+                    if respostas[numResposta][4]:
+                        index_dialogo = respostas[numResposta][4]
+                    else:
+                        break
+                else:
+                    break
+                
