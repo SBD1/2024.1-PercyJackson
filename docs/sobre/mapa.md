@@ -1,9 +1,4 @@
-# Sobre
-
-<img style="max-width:75%; display:block; margin-right: auto; margin-left:auto" src="https://raw.githubusercontent.com/SBD1/2024.1-PercyJackson/docs/docs/assets/game-cover/Default_a_percy_jackson_quest_of_olympus_game_cover_3.jpg"/>
-
-<p style="text-align:center; font-size:15px">Imagem gerada por IA</p>
-
+# Mapa
 ## Introdução ao Mapa
 
 <img style="max-width:75%; display:block; margin-right: auto; margin-left:auto" src="https://raw.githubusercontent.com/SBD1/2024.1-PercyJackson/docs/docs/assets/mapa/mapa-completo.jpg"/>
