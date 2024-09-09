@@ -1,7 +1,133 @@
 import time
-from psycopg2 import sql
+from psycopg2 import sql, DatabaseError
 from utils import limpar_terminal
+import random
 
+def criar_jogador(cursor, conn):
+    cursor.execute("""
+        SELECT nome
+        FROM deus
+    """)
+    result = cursor.fetchall()
+    print("Escolha o seu pai/mãe divino(a)")
+    for indice, deus in enumerate(result):
+        print(f"{indice} - {deus[0]}")
+    
+    while True:
+        try:
+            numDeus = int(input("Digite o número correspondente ao Deus/Deusa: "))
+
+            if 0 <= numDeus < len(result):
+                break
+            else: 
+                print("Deus/Deusa inexistente!")
+        except ValueError:
+            print("Entrada inválida. Digite um número.")
+    
+    while True:
+        try:
+            nomeJogador = input("Digite o nome do seu Personagem: ")
+            cursor.execute("""
+                SELECT criar_jogador(%s, %s)
+            """, (nomeJogador, result[numDeus][0]))
+
+            conn.commit()
+            print("\033[4;32mPersonagem criado com sucesso!\033[0m")
+            break
+        except (Exception, DatabaseError) as error:
+            print("Esse nome não está disponível. Tente outro")
+            conn.rollback()
+    
+    return nomeJogador
+
+def enfrentar_inimigo(cursor, areaAtual, nomeJogador):
+    cursor.execute("""
+        SELECT *
+        FROM inimigoConcreto
+        WHERE areaAtual = %s
+    """, (areaAtual,))
+    inimigoConcreto = cursor.fetchone()
+    if inimigoConcreto:
+        print(f"\033[4;31mInimigo encontrado. Prepare-se para enfrentrar {inimigoConcreto[0]}\033[0m")
+        vidaAtualInimigo = inimigoConcreto[1]
+        cursor.execute("""
+            SELECT forca, intelecto, agilidade, combate
+            FROM inimigo
+            WHERE nome = %s
+        """, (inimigoConcreto[2],))
+        inimigo = cursor.fetchone()
+
+        cursor.execute("""
+            SELECT vidaAtual, forca, intelecto, agilidade, combate
+            FROM jogador
+            WHERE nome = %s
+        """, (nomeJogador,))
+        jogador = cursor.fetchone()
+        vidaAtualJogador = jogador[0]
+
+        cursor.execute("""
+            SELECT valor
+            FROM constante
+            WHERE nome = 'baseDefesaPersonagem'
+        """)
+        defesaBase = cursor.fetchone()
+
+        while True:
+            comando = input("Digite o que você deseja fazer (atacar, fugir, confundir): ")
+
+            if comando == 'atacar': 
+                dadoAtaque = random.randint(1, 20)
+                if dadoAtaque + jogador[4] > defesaBase[0] + inimigo[2]:
+                    print(f"\033[4;32mVocê acertou o Ataque! {inimigoConcreto[0]} levou {jogador[1]} de dano\033[0m")
+                    cursor.execute("""
+                        UPDATE inimigoConcreto
+                        SET vidaAtual = vidaAtual - %s
+                        WHERE nomeConcreto = %s
+                    """, (jogador[1], inimigoConcreto[0],))
+
+                    vidaAtualInimigo = vidaAtualInimigo - jogador[1]
+                    if vidaAtualInimigo <= 0:
+                        print('\033[4;32mVocê derrotou o inimigo, combate encerrado!\033[0m')
+                        break
+                else:
+                    print('\033[4;31mVocê errou o Ataque!\033[0m')
+            elif comando == 'fugir':
+                dadoAgilidadeJogador = random.randint(1, 20)
+                dadoAgilidadeInimigo = random.randint(1, 20)
+
+                if dadoAgilidadeJogador + jogador[3] > dadoAgilidadeInimigo + inimigo[2]:
+                    print('\033[4;32mVocê conseguiu escapar! Combate finalizado\033[0m')
+                    break
+                else:
+                    print('\033[4;31mO inimigo foi mais rápido e te alcançou. Prepare-se para continuar na luta\033[0m')
+            elif comando == 'confundir':
+                dadoIntelectoJogador = random.randint(1, 20)
+                dadoIntelectoInimigo = random.randint(1, 20)
+
+                if dadoIntelectoJogador + jogador[2] > dadoIntelectoInimigo + inimigo[1]:
+                    print('\033[4;32mVocê confundiu o inimigo com uma conta de matemática e conseguiu escapar! Combate finalizado\033[0m')
+                    break
+                else:
+                    print('\033[4;31mO inimigo ignorou a sua pergunta. Prepare-se para continuar na luta\033[0m')
+            else:
+                print('Comando inválido. Tente outro')
+            
+            if comando in ["atacar", "fugir", "confundir"]:
+                dadoAtaqueInimigo = random.randint(1, 20)
+                if dadoAtaqueInimigo + inimigo[3] > defesaBase[0] + jogador[3]:
+                    print(f"\033[4;31mO inimigo acertou o Ataque! Você levou {inimigo[0]} de dano!\033[0m")
+
+                    cursor.execute("""
+                        UPDATE jogador
+                        SET vidaAtual = vidaAtual - %s
+                        WHERE nome = %s
+                    """, (inimigo[0], nomeJogador,))
+                    vidaAtualJogador = vidaAtualJogador - inimigo[0]
+                    if vidaAtualJogador <= 0:
+                        print('\033[4;31mO inimigo te derrotou! Você conseguiu escapar por um fio e se escondeu. Combate encerrado!\033[0m')
+                        break
+                else:
+                    print('\033[4;32mO inimigo errou o Ataque!\033[0m')
 def apresentar_jogo():
     limpar_terminal()
     print("\033[34mBem-vindo ao RPG Percy Jackson!\033[0m")
@@ -275,6 +401,7 @@ def mover_jogador(conn, cursor, jogador_nome, area_atual, direcao):
     if desafio:
         processar_desafio(conn, cursor, jogador_nome, nova_area[0], desafio)
     
+    enfrentar_inimigo(cursor, nova_area[0], jogador_nome)
     return nova_area[0]
 
 def pegar_item_area(conn, cursor, jogador_nome):

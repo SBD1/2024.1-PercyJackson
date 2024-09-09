@@ -269,7 +269,7 @@ SELECT inserir_item('Pedra de teletransporte', 'Consumivel', NULL, 'Uma pedra qu
 
 INSERT INTO inimigoConcreto (nomeConcreto, vidaAtual, inimigo, areaAtual, loot)
 VALUES
-    ('Ulfa', 10, 'Lobo', 'Clareira da Lua Prateada', 'Néctar'),
+    ('Ulfa', 10, 'Lobo', 'Wind Stone', 'Néctar'),
     ('Scott', 30, 'Ciclope', 'O Espelho das Arvores', 'Machado de Ares'),
     ('Alecto', 50, 'Harpia', 'Gruta das Arvores Ancias', 'Bastão de Hécate');
 
