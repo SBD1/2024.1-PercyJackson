@@ -25,7 +25,7 @@
 | arma             | Referência ao item de ataque que o personagem possui equipado. Oferece bônus no atributo de força e combate. Quando o valor for "null", então o personagem não possui nenhum Item de ataque equipado               | INTEGER      | -       | FK                                                                 |
 | itemMagico       | Referência ao item mágico que o personagem possui equipado. Oferece bônus em vários atributos dependendo do item. Quando o valor for "null", então o personagem não possui nenhum Item mágico equipado             | INTEGER      | -       | FK                                                                 |
 | deus             | Referência ao deus que define os atributos inicias do personagem                                                                                                                                                   | VARCHAR      | 15      | FK, Not Null                                                       |
-| areaAtual        | Referência à área que o personagem se encontra dentro do mapa do jogo                                                                                                                                              | VARCHAR      | 15      | FK, Not Null                                                       |
+| areaAtual        | Referência à área que o personagem se encontra dentro do mapa do jogo                                                                                                                                              | VARCHAR      | 35      | FK, Not Null                                                       |
 | nivel            | Referência ao nível atual do personagem. Ao atingir os pontos base do próximo nível, o personagem muda para o nível acima do atual                                                                                 | INTEGER      | -       | FK, Not Null, Default = 1                                          |
 
 ### Tabela Inimigo
@@ -83,7 +83,7 @@
 | nomeConcreto | O nome que identifica unicamente uma instância de Inimigo                                                                                                                                                                            | VARCGAR      | 15      | PK, Not Null                                                       |
 | vidaAtual    | A vida atual da instância de Inimigo, ao chegar a 0 a instância é derrotada. O valor inicial deste atributo deve ser o mesmo valor do atributo vidaMax do Inimigo gerador da instância, isso poderá ser feito a partir de um trigger | INTEGER      |         | Not Null                                                           |
 | inimigo      | Referência ao Inimigo gerador desta instância                                                                                                                                                                                        | VARCHAR      | 15      | FK, Not Null                                                       |
-| areaAtual    | Referência à área que o personagem se encontra dentro do mapa do jogo                                                                                                                                                                | VARCHAR      | 25      | FK, Not Null                                                       |
+| areaAtual    | Referência à área que o personagem se encontra dentro do mapa do jogo                                                                                                                                                                | VARCHAR      | 35      | FK, Not Null                                                       |
 | loot         | Referência ao item que o jogador ganha ao derrotar esta instância de Inimigo                                                                                                                                                         | INTEGER      |         | FK, Not Null                                                       |
 
 ### Tabela Abate
@@ -211,7 +211,7 @@
 | --------- | ----------------------------------------------------------------- | ------------ | ------- | --------------------- |
 | nome      | Identificador único de aliado                                     | VARCHAR      | 15      | PK, Not Null          |
 | descricao | Descrição do aliado a ser apresentada                             | TEXT         | -       | Not Null              |
-| nomeArea  | Referência à área que o aliado se encontra dentro do mapa do jogo | VARCHAR      | 15      | FK, Not Null          |
+| nomeArea  | Referência à área que o aliado se encontra dentro do mapa do jogo | VARCHAR      | 35      | FK, Not Null          |
 
 ### Tabela Dialogo
 
@@ -278,7 +278,7 @@
 
 | Nome      | Descrição                                                                                        | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | --------- | ------------------------------------------------------------------------------------------------ | ------------ | ------- | ------------------------------------------------------------------ |
-| nome      | Nome que identifica unicamente uma região                                                        | VARCHAR      | 15      | PK/ Not Null                                                       |
+| nome      | Nome que identifica unicamente uma região                                                        | VARCHAR      | 35      | PK/ Not Null                                                       |
 | descricao | Descrição detalhada de uma região e suas singularidades                                          | TEXT         | -       | Not Null                                                           |
 | nivel     | A referência ao nível da região é utilizada como parâmetro para balancear os combates e desafios | INTEGER      |         | Not Null                                                           |
 
@@ -292,7 +292,13 @@
 | Nome        | Descrição                                                         | Tipo de dado | Tamanho | Restrições de domínio (PK, FK, Not Null, Check, Default, Identity) |
 | ----------- | ----------------------------------------------------------------- | ------------ | ------- | ------------------------------------------------------------------ |
 | nome        | Nome que identifica unicamente uma área                           | VARCHAR      | 15      | PK, Not Null                                                       |
-| regiaoAtual | Referência à Região que a área se encontra dentro do mapa do jogo | VARCHAR      | 15      | FK, Not Null                                                       |
+| descricao | Descrição detalhada de uma área e suas singularidades                                          | TEXT         | -       |                                                           |
+| regiaoAtual | Referência à Região que a área se encontra dentro do mapa do jogo | VARCHAR      | 35      | FK, Not Null                                                       |
+| norte | Coordenada da posição norte da área no mapa | INTEGER     |      |
+| sul | Coordenada da posição sul da área no mapa | INTEGER     |      |
+| leste | Coordenada da posição leste da área no mapa | INTEGER     |      |
+| oeste | Coordenada da posição oeste da área no mapa | INTEGER     |      |
+| temBandeira | Variável responsável por identificar se a área possui ou não | BOOLEAN     |      |                                                       |
 | desafio     | Referência ao desafio que se encontra dentro da área              | INTEGER      |         | FK, Not Null                                                       |
 
 ### Tabela Desafio
@@ -321,7 +327,7 @@
 | DTForca            | Número de força mínima que um jogador deve possuir para vencer a armadilha         | INTEGER      |         | Not Null                                                           |
 | DTAgilidade        | Número de agilidade mínima que um jogador deve possuir para vencer a armadilha     | INTEGER      |         | Not Null                                                           |
 | DTInteligencia     | Número de inteligência mínima que um jogador deve possuir para vencer a armadilha  | INTEGER      |         | Not Null                                                           |
-| areaTeletransporte | Referência à área para onde o jogador será teletransportado caso caia na armadilha | VARCHAR      | 15      | FK, Not Null                                                       |
+| areaTeletransporte | Referência à área para onde o jogador será teletransportado caso caia na armadilha | VARCHAR      | 35      | FK, Not Null                                                       |
 
 ### Tabela Provação
 
@@ -351,3 +357,4 @@
 |  6.0   | 22/07 |        Criação das tabelas Regiao, Area, Desafio, Armadilha, Provacao, Consumíveis        |    [Paulo Henrique](https://github.com/owhenrique)    |
 |  7.0   | 06/08 |  Correção de inconsistências e adições de checks em atributos de Jogador, tipoPersonagem  |     [@Neitan2001](https://github.com/Neitan2001)      |
 |  8.0   | 06/08 |  Correção de inconsistências e renomeação de atributos em Desafio, Armadilha e Provação  |     [Paulo Henrique](https://github.com/owhenrique)      |
+|  9.0   | 09/09 |  Correção tamanho de colunas referentes a PK de área e região  |     [Paulo Henrique](https://github.com/owhenrique)      |
