@@ -2,9 +2,9 @@
 
 ## Versão Final
 
-<img display:block; margin-right: auto; margin-left:auto" src="../../assets/relacional/relacional7.jpg"/>
+<img display:block; margin-right: auto; margin-left:auto" src="../../assets/relacional/relacional8.jpg"/>
 
-<p style="text-align:center; font-size:15px">Versão final (versão 7) do Modelo Relacional. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
+<p style="text-align:center; font-size:15px">Versão final (versão 8) do Modelo Relacional. Autores: Natan, Clara, Charles e Paulo. Ferramenta: Miro</p>
 
 ## Versões do Modelo Relacional
 
@@ -75,3 +75,4 @@
 |  5.0   | 22/07 |    Adição da versão 4 do Modelo Relacional    |    [Paulo Henrique](https://github.com/owhenrique)    |
 |  6.0   | 22/07 |    Adição da versão 5 do Modelo Relacional    | [Charles Serafim](https://github.com/charles-serafim) |
 |  7.0   | 19/08 | Adição das versões 6 e 7 do Modelo Relacional |    [Paulo Henrique](https://github.com/owhenrique)    |
+|  8.0   | 09/08 | Adição da versão 8 do Modelo Relacional |    [Paulo Henrique](https://github.com/owhenrique)    |
