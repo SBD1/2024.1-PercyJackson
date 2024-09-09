@@ -241,6 +241,9 @@ def processar_desafio(conn, cursor, jogador_nome, area, desafio_id):
             """, (area_teletransporte, jogador_nome))
             conn.commit()
 
+            print(f"\033[43mNova localização\033[0m")
+            exibir_informacoes_area(cursor, area_teletransporte)
+
     else:
         print(f"\033[33mOk {jogador_nome}! Você tem uma provação pela frente. \033[0m")
 
