@@ -46,6 +46,7 @@ repo_name: SBD1/2024.1-PercyJackson
 # NavTabs
 nav:
   - index.md
+  - sobre.md
   - Módulo 1:
     - modulo1/der.md
     - modulo1/modeloRelacional.md
