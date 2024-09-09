@@ -29,6 +29,55 @@ Os inimigos no jogo são criaturas temidas que desafiarão suas habilidades e es
 | Ciclope | 30          | 5     | 1         | 2         | 4       | 10                    | 3     |
 | Harpia  | 50          | 5     | 5         | 5         | 5       | 30                    | 4     |
 
+## Aliados
+
+Os aliados são personagens na sua jornada, oferecendo apoio e orientações. Quíron, o sábio centauro, serve como mentor e guia, enquanto Grover, o leal sátiro, é um companheiro indispensável. Annabeth, com sua inteligência e estratégia, desempenha um papel nas batalhas e na resolução de problemas. 
+
+| Nome     | Descrição                               | Nome da Área               |
+|----------|-----------------------------------------|----------------------------|
+| Quíron   | O centauro e treinador dos heróis.       | Clareira da Lua Prateada    |
+| Grover   | O sátiro e melhor amigo de Percy.        | O Espelho das Árvores       |
+| Annabeth | Filha de Atena, inteligente e estratégica. | Mata Sombria               |
+
+
+## Desafios
+
+Os desafios no jogo são as provas que testam as habilidades dos jogadores em diferentes aspectos, seja na agilidade para evitar armadilhas traiçoeiras ou na inteligência para decifrar provações. Enfrentar e superar esses desafios não só proporciona um senso de conquista, mas também prepara os jogadores para os desafios mais difíceis que virão.
+
+### Armadilhas
+
+Armadilhas são obstáculos traiçoeiros que desafiam suas habilidades e colocam à prova sua astúcia e preparação.
+
+| Descrição                                                                                                                     | DTForça | DTAgilidade | DTInteligência | Área de Teletransporte   | Desafio |
+|-------------------------------------------------------------------------------------------------------------------------------|---------|-------------|----------------|--------------------------|---------|
+| Armadilha de Espinhos é um campo repleto de espinhos afiados que pode ferir qualquer um que caminhe por ele. Desafie sua agilidade para evitar ferimentos. | 5       | 3           | 2              | Fonte das Caldeiras      | 1       |
+| Jardim da Medusa é um local coberto por plantas venenosas e espinhosas que podem paralisar qualquer um. Use sua inteligência para encontrar um caminho seguro. | 4       | 5           | 6              | Fontes da Brisa          | 2       |
+| Labirinto de Atena é um labirinto cheio de armadilhas que exigem habilidades de força e agilidade para serem superadas. | 6       | 5           | 3              | Caverna                  | 3       |
+| Templo de Dionísio é uma armadilha mágica onde a gravidade muda constantemente, desafiando sua agilidade e força. | 5       | 7           | 4              | Círculo das Árvores Sábias | 4       |
+| Labirinto de Creta está cheio de corredores estreitos e labirintos complexos que testam sua inteligência e agilidade. | 4       | 6           | 7              | Câmaras de Incubação      | 5       |
+| Caminho dos Titãs é uma trilha onde pedras caem constantemente, exigindo reflexos rápidos e agilidade. | 3       | 8           | 2              | Ilha dos Mistérios       | 6       |
+| Fossas de Fogo são fossas ardentes que podem queimar rapidamente qualquer um que não passe por elas com cuidado. Prepare-se para um teste de agilidade e inteligência. | 5       | 6           | 4              | Riacho Oculto            | 7       |
+| Pontes Suspensas são pontes precárias sobre abismos que testam seu equilíbrio e coragem. | 3       | 7           | 5              | Itens dos Anciãos        | 8       |
+| Queda de Pedras são locais onde pedras caem de forma imprevisível. Desafie sua agilidade para escapar dos perigos. | 2       | 8           | 3              | Mar Sul Leste            | 9       |
+| Caverna de Gelo é um lugar onde o chão está coberto de gelo escorregadio. Use sua agilidade para evitar quedas. | 4       | 9           | 2              | Gruta das Árvores Anciãs  | 10      |
+
+### Provações
+
+As provações são desafios épicos que exigem habilidades específicas e coragem para serem superados. Cada prova é um teste de resistência, inteligência ou força, com recompensas significativas para aqueles que conseguem conquistá-las.
+
+| Descrição                                                                                                                                                   | DTForça | DTAgilidade | DTInteligência | Recompensa           | Desafio |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------|----------------|----------------------|---------|
+| No Enigma das Moiras, os jogadores enfrentam um labirinto de ilusões e paradoxos temporais que testam sua capacidade de resolver enigmas complexos. Cada erro pode levar a um retrocesso no tempo, forçando você a recomeçar o desafio. | 4       | 6           | 9              | Relíquia das Moiras  | 11      |
+| Na Prova de Atlas, os jogadores devem erguer um peso colossal por um período de tempo prolongado, testando sua força física e determinação. Somente os mais fortes conseguirão suportar o fardo e conquistar a recompensa. | 8       | 3           | 5              | Cinto de Atlas       | 12      |
+| O Desafio da Hidra exige que os jogadores enfrentem um monstro com múltiplas cabeças. Cada vez que uma cabeça é derrotada, duas novas surgem. A verdadeira vitória só vem ao encontrar e destruir o coração da Hidra. | 7       | 5           | 6              | Escama da Hidra      | 13      |
+| Na Prova de Labirinto, os jogadores são colocados dentro de um labirinto interminável onde devem usar sua inteligência para encontrar a saída. Armadilhas e enigmas estão escondidos em cada esquina, tornando a jornada desafiadora. | 3       | 7           | 9              | Espada de Bronze Celestial | 14      |
+| O Desafio do Oráculo coloca os jogadores frente a frente com um enigma profético. Eles devem interpretar visões enigmáticas e tomar decisões críticas para avançar e resolver o desafio que o Oráculo apresenta. | 4       | 5           | 10             | Pingente de Afrodite | 15      |
+| Na Prova de Perseu, os jogadores enfrentam um combate contra uma série de monstros que exigem habilidades variadas, desde força bruta até agilidade. Apenas a combinação perfeita de habilidades garantirá a vitória. | 6       | 6           | 6              | Bastão de Hécate     | 16      |
+| No Desafio do Labirinto de Atena, os jogadores precisam superar um complexo labirinto cheio de armadilhas e enigmas, que testam não apenas sua força, mas também sua capacidade de resolver problemas e tomar decisões estratégicas. | 5       | 7           | 8              | Escudo de Atena      | 17      |
+| A Prova de Heracles é uma série de desafios de força e resistência inspirados pelos trabalhos de Heracles. Os jogadores devem completar tarefas heroicas e enfrentar provas que testam sua força e coragem. | 9       | 4           | 5              | Néctar               | 18      |
+| No Desafio da Fúria de Tifão, os jogadores enfrentam tempestades e forças da natureza descontroladas. Eles devem usar sua agilidade e inteligência para se proteger e encontrar a calmaria no meio do caos. | 4       | 8           | 7              | Machado de Ares      | 19      |
+| Na Prova de Odisseu, os jogadores enfrentam uma série de testes que simulam as aventuras e perigos enfrentados pelo herói grego. Cada desafio testa um aspecto diferente das habilidades dos jogadores, desde a astúcia até a força. | 6       | 6           | 8              | Espada de Bronze Celestial | 20      |
+
 ## Itens
 
 No universo de "Percy Jackson: Captura a Bandeira", itens são aliados em sua jornada heroica.
