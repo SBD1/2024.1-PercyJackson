@@ -120,7 +120,7 @@ Os itens mágicos oferecem habilidades e bônus especiais que podem alterar o cu
 | Relíquia das Moiras           | Um antigo artefato mágico que permite ao portador vislumbrar fragmentos do futuro ou alterar pequenos eventos do passado.   | 2    | 1            | 5          | 5           | 20             | 3          | 20               | 15          |
 
 
-#### Consumível
+### Consumível
 
 Itens consumíveis são vitais para recuperar saúde e fornecer vantagens temporárias. Ambrosia e Néctar são recursos valiosos para restaurar vida e energia, enquanto a Pedra de Teletransporte permite ao jogador acessar áreas desconhecidas. Estes itens podem ser a chave para superar desafios e continuar a jornada com sucesso.
 
