@@ -212,7 +212,7 @@ def processar_desafio(conn, cursor, jogador_nome, area, desafio_id):
     forca_jogador, agilidade_jogador, intelecto_jogador = atributos_jogador
 
     if tipo_desafio[0] == 'A':
-        print(f"\033[33mOh não! Você caiu em uma armadilha. \033[0m")
+        print(f"\033[33mOh não! Você caiu em uma armadilha.\033[0m")
 
         cursor.execute("""
             SELECT descricao, DTForca, DTAgilidade, DTInteligencia, areaTeletransporte 
@@ -228,12 +228,20 @@ def processar_desafio(conn, cursor, jogador_nome, area, desafio_id):
         descricao, DTForca, DTAgilidade, DTInteligencia, area_teletransporte = armadilha
         print(f"\033[33mDetalhes da armadilha: {descricao}\033[0m")
 
+        if (forca_jogador < DTForca and
+            agilidade_jogador < DTAgilidade and
+            intelecto_jogador < DTInteligencia):
+            print(f"Você precisa ter {forca_jogador} de força, {agilidade_jogador} de agilidade e {intelecto_jogador} de intelecto para vencer!\n")
+            print(f"Será se você é capaz de escapar essa armadilha?\n")
+
+        input("\n\033[34mPressione Enter para tentar escapar...\033[0m")
+
         if (forca_jogador >= DTForca and
             agilidade_jogador >= DTAgilidade and
             intelecto_jogador >= DTInteligencia):
             print(f"\033[32mParabéns {jogador_nome}, você escapou da armadilha!\033[0m")
         else:
-            print(f"\033[31mVocê não conseguiu escapar. Você será teletransportado para {area_teletransporte}.\033[0m")
+            print(f"\033[31mVocê não conseguiu escapar. Quem sabe você tenha mais sorte em {area_teletransporte}.\033[0m")
             cursor.execute("""
                 UPDATE jogador
                 SET areaAtual = %s
@@ -241,11 +249,8 @@ def processar_desafio(conn, cursor, jogador_nome, area, desafio_id):
             """, (area_teletransporte, jogador_nome))
             conn.commit()
 
-            print(f"\033[43mNova localização\033[0m")
-            exibir_informacoes_area(cursor, area_teletransporte)
-
     else:
-        print(f"\033[33mOk {jogador_nome}! Você tem uma provação pela frente. \033[0m")
+        print(f"\033[33mOk {jogador_nome}! Você tem uma provação pela frente.\033[0m")
 
         cursor.execute("""
             SELECT descricao, DTForca, DTAgilidade, DTInteligencia, recompensa 
@@ -261,12 +266,19 @@ def processar_desafio(conn, cursor, jogador_nome, area, desafio_id):
         descricao, DTForca, DTAgilidade, DTInteligencia, recompensa = provacao
         print(f"\033[33mDetalhes da provação: {descricao}\033[0m")
 
+        if (forca_jogador < DTForca and
+            agilidade_jogador < DTAgilidade and
+            intelecto_jogador < DTInteligencia):
+            print(f"Você precisa ter {forca_jogador} de força, {agilidade_jogador} de agilidade e {intelecto_jogador} de intelecto para vencer!\n")
+            print(f"Será se você é capaz?\n")
+
+        input("\n\033[34mPressione Enter para enfrentar sua provação...\033[0m")
+
         if (forca_jogador >= DTForca and
             agilidade_jogador >= DTAgilidade and
             intelecto_jogador >= DTInteligencia):
-            
             print(f"\033[32mParabéns {jogador_nome}, você superou a provação! Você recebeu a recompensa: {recompensa}.\033[0m")
-            
+
             cursor.execute("""
                 INSERT INTO itemInventario (jogador, item)
                 VALUES (%s, %s)
